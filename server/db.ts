@@ -1,6 +1,6 @@
 import { eq, and, sql, gte, lte, or, isNull } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, promoCodes, promoRedemptions, InsertPromoCode, InsertPromoRedemption } from "../drizzle/schema";
+import { InsertUser, users, promoCodes, promoRedemptions, seasonalMessages, InsertPromoCode, InsertPromoRedemption, InsertSeasonalMessage } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -253,4 +253,62 @@ export async function hasCustomerRedeemedCode(promoCodeId: number, customerEmail
     ))
     .limit(1);
   return result.length > 0;
+}
+
+// ============ Seasonal Messages Queries ============
+
+/**
+ * Get all seasonal messages (admin view)
+ */
+export async function getAllSeasonalMessages() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(seasonalMessages).orderBy(sql`${seasonalMessages.priority} DESC, ${seasonalMessages.createdAt} DESC`);
+}
+
+/**
+ * Get active seasonal messages (public — for the ticker)
+ * Filters by isActive, and date range (startsAt/endsAt)
+ */
+export async function getActiveSeasonalMessages() {
+  const db = await getDb();
+  if (!db) return [];
+  const now = new Date();
+  return db.select().from(seasonalMessages).where(
+    and(
+      eq(seasonalMessages.isActive, "true"),
+      or(isNull(seasonalMessages.startsAt), lte(seasonalMessages.startsAt, now)),
+      or(isNull(seasonalMessages.endsAt), gte(seasonalMessages.endsAt, now))
+    )
+  ).orderBy(sql`${seasonalMessages.priority} DESC`);
+}
+
+/**
+ * Create a seasonal message
+ */
+export async function createSeasonalMessage(data: InsertSeasonalMessage) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(seasonalMessages).values(data);
+  return { success: true };
+}
+
+/**
+ * Update a seasonal message
+ */
+export async function updateSeasonalMessage(id: number, data: Partial<InsertSeasonalMessage>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(seasonalMessages).set(data).where(eq(seasonalMessages.id, id));
+  return { success: true };
+}
+
+/**
+ * Delete a seasonal message
+ */
+export async function deleteSeasonalMessage(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(seasonalMessages).where(eq(seasonalMessages.id, id));
+  return { success: true };
 }

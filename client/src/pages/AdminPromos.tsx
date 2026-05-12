@@ -278,10 +278,16 @@ export default function AdminPromos() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <Link href="/" className="flex items-center gap-2 text-[#345460]/60 hover:text-[#345460] mb-2 text-sm transition-colors">
-              <ArrowLeft className="w-4 h-4" />
-              Back to site
-            </Link>
+            <div className="flex items-center gap-3 mb-2">
+              <Link href="/" className="flex items-center gap-2 text-[#345460]/60 hover:text-[#345460] text-sm transition-colors">
+                <ArrowLeft className="w-4 h-4" />
+                Back to site
+              </Link>
+              <span className="text-[#345460]/30">|</span>
+              <Link href="/admin/messages" className="text-[#345460]/60 hover:text-[#345460] text-sm transition-colors">
+                Ticker Messages
+              </Link>
+            </div>
             <h1 className="text-2xl font-bold text-[#345460]">Promo Codes</h1>
             <p className="text-[#345460]/60 text-sm">
               Create and manage promotional offers for Metro Mutts

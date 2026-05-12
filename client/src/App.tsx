@@ -23,6 +23,7 @@ import FAQ from "./pages/FAQ";
 import Tour from "./pages/Tour";
 import VetReferred from "./pages/VetReferred";
 import AdminPromos from "./pages/AdminPromos";
+import AdminMessages from "./pages/AdminMessages";
 import GetStarted from "./pages/GetStarted";
 
 function Router() {
@@ -46,6 +47,7 @@ function Router() {
       <Route path={"/vet-referred"} component={VetReferred} />
       <Route path={"/get-started"} component={GetStarted} />
       <Route path={"/admin/promos"} component={AdminPromos} />
+      <Route path={"/admin/messages"} component={AdminMessages} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

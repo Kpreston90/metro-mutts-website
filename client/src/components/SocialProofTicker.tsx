@@ -1,12 +1,13 @@
 /**
- * Social Proof Ticker — v2
+ * Social Proof Ticker — v3
  * Auto-rotating messages mixing:
  * 1. Real-time Gingr availability urgency
- * 2. 5-star review snippets
+ * 2. Real 5-star review snippets (Yelp/Google)
  * 3. Fun personality stats
+ * 4. Admin-managed seasonal/announcement messages from DB
  */
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Star, Clock, Dog, Sparkles, Heart, TrendingUp } from "lucide-react";
+import { Star, Clock, Dog, Sparkles, Heart, TrendingUp, Megaphone } from "lucide-react";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
 
@@ -17,27 +18,32 @@ interface TickerMessage {
   bookable?: boolean;
 }
 
-// Static review messages
+// Real review messages from Yelp/Google
 const reviewMessages: TickerMessage[] = [
   {
     icon: <Star className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C]" />,
-    text: "5-star review:",
-    highlight: '"My dog has never been happier!" — Sarah M.',
+    text: "5★ Yelp:",
+    highlight: '"My corgis love spending their days playing at Metro Mutts!!" — Misty P.',
   },
   {
     icon: <Star className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C]" />,
-    text: "5-star review:",
-    highlight: '"Best daycare in Tulsa, hands down!" — Jake R.',
+    text: "5★ Yelp:",
+    highlight: '"These people are fantastic. You\'d swear they had degrees in dog psychology." — Betty C.',
   },
   {
     icon: <Star className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C]" />,
-    text: "4.9★ on Google",
-    highlight: "96 five-star reviews",
+    text: "5★ Yelp:",
+    highlight: '"Jacque, the groomer is excellent. Years of experience!" — Kelly & Mitch B.',
   },
   {
     icon: <Star className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C]" />,
-    text: "5-star review:",
-    highlight: '"The boarding suites are amazing!" — Lisa T.',
+    text: "5★ Yelp:",
+    highlight: '"Very thoughtful, very clean! Play yard is great bonus!" — Margaret C.',
+  },
+  {
+    icon: <Star className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C]" />,
+    text: "5★ Google:",
+    highlight: '"Truly the best doggy daycare in Tulsa. My puppy absolutely loves it!"',
   },
 ];
 
@@ -121,6 +127,18 @@ function buildAvailabilityMessages(
   return msgs;
 }
 
+function buildSeasonalMessages(
+  dbMessages: Array<{ message: string; highlight: string | null; bookable: string }> | undefined
+): TickerMessage[] {
+  if (!dbMessages || dbMessages.length === 0) return [];
+  return dbMessages.map((msg) => ({
+    icon: <Megaphone className="w-3.5 h-3.5 text-[#FB923C]" />,
+    text: msg.message,
+    highlight: msg.highlight || undefined,
+    bookable: msg.bookable === "true",
+  }));
+}
+
 export default function SocialProofTicker() {
   const { openBookingModal } = useBookingModal();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -132,23 +150,31 @@ export default function SocialProofTicker() {
     { refetchInterval: 60000, staleTime: 30000 }
   );
 
+  const { data: seasonalData } = trpc.seasonalMessages.getActive.useQuery(
+    undefined,
+    { refetchInterval: 300000, staleTime: 120000 }
+  );
+
   // Build the full message rotation
   const messages = useMemo(() => {
     const availMsgs = buildAvailabilityMessages(availability?.today);
-    // Interleave: availability, review, fun, availability, review, fun...
+    const seasonalMsgs = buildSeasonalMessages(seasonalData);
+
+    // Interleave: availability, seasonal, review, fun...
     const combined: TickerMessage[] = [];
-    const maxLen = Math.max(availMsgs.length, reviewMessages.length, funMessages.length);
+    const maxLen = Math.max(availMsgs.length, reviewMessages.length, funMessages.length, seasonalMsgs.length);
     for (let i = 0; i < maxLen; i++) {
       if (availMsgs[i]) combined.push(availMsgs[i]);
+      if (seasonalMsgs[i]) combined.push(seasonalMsgs[i]);
       if (reviewMessages[i]) combined.push(reviewMessages[i]);
       if (funMessages[i]) combined.push(funMessages[i]);
     }
-    // Add any remaining
+    // Add any remaining from longer arrays
     if (combined.length === 0) {
       return [...reviewMessages, ...funMessages];
     }
     return combined;
-  }, [availability]);
+  }, [availability, seasonalData]);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -211,12 +237,19 @@ export function SocialProofTickerMobile() {
     { refetchInterval: 60000, staleTime: 30000 }
   );
 
+  const { data: seasonalData } = trpc.seasonalMessages.getActive.useQuery(
+    undefined,
+    { refetchInterval: 300000, staleTime: 120000 }
+  );
+
   const messages = useMemo(() => {
     const availMsgs = buildAvailabilityMessages(availability?.today);
+    const seasonalMsgs = buildSeasonalMessages(seasonalData);
     const combined: TickerMessage[] = [];
-    const maxLen = Math.max(availMsgs.length, reviewMessages.length, funMessages.length);
+    const maxLen = Math.max(availMsgs.length, reviewMessages.length, funMessages.length, seasonalMsgs.length);
     for (let i = 0; i < maxLen; i++) {
       if (availMsgs[i]) combined.push(availMsgs[i]);
+      if (seasonalMsgs[i]) combined.push(seasonalMsgs[i]);
       if (reviewMessages[i]) combined.push(reviewMessages[i]);
       if (funMessages[i]) combined.push(funMessages[i]);
     }
@@ -224,7 +257,7 @@ export function SocialProofTickerMobile() {
       return [...reviewMessages, ...funMessages];
     }
     return combined;
-  }, [availability]);
+  }, [availability, seasonalData]);
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -99,3 +99,5 @@
 - [x] Build dedicated "Get Started" booking landing page for new customers (Gingr sign-up flow, temperament test explanation, service prerequisites)
 - [x] Add prominent "Get Started" button to top navigation bar linking to /get-started
 - [x] Update announcement ticker with real-time Gingr data (urgency messages, reviews, fun stats rotation)
+- [x] Add real Google/Yelp review quotes to the ticker (Misty P., Betty C., Kelly & Mitch B., Margaret C.)
+- [x] Build seasonal message admin system (DB schema, tRPC procedures, admin UI at /admin/messages, SocialProofTicker integration)

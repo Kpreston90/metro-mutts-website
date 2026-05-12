@@ -85,3 +85,30 @@ export const promoRedemptions = mysqlTable("promo_redemptions", {
 
 export type PromoRedemption = typeof promoRedemptions.$inferSelect;
 export type InsertPromoRedemption = typeof promoRedemptions.$inferInsert;
+
+/**
+ * Seasonal/announcement messages for the ticker bar.
+ * Admin can create, activate/deactivate, and schedule messages.
+ */
+export const seasonalMessages = mysqlTable("seasonal_messages", {
+  id: int("id").autoincrement().primaryKey(),
+  /** The message text to display */
+  message: text("message").notNull(),
+  /** Optional highlight text (shown in accent color) */
+  highlight: varchar("highlight", { length: 255 }),
+  /** Whether clicking should open the booking modal */
+  bookable: mysqlEnum("bookable", ["true", "false"]).default("false").notNull(),
+  /** Whether this message is currently active */
+  isActive: mysqlEnum("isActive", ["true", "false"]).default("true").notNull(),
+  /** Optional start date (null = immediately active) */
+  startsAt: timestamp("startsAt"),
+  /** Optional end date (null = never expires) */
+  endsAt: timestamp("endsAt"),
+  /** Display priority (higher = shown more often) */
+  priority: int("priority").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SeasonalMessage = typeof seasonalMessages.$inferSelect;
+export type InsertSeasonalMessage = typeof seasonalMessages.$inferInsert;

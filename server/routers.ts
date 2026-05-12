@@ -16,6 +16,11 @@ import {
   getRedemptions,
   updateRedemptionStatus,
   hasCustomerRedeemedCode,
+  getAllSeasonalMessages,
+  getActiveSeasonalMessages,
+  createSeasonalMessage,
+  updateSeasonalMessage,
+  deleteSeasonalMessage,
 } from "./db";
 import { z } from "zod";
 
@@ -236,6 +241,84 @@ export const appRouter = router({
       }))
       .mutation(async ({ input }) => {
         await updateRedemptionStatus(input.id, input.status, input.notes);
+        return { success: true };
+      }),
+  }),
+
+  seasonalMessages: router({
+    /**
+     * Get active seasonal messages (public) — for the ticker
+     */
+    getActive: publicProcedure.query(async () => {
+      return getActiveSeasonalMessages();
+    }),
+
+    /**
+     * List all seasonal messages (admin)
+     */
+    list: adminProcedure.query(async () => {
+      return getAllSeasonalMessages();
+    }),
+
+    /**
+     * Create a seasonal message (admin)
+     */
+    create: adminProcedure
+      .input(z.object({
+        message: z.string().min(1),
+        highlight: z.string().max(255).nullable().optional(),
+        bookable: z.boolean().optional(),
+        isActive: z.boolean().optional(),
+        startsAt: z.date().nullable().optional(),
+        endsAt: z.date().nullable().optional(),
+        priority: z.number().int().min(1).max(10).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createSeasonalMessage({
+          message: input.message,
+          highlight: input.highlight ?? null,
+          bookable: input.bookable ? "true" : "false",
+          isActive: input.isActive !== false ? "true" : "false",
+          startsAt: input.startsAt ?? null,
+          endsAt: input.endsAt ?? null,
+          priority: input.priority ?? 1,
+        });
+      }),
+
+    /**
+     * Update a seasonal message (admin)
+     */
+    update: adminProcedure
+      .input(z.object({
+        id: z.number().int(),
+        message: z.string().min(1).optional(),
+        highlight: z.string().max(255).nullable().optional(),
+        bookable: z.boolean().optional(),
+        isActive: z.boolean().optional(),
+        startsAt: z.date().nullable().optional(),
+        endsAt: z.date().nullable().optional(),
+        priority: z.number().int().min(1).max(10).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        const updateData: Record<string, unknown> = {};
+        if (data.message !== undefined) updateData.message = data.message;
+        if (data.highlight !== undefined) updateData.highlight = data.highlight;
+        if (data.bookable !== undefined) updateData.bookable = data.bookable ? "true" : "false";
+        if (data.isActive !== undefined) updateData.isActive = data.isActive ? "true" : "false";
+        if (data.startsAt !== undefined) updateData.startsAt = data.startsAt;
+        if (data.endsAt !== undefined) updateData.endsAt = data.endsAt;
+        if (data.priority !== undefined) updateData.priority = data.priority;
+        return updateSeasonalMessage(id, updateData as any);
+      }),
+
+    /**
+     * Delete a seasonal message (admin)
+     */
+    delete: adminProcedure
+      .input(z.object({ id: z.number().int() }))
+      .mutation(async ({ input }) => {
+        await deleteSeasonalMessage(input.id);
         return { success: true };
       }),
   }),
