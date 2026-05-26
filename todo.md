@@ -102,3 +102,4 @@
 - [x] Add real Google/Yelp review quotes to the ticker (Misty P., Betty C., Kelly & Mitch B., Margaret C.)
 - [x] Build seasonal message admin system (DB schema, tRPC procedures, admin UI at /admin/messages, SocialProofTicker integration)
 - [x] Add blog post: "Your Dog Notices When Routines Change" (summer routine/consistency article with hero image)
+- [x] Create dedicated /booking landing page (shareable link for emails, ads, social — services, trust signals, live availability, new/returning CTAs)

@@ -96,6 +96,13 @@ const routeOgMap: Record<string, OgMeta> = {
     image: `${CDN}/og-homepage-4Bvn5v2GYGM8G8Cq2fVJZq.png`,
     url: `${BASE_URL}/book`,
   },
+  "/booking": {
+    title: "Book Your Dog's Visit | Metro Mutts Tulsa — Daycare, Boarding & Grooming",
+    description:
+      "Book daycare, boarding, or grooming for your dog at Metro Mutts in Tulsa. First day of daycare is free. Call 539-867-3841 or book online.",
+    image: `${CDN}/og-homepage-4Bvn5v2GYGM8G8Cq2fVJZq.png`,
+    url: `${BASE_URL}/booking`,
+  },
   "/careers": {
     title: "Careers at Metro Mutts Tulsa | Dog Care Jobs",
     description:

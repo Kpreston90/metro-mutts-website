@@ -25,6 +25,7 @@ import VetReferred from "./pages/VetReferred";
 import AdminPromos from "./pages/AdminPromos";
 import AdminMessages from "./pages/AdminMessages";
 import GetStarted from "./pages/GetStarted";
+import Booking from "./pages/Booking";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -46,6 +47,7 @@ function Router() {
       <Route path={"/tour"} component={Tour} />
       <Route path={"/vet-referred"} component={VetReferred} />
       <Route path={"/get-started"} component={GetStarted} />
+      <Route path={"/booking"} component={Booking} />
       <Route path={"/admin/promos"} component={AdminPromos} />
       <Route path={"/admin/messages"} component={AdminMessages} />
       <Route path={"/404"} component={NotFound} />
