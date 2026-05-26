@@ -61,8 +61,8 @@ export default function AboutSection() {
                     <Heart className="w-6 h-6 text-[#48D597]" fill="currentColor" />
                   </div>
                   <div>
-                    <div className="text-2xl font-extrabold text-[#345460]">4,000+</div>
-                    <div className="text-sm text-[#345460]/60 font-medium">Sq Ft of Play Space</div>
+                    <div className="text-2xl font-extrabold text-[#345460]">7,000+</div>
+                    <div className="text-sm text-[#345460]/60 font-medium">Sq Ft Facility</div>
                   </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default function AboutSection() {
               <span className="text-[#48D597]">of Dogs</span>
             </h2>
             <p className="text-[#345460]/70 text-lg leading-relaxed mb-5">
-              Metro Mutts was founded in Tulsa, Oklahoma with a simple mission: to create the kind of dog care we'd want for our own pups. Our state-of-the-art facility features 2,000 sq ft of indoor play area, 2,000 sq ft of outdoor play area, and spacious overnight boarding suites.
+              Metro Mutts was founded in Tulsa, Oklahoma with a simple mission: to create the kind of dog care we'd want for our own pups. Our state-of-the-art 7,000 sq ft facility features 4,000 sq ft of turfed play space and spacious overnight boarding suites.
             </p>
             <p className="text-[#345460]/70 text-base leading-relaxed mb-8">
               Every decision we make — from the products we use to the staff we hire — is guided by one question: "Is this what's best for the dogs?" That commitment to excellence is why Tulsa families trust us with their furry family members every day.

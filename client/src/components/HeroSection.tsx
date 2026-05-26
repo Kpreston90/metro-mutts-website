@@ -60,7 +60,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            Tulsa's newest dog daycare, boarding, and grooming facility — from the family behind OKC's most waitlisted dog care spot. 4,000+ sq ft of pure pup paradise.
+            Tulsa's newest dog daycare, boarding, and grooming facility — from the family behind OKC's most waitlisted dog care spot. 7,000+ sq ft of pure pup paradise.
           </motion.p>
 
           <motion.div
@@ -105,7 +105,7 @@ export default function HeroSection() {
                   </div>
                 ))}
               </div>
-              <span className="text-white/75 text-sm font-medium">4,000+ sq ft of play space</span>
+              <span className="text-white/75 text-sm font-medium">7,000+ sq ft facility</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="flex gap-0.5">

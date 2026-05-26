@@ -4,7 +4,8 @@
  * Shows services at a glance, trust signals, live availability, and clear CTAs.
  * Brand: Green #48D597, Dark #345460, Accent #FB923C
  */
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -67,7 +68,7 @@ const trustPoints = [
   { icon: Star, text: "4.9★ on Google & Yelp" },
   { icon: Shield, text: "Trained & certified staff" },
   { icon: Users, text: "Supervised play groups" },
-  { icon: Clock, text: "Mon–Fri 6:30AM–7PM" },
+  { icon: Clock, text: "Mon–Fri 7AM–6PM" },
   { icon: MapPin, text: "Tulsa, Oklahoma" },
   { icon: Heart, text: "Family-owned & operated" },
 ];
@@ -85,6 +86,16 @@ const fadeUp = {
 
 export default function Booking() {
   const { openBookingModal } = useBookingModal();
+  const [showStickyBtn, setShowStickyBtn] = useState(false);
+
+  // Show sticky button after scrolling past the hero
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyBtn(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Live availability
   const { data: availability } = trpc.availability.todayAndTomorrow.useQuery(
@@ -366,14 +377,14 @@ export default function Booking() {
                 <Clock className="w-6 h-6 text-[#48D597] mx-auto mb-2" />
                 <p className="font-bold text-[#345460] text-sm">Hours</p>
                 <p className="text-[#345460]/60 text-xs mt-1">
-                  Mon–Fri 6:30AM–7PM<br />Sat 8AM–5PM
+                  Mon–Fri 7AM–6PM<br />Sat–Sun 9AM–5PM
                 </p>
               </div>
               <div>
                 <MapPin className="w-6 h-6 text-[#48D597] mx-auto mb-2" />
                 <p className="font-bold text-[#345460] text-sm">Location</p>
                 <p className="text-[#345460]/60 text-xs mt-1">
-                  Tulsa, Oklahoma<br />4,000+ sq ft facility
+                  Tulsa, Oklahoma<br />7,000+ sq ft facility (4K turfed play space)
                 </p>
               </div>
               <div>
@@ -433,6 +444,28 @@ export default function Booking() {
       </main>
 
       <Footer />
+
+      {/* ─── Sticky Book Now Button ─── */}
+      <AnimatePresence>
+        {showStickyBtn && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 sm:bottom-8"
+          >
+            <Button
+              size="lg"
+              className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-2xl shadow-black/20 transition-all hover:-translate-y-0.5 rounded-full"
+              onClick={openBookingModal}
+            >
+              <CalendarCheck className="w-5 h-5 mr-2" />
+              Book Now
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

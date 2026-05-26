@@ -24,7 +24,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <PageSEO
         title="Metro Mutts | Dog Boarding, Grooming & Daycare in Tulsa, OK"
-        description="Metro Mutts offers luxury dog boarding, professional grooming, and supervised daycare in Tulsa, Oklahoma. 4,000+ sq ft facility with indoor play areas. First day free! Call 539-867-3841."
+        description="Metro Mutts offers luxury dog boarding, professional grooming, and supervised daycare in Tulsa, Oklahoma. 7,000+ sq ft facility with 4K of turfed play space. First day free! Call 539-867-3841."
         canonical="https://www.metromutts.com"
       />
       <Navbar />

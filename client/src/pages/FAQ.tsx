@@ -107,7 +107,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: "What are your daycare hours?",
         answer:
-          "Our daycare operates Monday through Friday, 6:30 AM to 6:30 PM, and Saturday 8:00 AM to 5:00 PM. Drop-off is available anytime during operating hours, and we ask that all pups be picked up by closing time. Late pick-ups may incur an additional fee.",
+          "Our daycare operates Monday through Friday, 7:00 AM to 6:00 PM, and Saturday & Sunday 9:00 AM to 5:00 PM. Drop-off is available anytime during operating hours, and we ask that all pups be picked up by closing time. Late pick-ups may incur an additional fee.",
       },
       {
         question: "What does a typical day look like?",

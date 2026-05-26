@@ -51,7 +51,7 @@ const reviewMessages: TickerMessage[] = [
 const funMessages: TickerMessage[] = [
   {
     icon: <Heart className="w-3.5 h-3.5 text-[#FB923C]" />,
-    text: "4,000+ sq ft of pure pup paradise",
+    text: "7,000+ sq ft of pure pup paradise",
   },
   {
     icon: <Sparkles className="w-3.5 h-3.5 text-[#48D597]" />,

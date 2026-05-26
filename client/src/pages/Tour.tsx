@@ -104,14 +104,14 @@ const tourStops = [
     id: "play-area",
     number: "03",
     title: "Indoor Play Area",
-    subtitle: "4,000+ sq ft of pure pup paradise",
+    subtitle: "7,000+ sq ft of pure pup paradise",
     icon: Dog,
     color: "#48D597",
     description:
       "The heart of Metro Mutts — our massive indoor play area features professional-grade artificial turf, towering ceilings with exposed steel beams, and a roll-up garage door that opens to our outdoor yard. Dogs are grouped by size and temperament for safe, supervised play sessions throughout the day.",
     highlights: [
       "Professional artificial turf",
-      "2,000 sq ft indoor + 2,000 sq ft outdoor",
+      "4,000 sq ft of turfed play space",
       "Roll-up garage door to outdoor yard",
       "Size-appropriate play groups",
     ],
@@ -513,7 +513,7 @@ export default function Tour() {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             {[
-              { value: "4,000+", label: "Sq Ft of Space" },
+              { value: "7,000+", label: "Sq Ft of Space" },
               { value: "13", label: "Real Photos" },
               { value: "4", label: "Tour Stops" },
             ].map((stat) => (

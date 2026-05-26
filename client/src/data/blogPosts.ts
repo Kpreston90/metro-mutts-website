@@ -433,9 +433,9 @@ Happy Friday, Tulsa. Go make some memories with your dog this weekend.
     content: `
 Dropping your dog off at daycare requires trust. You're handing your best friend to someone else and hoping they'll be just as careful, just as attentive, and just as loving as you are. That's a big ask — and we don't take it lightly.
 
-At Metro Mutts, safety isn't a policy we printed out and taped to the wall. It's the foundation of everything we do, from the moment we unlock the doors at 6:30 AM to the last check-in before lights out. And because we believe transparency builds trust, we're pulling back the curtain today to show you exactly how we keep 30+ dogs safe, happy, and thriving under one roof every single day.
+At Metro Mutts, safety isn't a policy we printed out and taped to the wall. It's the foundation of everything we do, from the moment we unlock the doors at 7:00 AM to the last check-in before lights out. And because we believe transparency builds trust, we're pulling back the curtain today to show you exactly how we keep 30+ dogs safe, happy, and thriving under one roof every single day.
 
-## 6:30 AM — The Morning Setup
+## 6:45 AM — The Morning Setup
 
 Before the first pup walks through the door, our team is already on the floor. Every morning starts with a full facility walkthrough. We check the indoor play area for anything that shouldn't be there — a loose bolt, a toy that's been chewed down to a choking hazard, a wet spot on the floor. The outdoor turf gets inspected too. Fencing is checked, gates are tested, and water stations are filled with fresh water.
 
@@ -1327,7 +1327,7 @@ Once you've found the right facility, here's how to set your dog up for a great 
 
 Metro Mutts was built by the family behind OKC's most waitlisted dog daycare. When we opened our Tulsa location, we brought everything we learned about what dogs (and their parents) actually need:
 
-**4,000+ square feet of indoor and outdoor play space** — enough room for dogs to run, play, and decompress without feeling crowded.
+**7,000+ square feet of indoor and outdoor space (4,000 sq ft of turfed play area)** — enough room for dogs to run, play, and decompress without feeling crowded.
 
 **Full daycare included with every boarding stay** — your dog isn't sitting in a suite all day. They're playing, socializing, and burning energy from open to close.
 

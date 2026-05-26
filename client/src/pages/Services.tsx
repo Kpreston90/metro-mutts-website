@@ -43,7 +43,7 @@ const services = [
     price: "From $30/day",
     freeOffer: "First day FREE",
     description:
-      "Supervised group play in 4,000+ sq ft of indoor and outdoor space. Dogs are grouped by size and temperament. Enrichment activities, puzzle toys, and agility equipment keep your pup mentally stimulated and physically tired.",
+      "Supervised group play in 7,000+ sq ft of indoor and outdoor space (4K of turfed play area). Dogs are grouped by size and temperament. Enrichment activities, puzzle toys, and agility equipment keep your pup mentally stimulated and physically tired.",
     features: [
       "Supervised group play",
       "Size & temperament grouping",
@@ -217,7 +217,7 @@ export default function Services() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { value: "3", label: "Services" },
-              { value: "4,000+", label: "Sq Ft Facility" },
+              { value: "7,000+", label: "Sq Ft Facility" },
               { value: "4.9★", label: "Google Rating" },
               { value: "FREE", label: "First Day Daycare" },
             ].map((stat) => (

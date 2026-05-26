@@ -203,7 +203,7 @@ export default function VetReferred() {
             </span>
             <span className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-[#48D597]" />
-              Mon–Fri 6:30AM–7PM
+              Mon–Fri 7AM–6PM
             </span>
           </div>
         </div>
@@ -271,7 +271,7 @@ export default function VetReferred() {
                 Our Facility
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3 mb-6">
-                4,000+ Sq Ft of Pure Pup Paradise
+                7,000+ Sq Ft of Pure Pup Paradise
               </h2>
               <div className="space-y-4">
                 {[

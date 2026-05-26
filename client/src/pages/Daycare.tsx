@@ -69,7 +69,7 @@ const included = [
 ];
 
 const whyUs = [
-  "4,000+ sq ft of indoor & outdoor play space",
+  "7,000+ sq ft facility (4K of turfed play space)",
   "Climate-controlled facility year-round",
   "Temperament-tested playgroups for safety",
   "Trained, passionate staff on-site",
@@ -146,7 +146,7 @@ export default function Daycare() {
               Starts Here
             </h1>
             <p className="text-lg text-white/65 max-w-xl mb-8 leading-relaxed">
-              Supervised group play, enrichment activities, and 4,000+ sq ft of
+              Supervised group play, enrichment activities, and 7,000+ sq ft of
               indoor and outdoor space — where every dog comes home happy and
               tired. First day free for new pups.
             </p>
@@ -178,7 +178,7 @@ export default function Daycare() {
             {[
               { value: "$30", label: "Full Day" },
               { value: "FREE", label: "First Day" },
-              { value: "4,000+", label: "Sq Ft Play Space" },
+              { value: "7,000+", label: "Sq Ft Facility" },
               { value: "7–6", label: "Mon–Fri Hours" },
             ].map((stat) => (
               <div key={stat.label}>

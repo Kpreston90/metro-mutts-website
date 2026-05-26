@@ -20,7 +20,7 @@
 - Phone: 539-867-3841
 - Email: info@metromutts.com
 - Location: Tulsa, Oklahoma
-- Hours: Mon-Fri 6:30AM-7PM, Sat 8AM-5PM
+- Hours: Mon-Fri 7AM-6PM, Sat-Sun 9AM-5PM
 - Logo PNG (dark): https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/mm-logo-dark_455bad7b.png
 - Logo PNG (white): https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/mm-logo-white_a0eef0bd.png
 
@@ -103,3 +103,6 @@
 - [x] Build seasonal message admin system (DB schema, tRPC procedures, admin UI at /admin/messages, SocialProofTicker integration)
 - [x] Add blog post: "Your Dog Notices When Routines Change" (summer routine/consistency article with hero image)
 - [x] Create dedicated /booking landing page (shareable link for emails, ads, social — services, trust signals, live availability, new/returning CTAs)
+- [x] Add sticky "Book Now" button on /booking page that remains visible while scrolling
+- [x] Correct hours site-wide to 7AM-6PM M-F and 9AM-5PM Sat-Sun
+- [x] Correct facility size to 7K sq ft (4K turfed play space) site-wide

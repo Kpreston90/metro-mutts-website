@@ -722,21 +722,16 @@ function StoreStep() {
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-[#48D597]" />
             <span>
-              <strong>Mon–Fri:</strong> 6:30 AM – 7:00 PM
+              <strong>Mon–Fri:</strong> 7:00 AM – 6:00 PM
             </span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-[#48D597]" />
             <span>
-              <strong>Saturday:</strong> 8:00 AM – 5:00 PM
+              <strong>Sat–Sun:</strong> 9:00 AM – 5:00 PM
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#48D597]" />
-            <span>
-              <strong>Sunday:</strong> Closed
-            </span>
-          </div>
+
         </div>
       </div>
 

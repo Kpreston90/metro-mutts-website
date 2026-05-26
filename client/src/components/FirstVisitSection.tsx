@@ -31,7 +31,7 @@ const steps = [
     icon: Users,
     title: "Supervised Play Time",
     description:
-      "Your dog joins a matched group on our 4,000+ sq ft indoor turf for monitored, structured play sessions.",
+      "Your dog joins a matched group on our 4,000 sq ft indoor turf for monitored, structured play sessions.",
   },
   {
     number: "04",

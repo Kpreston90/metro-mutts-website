@@ -52,7 +52,7 @@ const included = [
   {
     icon: Gamepad2,
     title: "Daily Playtime",
-    desc: "Every boarding guest gets supervised group play sessions in our 4,000+ sq ft indoor and outdoor play areas.",
+    desc: "Every boarding guest gets supervised group play sessions in our 7,000+ sq ft indoor and outdoor play areas.",
   },
   {
     icon: Moon,
@@ -72,7 +72,7 @@ const included = [
 ];
 
 const whyUs = [
-  "4,000+ sq ft of indoor & outdoor play space",
+  "7,000+ sq ft facility (4K of turfed play space)",
   "Climate-controlled facility year-round",
   "Temperament-tested playgroups for safety",
   "Trained, passionate staff on-site",
@@ -171,7 +171,7 @@ export default function Boarding() {
             {[
               { value: "$50", label: "Per Night" },
               { value: "$45", label: "Additional Dogs" },
-              { value: "4,000+", label: "Sq Ft Play Space" },
+              { value: "7,000+", label: "Sq Ft Facility" },
               { value: "24/7", label: "Supervised Care" },
             ].map((stat) => (
               <div key={stat.label}>
@@ -536,7 +536,7 @@ export default function Boarding() {
           },
           {
             question: "What makes Metro Mutts different from other dog boarding in Tulsa?",
-            answer: "Metro Mutts is Tulsa's newest purpose-built dog care facility with 4,000+ sq ft of indoor and outdoor space. Unlike traditional kennels, our dogs aren't crated all day — they enjoy supervised group play, enrichment activities, and personalized attention. We're family-run by the team behind OKC's most waitlisted dog care spot."
+            answer: "Metro Mutts is Tulsa's newest purpose-built dog care facility with 7,000+ sq ft of indoor and outdoor space (4,000 sq ft of turfed play area). Unlike traditional kennels, our dogs aren't crated all day — they enjoy supervised group play, enrichment activities, and personalized attention. We're family-run by the team behind OKC's most waitlisted dog care spot."
           },
           {
             question: "Do you offer boarding for large dogs in Tulsa?",
@@ -544,7 +544,7 @@ export default function Boarding() {
           },
           {
             question: "What are your dog boarding hours for drop-off and pick-up?",
-            answer: "Drop-off is available Monday through Friday from 6:30 AM to 7:00 PM, Saturday 8:00 AM to 5:00 PM, and Sunday 10:00 AM to 4:00 PM. We're flexible with scheduling — just let us know your travel plans and we'll work with you."
+            answer: "Drop-off is available Monday through Friday from 7:00 AM to 6:00 PM, and Saturday & Sunday 9:00 AM to 5:00 PM. We're flexible with scheduling — just let us know your travel plans and we'll work with you."
           }
         ]}
       />
