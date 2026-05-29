@@ -6,7 +6,6 @@
  */
 import { Facebook, Instagram } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import { toast } from "sonner";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 
 const LOGO_WHITE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/mm-logo-white_a0eef0bd.png";
@@ -153,18 +152,18 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Metro Mutts. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-white/40">
-            <button
-              onClick={() => toast("Privacy Policy coming soon")}
+            <Link
+              href="/privacy"
               className="hover:text-white/60 transition-colors"
             >
               Privacy Policy
-            </button>
-            <button
-              onClick={() => toast("Terms of Service coming soon")}
+            </Link>
+            <Link
+              href="/terms"
               className="hover:text-white/60 transition-colors"
             >
               Terms of Service
-            </button>
+            </Link>
           </div>
         </div>
       </div>

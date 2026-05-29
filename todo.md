@@ -106,3 +106,6 @@
 - [x] Add sticky "Book Now" button on /booking page that remains visible while scrolling
 - [x] Correct hours site-wide to 7AM-6PM M-F and 9AM-5PM Sat-Sun
 - [x] Correct facility size to 7K sq ft (4K turfed play space) site-wide
+- [x] Create Privacy Policy page at /privacy with full legal content
+- [x] Create Terms of Service page at /terms with full legal content
+- [x] Link Privacy Policy and Terms of Service from footer (replaced toast placeholders with real links)

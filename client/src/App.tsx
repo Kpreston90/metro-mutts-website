@@ -26,6 +26,8 @@ import AdminPromos from "./pages/AdminPromos";
 import AdminMessages from "./pages/AdminMessages";
 import GetStarted from "./pages/GetStarted";
 import Booking from "./pages/Booking";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -48,6 +50,8 @@ function Router() {
       <Route path={"/vet-referred"} component={VetReferred} />
       <Route path={"/get-started"} component={GetStarted} />
       <Route path={"/booking"} component={Booking} />
+      <Route path={"/privacy"} component={PrivacyPolicy} />
+      <Route path={"/terms"} component={TermsOfService} />
       <Route path={"/admin/promos"} component={AdminPromos} />
       <Route path={"/admin/messages"} component={AdminMessages} />
       <Route path={"/404"} component={NotFound} />
