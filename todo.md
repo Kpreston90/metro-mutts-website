@@ -1,16 +1,16 @@
 # Metro Mutts Branding Update Todo
 
 ## Color Swap: Replace teal/amber oklch with Metro Mutts green/blue
-- [ ] index.css — update all color tokens
-- [ ] Navbar — swap logo to real MM logo, update phone to 539-867-3841, single Tulsa location
-- [ ] HeroSection — swap hero image to real MM photo, update colors
-- [ ] ServicesSection — swap service images to real MM photos
-- [ ] StatsSection — fix stats to single location (4000+ sqft, not 12 locations)
-- [ ] TestimonialsSection — remove multi-location references
-- [ ] AboutSection — update with real MM info
-- [ ] CTASection — update phone number
-- [ ] ContactSection — single Tulsa location, real address/phone/email
-- [ ] Footer — swap logo, update contact info
+- [x] index.css — update all color tokens
+- [x] Navbar — swap logo to real MM logo, update phone to 539-867-3841, single Tulsa location
+- [x] HeroSection — swap hero image to real MM photo, update colors
+- [x] ServicesSection — swap service images to real MM photos
+- [x] StatsSection — fix stats to single location (7000+ sqft)
+- [x] TestimonialsSection — remove multi-location references
+- [x] AboutSection — update with real MM info
+- [x] CTASection — update phone number
+- [x] ContactSection — single Tulsa location, real address/phone/email
+- [x] Footer — swap logo, update contact info
 
 ## Key Brand Values
 - Primary Green: #48D597
@@ -109,3 +109,4 @@
 - [x] Create Privacy Policy page at /privacy with full legal content
 - [x] Create Terms of Service page at /terms with full legal content
 - [x] Link Privacy Policy and Terms of Service from footer (replaced toast placeholders with real links)
+- [x] Add blog post: "What Your Dog Is Actually Thinking When You Leave for a Trip" (SEO-optimized boarding article with internal links)
