@@ -153,13 +153,23 @@ export default function ReferFriend() {
       <Navbar />
 
       {/* ─── Hero ─── */}
+      {/* GRADIENT CONFIG — adjust these values to control the overlay */}
+      {/* direction: to-r (left→right), to-l (right→left), to-b (top→down), to-t (bottom→up) */}
+      {/* color: base overlay color (hex) */}
+      {/* from/via/to: opacity stops from 0-100 (percentage) */}
       <section className="relative h-[420px] sm:h-[380px] lg:h-[460px] overflow-hidden">
         <img
           src={HERO_IMG}
           alt="Two friends with their dogs at Metro Mutts"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#345460]/90 via-[#345460]/80 to-[#345460]/50" />
+        {/* Directional gradient overlay — edit inline style for full control */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to right, rgba(52, 84, 96, 1) 0%, rgba(52, 84, 96, 0.85) 40%, rgba(52, 84, 96, 0.5) 70%, rgba(52, 84, 96, 0.2) 100%)`,
+          }}
+        />
         <div className="relative container h-full flex flex-col justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

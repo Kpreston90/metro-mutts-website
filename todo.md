@@ -110,3 +110,9 @@
 - [x] Create Terms of Service page at /terms with full legal content
 - [x] Link Privacy Policy and Terms of Service from footer (replaced toast placeholders with real links)
 - [x] Add blog post: "What Your Dog Is Actually Thinking When You Leave for a Trip" (SEO-optimized boarding article with internal links)
+- [ ] Alpha dashboard: Replace hero photo with cream→mint→teal gradient (Option 3)
+- [ ] Alpha dashboard: Increase Pulse card ring size 20%, score size 30%, white space 15%
+- [ ] Alpha dashboard: Convert Dog of the Day to operational Pet Spotlight (visits, LTV, rating)
+- [ ] Alpha dashboard: Add Alpha Feed scrolling intelligence section
+- [ ] Alpha dashboard: Update top branding to "Metro Mutts — Powered by Alpha"
+- [x] Add blog post: "Why Your Dog Sleeps So Much After Daycare (And Why That's Actually a Good Thing)" (daycare tips article)
