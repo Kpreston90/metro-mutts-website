@@ -1764,7 +1764,7 @@ Whether your dog needs socialization, exercise, mental stimulation, or simply a 
     author: "Metro Mutts Team",
     date: "2026-06-16",
     readTime: "5 min read",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-dog-sleep-daycare-WsMnoNUruywN8eyPJXdoPC.webp",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-dog-sleep-daycare-v2-Ngai6p3mH9K9K4QZeDgyqA.webp",
     tags: ["dog daycare Tulsa", "dog daycare", "why dogs sleep after daycare", "mental stimulation dogs", "dog enrichment", "Tulsa dog daycare", "daycare tips", "dog behavior"],
   },
 ];
