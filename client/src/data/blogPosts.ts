@@ -1767,6 +1767,120 @@ Whether your dog needs socialization, exercise, mental stimulation, or simply a 
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-dog-sleep-daycare-v2-Ngai6p3mH9K9K4QZeDgyqA.webp",
     tags: ["dog daycare Tulsa", "dog daycare", "why dogs sleep after daycare", "mental stimulation dogs", "dog enrichment", "Tulsa dog daycare", "daycare tips", "dog behavior"],
   },
+  {
+    title: "The Science of the Zoomies",
+    slug: "the-science-of-the-zoomies",
+    excerpt: "What those sudden bursts of speed actually mean — and why every dog owner has seen it.",
+    content: `One second your dog is calmly lying on the couch.
+
+The next?
+
+They're sprinting through the house at full speed, bouncing off furniture, and making laps around the yard like they just drank three espressos.
+
+Dog owners have a name for this:
+
+**The Zoomies.**
+
+## What Are Zoomies?
+
+The scientific term is:
+
+**FRAPs**
+
+*Frenetic Random Activity Periods.*
+
+In plain English:
+
+A sudden burst of energy that causes dogs to run, spin, race, and play at high speed.
+
+## Why Do Dogs Get Them?
+
+### 1. Excitement
+
+A favorite person comes home.
+
+A leash comes out.
+
+A new friend arrives.
+
+Sometimes dogs simply can't contain their excitement.
+
+### 2. Stress Release
+
+Just like humans shake off tension after a stressful day, dogs sometimes release pent-up energy through movement.
+
+That's why some dogs get zoomies after:
+
+- baths
+- vet visits
+- grooming appointments
+
+### 3. Built-Up Energy
+
+This is the one most owners recognize.
+
+A dog that hasn't had enough exercise or stimulation may occasionally release energy all at once.
+
+### 4. Pure Joy
+
+Sometimes they're just having fun.
+
+No deeper meaning.
+
+No hidden message.
+
+Just happiness.
+
+## Did You Know?
+
+Zoomies are especially common in:
+
+- puppies
+- adolescent dogs
+- highly social dogs
+- athletic breeds
+
+They're usually a sign of healthy energy and normal behavior.
+
+## When Should You Be Concerned?
+
+Almost never.
+
+The only concern is safety.
+
+Make sure dogs have enough room and aren't racing on slippery surfaces.
+
+Otherwise, zoomies are generally completely normal.
+
+## How Daycare Fits In
+
+One of the benefits of daycare is giving dogs a healthy outlet for energy, play, and social interaction.
+
+Dogs naturally get opportunities to:
+
+- run
+- play
+- socialize
+- explore
+- burn mental and physical energy
+
+Which often means fewer surprise zoomie attacks in your living room.
+
+(Although we make no promises.)
+
+## Want a healthier outlet for all that energy?
+
+Give your dog a day of play, enrichment, and socialization.
+
+[Book a daycare visit](/booking) and let them zoom where it's safe — on 4,000 sq ft of turfed play space.
+`,
+    category: "Dog Care",
+    author: "Metro Mutts Team",
+    date: "2026-06-23",
+    readTime: "4 min read",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-zoomies-hero-oKuJchKK5JFvj59yhx9fjm.webp",
+    tags: ["dog zoomies", "FRAPs", "dog behavior", "why dogs get zoomies", "dog energy", "dog daycare Tulsa", "Tulsa dog daycare", "dog enrichment"],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

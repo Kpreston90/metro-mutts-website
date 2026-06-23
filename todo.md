@@ -116,3 +116,4 @@
 - [ ] Alpha dashboard: Add Alpha Feed scrolling intelligence section
 - [ ] Alpha dashboard: Update top branding to "Metro Mutts — Powered by Alpha"
 - [x] Add blog post: "Why Your Dog Sleeps So Much After Daycare (And Why That's Actually a Good Thing)" (daycare tips article)
+- [x] Add blog post: "The Science of the Zoomies" (dog behavior/daycare article with hero image)
