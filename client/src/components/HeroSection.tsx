@@ -23,11 +23,11 @@ export default function HeroSection() {
           alt="Dog pulling on leash toward Metro Mutts entrance, excited for daycare"
           className="w-full h-full object-cover"
         />
-        {/* Morning glow overlay — warm golden tint */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/65 via-[#2a4048]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-900/10 via-transparent to-transparent" />
+        {/* Morning glow overlay — warm, bright, golden hour feel */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/50 via-[#2a4048]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/15 via-orange-400/8 to-transparent" />
         {/* Extra bottom fade for wave transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#345460]/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#345460]/20 to-transparent" />
       </div>
 
       {/* Content */}
