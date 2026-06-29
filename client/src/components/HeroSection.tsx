@@ -10,7 +10,7 @@ import { Link } from "wouter";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
+const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/hero-welcome-v4-AoYRMSTyzjVinFfTjXN5YV.webp";
 
 export default function HeroSection() {
   const { openBookingModal } = useBookingModal();
@@ -20,7 +20,7 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <img
           src={HERO_IMG}
-          alt="Metro Mutts indoor play area with dogs on green turf"
+          alt="Dog pulling on leash toward Metro Mutts entrance, excited for daycare"
           className="w-full h-full object-cover"
         />
         {/* Dark gradient overlay for text readability */}
@@ -49,9 +49,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            Your Dog's{" "}
-            <span className="text-[#48D597]">Best Day</span>{" "}
-            Starts Here
+            Where Every Dog{" "}
+            <span className="text-[#48D597]">Wants</span> to Be
           </motion.h1>
 
           <motion.p
@@ -60,7 +59,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            Tulsa's newest dog daycare, boarding, and grooming facility — from the family behind OKC's most waitlisted dog care spot. 7,000+ sq ft of pure pup paradise.
+            7,000+ sq ft of play, rest & real care. Tulsa's premier dog daycare, boarding, and grooming facility.
           </motion.p>
 
           <motion.div
