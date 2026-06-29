@@ -5,6 +5,7 @@
  * Fixed height, crossfade only, no initial load glitch
  */
 import { useState, useEffect, useCallback, useRef } from "react";
+import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Star, ChevronLeft, ChevronRight } from "lucide-react";
@@ -60,10 +61,17 @@ function SlideTextWrapper({ isActive, children }: { isActive: boolean; children:
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
+  const [heroLoaded, setHeroLoaded] = useState(false);
   const { openBookingModal } = useBookingModal();
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+
+  // Fade-in on page load
+  useEffect(() => {
+    const timeout = setTimeout(() => setHeroLoaded(true), 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const resetTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -136,7 +144,10 @@ export default function HeroSection() {
   return (
     <section
       data-hero-section
-      className="relative overflow-hidden h-[600px] sm:h-[700px] lg:h-[750px]"
+      className={cn(
+        "relative overflow-hidden h-[600px] sm:h-[700px] lg:h-[750px] transition-all duration-1000 ease-out",
+        heroLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      )}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -153,10 +164,12 @@ export default function HeroSection() {
             alt={slide.alt}
             className="w-full h-full object-cover"
           />
-          {/* Morning glow overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/55 via-[#2a4048]/25 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/12 via-orange-400/6 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#345460]/20 to-transparent" />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f1f27]/70 via-[#1a2e38]/45 to-[#1a2e38]/15" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f1f27]/30 via-transparent to-[#0f1f27]/20" />
+          {/* Morning glow accent */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/8 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#345460]/30 to-transparent" />
         </div>
       ))}
 
