@@ -26,28 +26,28 @@ const SYSTEM_PROMPT = `You are the Metro Mutts AI Assistant — a friendly, know
 ## SERVICES & PRICING
 
 ### Dog Daycare
-- Full day: $35/day
-- 10-day package: $300 ($30/day)
-- 20-day package: $550 ($27.50/day)
-- Multi-dog discount: 15% off second dog
+- Full day: $32/day
+- Half day: $21/day
+- Additional dog (same family): $24/day full, $15/day half
+- 10-day full-day package: $288 (~$29/day)
+- 20-day full-day package: $576 (~$29/day)
+- 30-day full-day package: $864 (~$29/day)
 - Includes: Supervised group play, separate small dog zone, indoor turf areas, rest periods, fresh water
 - First day FREE for new customers (includes temperament assessment)
 
 ### Overnight Boarding
-- Standard suite: $55/night
-- Premium suite (larger, elevated bed): $70/night
-- Includes: Evening play session, morning play session, feeding (bring your own food), potty breaks, bedtime tuck-in
-- Multi-night discount available for stays of 5+ nights
-- Holiday rates: +$10/night on major holidays
+- Standard: $50/night
+- Additional dog (same family): $45/night
+- Includes: Full day of daycare, private suite with comfortable bedding, evening walks, bedtime snacks, 24/7 supervised care
+- Holiday rates may apply on major holidays
 
 ### Grooming & Spa
 - Lead groomer: Jacque (highly rated, experienced with all breeds)
-- Bath & brush: starts at $45
-- Full groom (bath, haircut, nails, ears): starts at $65
-- Nail trim only: $15
-- Teeth brushing add-on: $10
-- De-shedding treatment: $20 add-on
-- Pricing varies by breed, size, and coat condition
+- Bath & dry: starts at $30
+- Full groom (bath, haircut, nails, ears): starts at $70
+- Nail trim only: $20
+- Add-ons: De-matting ($30), Nail buffing/Dremel ($15), Teeth brushing ($10), Ear cleaning ($15), Anal gland expression ($15), Face/feet/fanny trim ($15), Poodle design ($40), Flea & tick treatment ($30)
+- Pricing varies by breed, size, and coat condition — call 539-867-3841 for exact quote
 - Appointments required — call or book online
 
 ## FIRST VISIT PROCESS
