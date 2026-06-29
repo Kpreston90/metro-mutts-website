@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
+import VideoLightbox from "@/components/VideoLightbox";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/hero-dog-calm-leash-v5-jFftLJRsrpv3AqQvZkKqLc.webp";
 const DOTW_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/dotw-real-pup_37baa9e9.webp";
@@ -62,6 +63,7 @@ export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
   const { openBookingModal } = useBookingModal();
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef<number | null>(null);
@@ -185,7 +187,7 @@ export default function HeroSection() {
                   pointerEvents: index === currentSlide ? "auto" : "none",
                 }}
               >
-                {index === 0 && <MainSlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
+                {index === 0 && <MainSlideContent openBookingModal={openBookingModal} onPlayVideo={() => setVideoOpen(true)} isActive={index === currentSlide && textVisible} />}
                 {index === 1 && <DOTWSlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
                 {index === 2 && <FacilitySlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
               </div>
@@ -239,12 +241,15 @@ export default function HeroSection() {
           <path d="M0 40L48 35C96 30 192 20 288 18C384 16 480 22 576 30C672 38 768 48 864 50C960 52 1056 46 1152 38C1248 30 1344 20 1392 15L1440 10V80H1392C1344 80 1248 80 1152 80C1056 80 960 80 864 80C768 80 672 80 576 80C480 80 384 80 288 80C192 80 96 80 48 80H0V40Z" fill="oklch(0.995 0.002 90)" />
         </svg>
       </div>
+
+      {/* Video Lightbox */}
+      <VideoLightbox isOpen={videoOpen} onClose={() => setVideoOpen(false)} />
     </section>
   );
 }
 
 /* ─── Slide 1: Main CTA ─── */
-function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: () => void; isActive: boolean }) {
+function MainSlideContent({ openBookingModal, onPlayVideo, isActive }: { openBookingModal: () => void; onPlayVideo: () => void; isActive: boolean }) {
   return (
     <div>
       <SlideTextWrapper isActive={isActive}>
@@ -277,14 +282,15 @@ function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
             Book a Free Visit
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-white/30 text-white hover:bg-white/10 font-semibold text-sm sm:text-base px-5 sm:px-8 h-11 sm:h-13 bg-transparent backdrop-blur-sm"
-            onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+          <button
+            onClick={onPlayVideo}
+            className="group flex items-center gap-2 sm:gap-3 text-white font-semibold text-sm sm:text-base px-4 sm:px-6 h-11 sm:h-13 rounded-md border border-white/30 bg-transparent backdrop-blur-sm hover:bg-white/10 transition-all"
           >
-            Explore Services
-          </Button>
+            <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors">
+              <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white text-white ml-0.5" />
+            </span>
+            See Our Pack in Action
+          </button>
         </div>
       </div>
 

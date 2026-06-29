@@ -126,3 +126,4 @@
 - [x] Hero image v6: Apply correct Metro Mutts building image to hero and ensure mobile scaling
 - [x] Hero text overlay: Improve text readability with darker gradient overlay
 - [x] Hero fade-in animation: Add smooth fade-in when page loads
+- [x] Add "See Our Pack in Action" video lightbox button on hero (opens facility video in modal)
