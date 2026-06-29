@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, ArrowDown, MessageSquareText } from "lucide-react";
-
-const CHAT_AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/chat-avatar-dog-UtAbboEf7qFZvskcwVGY73.webp";
+import { MessageCircle, X, Send, ArrowDown, MessageSquareText, Dog } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { Streamdown } from "streamdown";
 
@@ -148,8 +146,8 @@ export default function ChatWidget() {
 
               {/* Avatar */}
               <div className="relative">
-                <div className="w-10 h-10 rounded-full overflow-hidden shadow-md">
-                  <img src={CHAT_AVATAR} alt="Metro Mutts Assistant" className="w-full h-full object-cover" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shadow-md">
+                  <Dog className="w-5 h-5 text-white" />
                 </div>
                 {/* Online indicator */}
                 <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-400 border-2 border-[#345460] rounded-full" />
@@ -231,8 +229,8 @@ export default function ChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" && (
-                        <div className="w-7 h-7 rounded-full overflow-hidden shrink-0 mt-1 shadow-sm">
-                          <img src={CHAT_AVATAR} alt="" className="w-full h-full object-cover" />
+                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shrink-0 mt-1 shadow-sm">
+                          <Dog className="w-3.5 h-3.5 text-white" />
                         </div>
                       )}
                       <div
@@ -262,8 +260,8 @@ export default function ChatWidget() {
                       animate={{ opacity: 1, y: 0 }}
                       className="flex gap-2 items-start"
                     >
-                      <div className="w-7 h-7 rounded-full overflow-hidden shrink-0 shadow-sm">
-                        <img src={CHAT_AVATAR} alt="" className="w-full h-full object-cover" />
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shrink-0 shadow-sm">
+                        <Dog className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="bg-white border border-[#e8e8e0] rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
                         <div className="flex gap-1.5">
