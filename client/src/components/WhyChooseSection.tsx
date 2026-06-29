@@ -1,10 +1,12 @@
 /*
  * Metro Mutts "Why Choose Us" Section
  * Brand: Green #48D597, Dark #345460
- * Feature cards in a grid with icons
+ * Feature cards in a grid with blurred photo background + cream overlay
  */
 import { motion } from "framer-motion";
 import { Camera, ShieldCheck, Stethoscope, Clock, Smile, Award } from "lucide-react";
+
+const BG_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
 
 const features = [
   {
@@ -41,8 +43,20 @@ const features = [
 
 export default function WhyChooseSection() {
   return (
-    <section className="py-10 lg:py-12 pb-6 lg:pb-8 relative">
-      <div className="container">
+    <section className="py-10 lg:py-12 pb-6 lg:pb-8 relative overflow-hidden">
+      {/* Blurred facility photo background */}
+      <div className="absolute inset-0">
+        <img
+          src={BG_IMG}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover blur-sm scale-105"
+        />
+        {/* Cream overlay for readability */}
+        <div className="absolute inset-0 bg-[#FFFFEC]/88" />
+      </div>
+
+      <div className="container relative">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -50,7 +64,7 @@ export default function WhyChooseSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase border border-[#48D597]/20">
             Why Metro Mutts
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#345460] tracking-tight mb-5">
@@ -67,19 +81,19 @@ export default function WhyChooseSection() {
             return (
               <motion.div
                 key={feature.title}
-                className="group bg-white rounded-2xl p-7 shadow-sm shadow-black/5 border border-black/5 hover:shadow-xl hover:shadow-[#48D597]/10 hover:border-[#48D597]/20 transition-all duration-300 hover:-translate-y-1"
+                className="group bg-white/80 backdrop-blur-md rounded-2xl p-7 shadow-md shadow-[#345460]/8 border border-white/60 hover:shadow-xl hover:shadow-[#48D597]/15 hover:border-[#48D597]/30 transition-all duration-300 hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
               >
-                <div className="w-13 h-13 rounded-2xl bg-[#48D597]/10 group-hover:bg-[#48D597] flex items-center justify-center mb-5 transition-colors duration-300">
+                <div className="w-13 h-13 rounded-2xl bg-[#48D597]/15 group-hover:bg-[#48D597] flex items-center justify-center mb-5 transition-colors duration-300">
                   <Icon className="w-6 h-6 text-[#48D597] group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-bold text-[#345460] mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-[#345460]/60 leading-relaxed">
+                <p className="text-sm text-[#345460]/65 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
