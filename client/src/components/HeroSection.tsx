@@ -268,7 +268,7 @@ function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
           <Button
             size="lg"
             variant="outline"
-            className="hidden sm:inline-flex border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
+            className="border-white/30 text-white hover:bg-white/10 font-semibold text-sm sm:text-base px-5 sm:px-8 h-11 sm:h-13 bg-transparent backdrop-blur-sm"
             onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
           >
             Explore Services
