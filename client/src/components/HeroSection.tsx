@@ -98,7 +98,7 @@ export default function HeroSection() {
       <div className="relative h-full container flex items-center">
         <div className="max-w-2xl w-full">
           {/* All slide content stacked absolutely so height is fixed */}
-          <div className="relative min-h-[380px] sm:min-h-[400px]">
+          <div className="relative min-h-[420px] sm:min-h-[440px]">
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -311,7 +311,7 @@ function HeroAvailabilityBadge() {
   const displayText = summary || "33 daycare \u00B7 12 boarding spots open today";
 
   return (
-    <div className="mt-6">
+    <div className="mt-8">
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
         <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#48D597] opacity-75"></span>
