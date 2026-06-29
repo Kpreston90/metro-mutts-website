@@ -1,7 +1,7 @@
 /*
  * Metro Mutts "Why Choose Us" Section
  * Brand: Green #48D597, Dark #345460
- * Dark teal background with white text and green accent icons
+ * Feature cards in a grid with icons
  */
 import { motion } from "framer-motion";
 import { Camera, ShieldCheck, Stethoscope, Clock, Smile, Award } from "lucide-react";
@@ -41,7 +41,7 @@ const features = [
 
 export default function WhyChooseSection() {
   return (
-    <section className="py-10 lg:py-12 pb-6 lg:pb-8 relative bg-[#345460]">
+    <section className="py-10 lg:py-12 pb-6 lg:pb-8 relative">
       <div className="container">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-10"
@@ -50,13 +50,13 @@ export default function WhyChooseSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase border border-[#48D597]/25">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
             Why Metro Mutts
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#345460] tracking-tight mb-5">
             The <span className="text-[#48D597]">Metro Mutts</span> Difference
           </h2>
-          <p className="text-white/70 text-lg leading-relaxed">
+          <p className="text-[#345460]/70 text-lg leading-relaxed">
             We go above and beyond to ensure every dog in our care has the safest, happiest, and most enriching experience possible.
           </p>
         </motion.div>
@@ -67,19 +67,19 @@ export default function WhyChooseSection() {
             return (
               <motion.div
                 key={feature.title}
-                className="group bg-white/8 backdrop-blur-sm rounded-2xl p-7 border border-white/10 hover:border-[#48D597]/30 hover:bg-white/12 transition-all duration-300 hover:-translate-y-1"
+                className="group bg-white rounded-2xl p-7 shadow-sm shadow-black/5 border border-black/5 hover:shadow-xl hover:shadow-[#48D597]/10 hover:border-[#48D597]/20 transition-all duration-300 hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
               >
-                <div className="w-13 h-13 rounded-2xl bg-[#48D597]/15 group-hover:bg-[#48D597] flex items-center justify-center mb-5 transition-colors duration-300">
+                <div className="w-13 h-13 rounded-2xl bg-[#48D597]/10 group-hover:bg-[#48D597] flex items-center justify-center mb-5 transition-colors duration-300">
                   <Icon className="w-6 h-6 text-[#48D597] group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">
+                <h3 className="text-lg font-bold text-[#345460] mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-white/60 leading-relaxed">
+                <p className="text-sm text-[#345460]/60 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
