@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, ArrowDown, MessageSquareText } from "lucide-react";
+import { X, Send, ArrowDown, MessageSquareText } from "lucide-react";
 
 /** Custom speech-bubble-with-paw icon */
 function PawBubble({ className }: { className?: string }) {
@@ -144,7 +144,7 @@ export default function ChatWidget() {
             <span className="absolute inset-0 rounded-full bg-[#48D597] animate-ping opacity-20" />
             {/* Button */}
             <span className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#48D597] to-[#345460] shadow-lg shadow-[#48D597]/30 group-hover:shadow-xl group-hover:shadow-[#48D597]/40 transition-shadow">
-              <MessageCircle className="w-6 h-6 text-white" />
+              <PawBubble className="w-6 h-6 text-white" />
             </span>
             {/* Label tooltip */}
             <span className="absolute bottom-full right-0 mb-2 px-3 py-1.5 rounded-lg bg-[#345460] text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
