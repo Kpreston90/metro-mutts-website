@@ -5,7 +5,7 @@
  */
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, ArrowRight, Navigation } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Navigation, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { trackFormSubmit, trackPhoneCall } from "@/lib/analytics";
 
@@ -218,14 +218,23 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-              {/* Get Directions button */}
-              <button
-                onClick={handleGetDirections}
-                className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#345460] text-white text-sm font-semibold hover:bg-[#2a4550] transition-colors"
-              >
-                <Navigation className="w-4 h-4" />
-                Get Directions
-              </button>
+              {/* Action buttons */}
+              <div className="mt-4 space-y-2.5">
+                <button
+                  onClick={handleGetDirections}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#345460] text-white text-sm font-semibold hover:bg-[#2a4550] transition-colors"
+                >
+                  <Navigation className="w-4 h-4" />
+                  Get Directions
+                </button>
+                <a
+                  href={`sms:5398673841?&body=${encodeURIComponent("Hi! I'd like to book a free trial day for my dog.")}`}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#48D597]/10 text-[#345460] text-sm font-semibold hover:bg-[#48D597]/20 transition-colors border border-[#48D597]/30"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#48D597]" />
+                  Text Us to Book
+                </a>
+              </div>
             </div>
 
             {/* Google Maps Embed */}

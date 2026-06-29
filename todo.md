@@ -121,3 +121,5 @@
 - [x] Remove "Spots filling up" floating toast popup (too invasive — availability still shown in ticker + hero badge)
 - [x] Convert hero into auto-rotating slider (slide 1: main CTA, slide 2: Dog of the Week, slide 3: expandable)
 - [x] Sticky "Book Now" bar that appears after scrolling past the hero, shows availability + book button, hides when scrolling back up
+- [x] Add SMS "Text us to book" button in sticky bar (mobile only)
+- [x] Add SMS "Text us to book" option in Contact section (all devices)

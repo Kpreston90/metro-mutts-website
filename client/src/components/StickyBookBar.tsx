@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { useBookingModal } from "@/contexts/BookingModalContext";
+
+const SMS_NUMBER = "5398673841";
+const SMS_BODY = encodeURIComponent("Hi! I'd like to book a free trial day for my dog.");
 
 export default function StickyBookBar() {
   const [visible, setVisible] = useState(false);
@@ -69,14 +72,26 @@ export default function StickyBookBar() {
             </span>
           </div>
 
-          {/* Book button */}
-          <button
-            onClick={openBookingModal}
-            className="flex items-center gap-2 px-5 py-2.5 bg-[#48D597] hover:bg-[#3bc485] text-[#1a2e38] font-semibold text-sm rounded-full transition-colors shadow-md"
-          >
-            Book Now
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {/* Action buttons */}
+          <div className="flex items-center gap-2">
+            {/* SMS button — mobile only */}
+            <a
+              href={`sms:${SMS_NUMBER}?&body=${SMS_BODY}`}
+              className="flex sm:hidden items-center gap-1.5 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white font-medium text-sm rounded-full transition-colors border border-white/20"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Text Us
+            </a>
+
+            {/* Book button */}
+            <button
+              onClick={openBookingModal}
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#48D597] hover:bg-[#3bc485] text-[#1a2e38] font-semibold text-sm rounded-full transition-colors shadow-md"
+            >
+              Book Now
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
