@@ -282,11 +282,11 @@ export default function ChatWidget() {
                       className="flex justify-center pt-2 pb-1"
                     >
                       <a
-                        href="sms:5398673841?body=Hi! I was chatting on your website and had a question:"
+                        href="sms:5398673841?body=Hi! I was chatting on your website and couldn't find the answer I needed:"
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#345460]/5 border border-[#345460]/10 text-[#345460] text-xs font-medium hover:bg-[#345460]/10 hover:border-[#345460]/20 transition-all"
                       >
                         <MessageSquareText className="w-3.5 h-3.5" />
-                        Need more help? Text us directly
+                        Still have questions? Text our team directly
                       </a>
                     </motion.div>
                   )}
@@ -313,14 +313,14 @@ export default function ChatWidget() {
 
             {/* Input area */}
             <div className="shrink-0 px-4 py-3 border-t border-[#e8e8e0] bg-white/80">
-              {/* Persistent text-us bar when conversation is active */}
-              {messages.length > 0 && (
+              {/* Text escalation bar — appears after 3+ messages indicating they may need more help */}
+              {messages.length >= 3 && (
                 <a
-                  href="sms:5398673841?body=Hi! I was chatting on your website and had a question:"
+                  href="sms:5398673841?body=Hi! I was chatting on your website and couldn't find the answer I needed:"
                   className="flex items-center justify-center gap-2 mb-2 py-2 rounded-lg bg-gradient-to-r from-[#345460] to-[#2a4550] text-white text-xs font-medium hover:opacity-90 transition-opacity"
                 >
                   <MessageSquareText className="w-3.5 h-3.5" />
-                  Text us at 539-867-3841 for a faster reply
+                  Can't find what you need? Text our team
                 </a>
               )}
               <form
