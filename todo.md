@@ -131,3 +131,4 @@
 - [x] AI Chat Assistant: Slick modern chat widget UI (glassmorphism, animations, typing indicator)
 - [x] AI Chat Assistant: Integration into site layout (floating button, all pages)
 - [ ] AI Chat Assistant: Lead capture (name/email/phone) for after-hours follow-up (future enhancement)
+- [x] AI Chat Assistant: Add "Text Us" escalation option when visitor can't get the answer they need

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Sparkles, ArrowDown } from "lucide-react";
+import { MessageCircle, X, Send, Sparkles, ArrowDown, MessageSquareText } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { Streamdown } from "streamdown";
 
@@ -43,7 +43,7 @@ export default function ChatWidget() {
         {
           role: "assistant",
           content:
-            "Sorry, I'm having a moment! 🐾 Please try again or call us at **539-867-3841**.",
+            "Sorry, I'm having a moment! 🐾 No worries though — just **text us at 539-867-3841** and our team will help you out directly.",
         },
       ]);
     },
@@ -273,6 +273,24 @@ export default function ChatWidget() {
                     </motion.div>
                   )}
 
+                  {/* Text Us escalation — appears after 2+ exchanges */}
+                  {messages.filter((m) => m.role === "user").length >= 2 && !chatMutation.isPending && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="flex justify-center pt-2 pb-1"
+                    >
+                      <a
+                        href="sms:5398673841?body=Hi! I was chatting on your website and had a question:"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#345460]/5 border border-[#345460]/10 text-[#345460] text-xs font-medium hover:bg-[#345460]/10 hover:border-[#345460]/20 transition-all"
+                      >
+                        <MessageSquareText className="w-3.5 h-3.5" />
+                        Need more help? Text us directly
+                      </a>
+                    </motion.div>
+                  )}
+
                   <div ref={messagesEndRef} />
                 </>
               )}
@@ -295,6 +313,16 @@ export default function ChatWidget() {
 
             {/* Input area */}
             <div className="shrink-0 px-4 py-3 border-t border-[#e8e8e0] bg-white/80">
+              {/* Persistent text-us bar when conversation is active */}
+              {messages.length > 0 && (
+                <a
+                  href="sms:5398673841?body=Hi! I was chatting on your website and had a question:"
+                  className="flex items-center justify-center gap-2 mb-2 py-2 rounded-lg bg-gradient-to-r from-[#345460] to-[#2a4550] text-white text-xs font-medium hover:opacity-90 transition-opacity"
+                >
+                  <MessageSquareText className="w-3.5 h-3.5" />
+                  Text us at 539-867-3841 for a faster reply
+                </a>
+              )}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
