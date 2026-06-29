@@ -1,6 +1,37 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, ArrowDown, MessageSquareText, Megaphone } from "lucide-react";
+import { MessageCircle, X, Send, ArrowDown, MessageSquareText } from "lucide-react";
+
+/** Custom speech-bubble-with-paw icon */
+function PawBubble({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Speech bubble */}
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      {/* Paw pads - filled */}
+      <g fill="currentColor" stroke="none">
+        {/* Main pad */}
+        <ellipse cx="12" cy="12" rx="2.2" ry="1.8" />
+        {/* Top-left toe */}
+        <circle cx="9.5" cy="8.5" r="1.1" />
+        {/* Top-right toe */}
+        <circle cx="14.5" cy="8.5" r="1.1" />
+        {/* Left toe */}
+        <circle cx="8.5" cy="11" r="1" />
+        {/* Right toe */}
+        <circle cx="15.5" cy="11" r="1" />
+      </g>
+    </svg>
+  );
+}
 import { trpc } from "@/lib/trpc";
 import { Streamdown } from "streamdown";
 
@@ -147,7 +178,7 @@ export default function ChatWidget() {
               {/* Avatar */}
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shadow-md">
-                  <Megaphone className="w-5 h-5 text-white" />
+                  <PawBubble className="w-5 h-5 text-white" />
                 </div>
                 {/* Online indicator */}
                 <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-400 border-2 border-[#345460] rounded-full" />
@@ -230,7 +261,7 @@ export default function ChatWidget() {
                     >
                       {msg.role === "assistant" && (
                         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shrink-0 mt-1 shadow-sm">
-                          <Megaphone className="w-3.5 h-3.5 text-white" />
+                          <PawBubble className="w-3.5 h-3.5 text-white" />
                         </div>
                       )}
                       <div
@@ -261,7 +292,7 @@ export default function ChatWidget() {
                       className="flex gap-2 items-start"
                     >
                       <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shrink-0 shadow-sm">
-                        <Megaphone className="w-3.5 h-3.5 text-white" />
+                        <PawBubble className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="bg-white border border-[#e8e8e0] rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
                         <div className="flex gap-1.5">
