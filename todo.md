@@ -127,3 +127,7 @@
 - [x] Hero text overlay: Improve text readability with darker gradient overlay
 - [x] Hero fade-in animation: Add smooth fade-in when page loads
 - [x] Add "See Our Pack in Action" video lightbox button on hero (opens facility video in modal)
+- [x] AI Chat Assistant: Server-side tRPC procedure with comprehensive Metro Mutts system prompt
+- [x] AI Chat Assistant: Slick modern chat widget UI (glassmorphism, animations, typing indicator)
+- [x] AI Chat Assistant: Integration into site layout (floating button, all pages)
+- [ ] AI Chat Assistant: Lead capture (name/email/phone) for after-hours follow-up (future enhancement)

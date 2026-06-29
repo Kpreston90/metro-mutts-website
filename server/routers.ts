@@ -5,6 +5,7 @@ import { publicProcedure, router, adminProcedure } from "./_core/trpc";
 import { getTodayAndTomorrowAvailability, getAvailability } from "./gingr";
 import { notifyOwner } from "./_core/notification";
 import { sendPromoRedemptionEmail } from "./email";
+import { processChat } from "./chat";
 import {
   getAllPromoCodes,
   getPromoCodeByCode,
@@ -36,6 +37,23 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
+  }),
+
+  chat: router({
+    /**
+     * Send a message to the AI chat assistant (public — no auth required)
+     */
+    send: publicProcedure
+      .input(z.object({
+        messages: z.array(z.object({
+          role: z.enum(["user", "assistant"]),
+          content: z.string().min(1).max(2000),
+        })).min(1).max(30),
+      }))
+      .mutation(async ({ input }) => {
+        const response = await processChat(input.messages);
+        return { response };
+      }),
   }),
 
   availability: router({

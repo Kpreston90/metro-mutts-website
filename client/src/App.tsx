@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
 import { BookingModalProvider } from "./contexts/BookingModalContext";
 import Home from "./pages/Home";
+import ChatWidget from "./components/ChatWidget";
 import Pricing from "./pages/Pricing";
 import BookVisit from "./pages/BookVisit";
 import ReferFriend from "./pages/ReferFriend";
@@ -68,6 +69,7 @@ function App() {
             <ScrollToTop />
             <Toaster />
             <Router />
+            <ChatWidget />
           </BookingModalProvider>
         </TooltipProvider>
       </ThemeProvider>
