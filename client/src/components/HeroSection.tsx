@@ -1,9 +1,10 @@
 /*
  * Metro Mutts Hero Slider — Auto-rotating hero with multiple slides
  * Brand: Green #48D597, Dark #345460
- * Slides: 1) Main CTA  2) Dog of the Week  3) Expandable
+ * Slides: 1) Main CTA  2) Dog of the Week  3) Facility
+ * Fixed height, crossfade only, no initial load glitch
  */
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Star, ChevronLeft, ChevronRight } from "lucide-react";
@@ -38,74 +39,81 @@ const slides: Slide[] = [
   },
 ];
 
-const SLIDE_INTERVAL = 7000; // 7 seconds per slide
+const SLIDE_INTERVAL = 7000;
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(1);
   const { openBookingModal } = useBookingModal();
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const resetTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, SLIDE_INTERVAL);
+  }, []);
 
   const goToSlide = useCallback((index: number) => {
-    setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
-  }, [currentSlide]);
+    resetTimer();
+  }, [resetTimer]);
 
   const nextSlide = useCallback(() => {
-    setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, []);
+    resetTimer();
+  }, [resetTimer]);
 
   const prevSlide = useCallback(() => {
-    setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  }, []);
+    resetTimer();
+  }, [resetTimer]);
 
-  // Auto-advance
   useEffect(() => {
-    const timer = setInterval(nextSlide, SLIDE_INTERVAL);
-    return () => clearInterval(timer);
-  }, [nextSlide]);
-
-  const slideVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
-  };
+    resetTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [resetTimer]);
 
   return (
-    <section className="relative overflow-hidden flex items-center">
-      {/* Sliding background images */}
-      <AnimatePresence initial={false} custom={direction} mode="popLayout">
-        <motion.div
-          key={slides[currentSlide].id}
-          className="absolute inset-0"
-          custom={direction}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+    <section className="relative overflow-hidden h-[600px] sm:h-[650px] lg:h-[700px]">
+      {/* Background images — crossfade only */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: index === currentSlide ? 1 : 0 }}
         >
           <img
-            src={slides[currentSlide].image}
-            alt={slides[currentSlide].alt}
+            src={slide.image}
+            alt={slide.alt}
             className="w-full h-full object-cover"
           />
           {/* Morning glow overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/50 via-[#2a4048]/20 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/15 via-orange-400/8 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/55 via-[#2a4048]/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/12 via-orange-400/6 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#345460]/20 to-transparent" />
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      ))}
 
-      {/* Content — changes per slide */}
-      <div className="relative container py-20 sm:py-24 lg:py-28">
-        <div className="max-w-2xl">
-          <AnimatePresence mode="wait">
-            {currentSlide === 0 && <MainSlideContent key="main" openBookingModal={openBookingModal} />}
-            {currentSlide === 1 && <DOTWSlideContent key="dotw" openBookingModal={openBookingModal} />}
-            {currentSlide === 2 && <FacilitySlideContent key="facility" openBookingModal={openBookingModal} />}
-          </AnimatePresence>
+      {/* Content — crossfade between slides, no vertical motion */}
+      <div className="relative h-full container flex items-center">
+        <div className="max-w-2xl w-full">
+          {/* All slide content stacked absolutely so height is fixed */}
+          <div className="relative min-h-[380px] sm:min-h-[400px]">
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                style={{
+                  opacity: index === currentSlide ? 1 : 0,
+                  pointerEvents: index === currentSlide ? "auto" : "none",
+                }}
+              >
+                {index === 0 && <MainSlideContent openBookingModal={openBookingModal} />}
+                {index === 1 && <DOTWSlideContent openBookingModal={openBookingModal} />}
+                {index === 2 && <FacilitySlideContent openBookingModal={openBookingModal} />}
+              </div>
+            ))}
+          </div>
 
           {/* Live availability badge — always visible */}
           <HeroAvailabilityBadge />
@@ -157,12 +165,7 @@ export default function HeroSection() {
 /* ─── Slide 1: Main CTA ─── */
 function MainSlideContent({ openBookingModal }: { openBookingModal: () => void }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div>
       <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
         <Play className="w-3.5 h-3.5 fill-current" />
         Tulsa's Favorite Dog Daycare
@@ -197,7 +200,7 @@ function MainSlideContent({ openBookingModal }: { openBookingModal: () => void }
       </div>
 
       {/* Trust badge */}
-      <div className="mt-10 pt-8 border-t border-white/15">
+      <div className="mt-8 pt-6 border-t border-white/15">
         <div className="inline-flex items-center gap-2">
           <div className="flex gap-0.5">
             {[1,2,3,4,5].map((i) => (
@@ -207,19 +210,14 @@ function MainSlideContent({ openBookingModal }: { openBookingModal: () => void }
           <span className="text-white/80 text-sm font-medium">Rated 5 stars by 100+ happy dog owners</span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ─── Slide 2: Dog of the Week ─── */
 function DOTWSlideContent({ openBookingModal }: { openBookingModal: () => void }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div>
       <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-sm font-semibold mb-6 border border-amber-400/30 backdrop-blur-sm">
         <Star className="w-3.5 h-3.5 fill-current" />
         Dog of the Week
@@ -247,19 +245,14 @@ function DOTWSlideContent({ openBookingModal }: { openBookingModal: () => void }
           <ArrowRight className="w-5 h-5 ml-1" />
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ─── Slide 3: Facility / Play All Day ─── */
 function FacilitySlideContent({ openBookingModal }: { openBookingModal: () => void }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div>
       <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
         <Play className="w-3.5 h-3.5 fill-current" />
         Play All Day
@@ -292,7 +285,7 @@ function FacilitySlideContent({ openBookingModal }: { openBookingModal: () => vo
           View Services
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -318,12 +311,7 @@ function HeroAvailabilityBadge() {
   const displayText = summary || "33 daycare \u00B7 12 boarding spots open today";
 
   return (
-    <motion.div
-      className="mt-6"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.6 }}
-    >
+    <div className="mt-6">
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
         <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#48D597] opacity-75"></span>
@@ -333,6 +321,6 @@ function HeroAvailabilityBadge() {
           {displayText}
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 }
