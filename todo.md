@@ -124,5 +124,5 @@
 - [x] Add SMS "Text us to book" button in sticky bar (mobile only)
 - [x] Add SMS "Text us to book" option in Contact section (all devices)
 - [x] Hero image v6: Apply correct Metro Mutts building image to hero and ensure mobile scaling
-- [ ] Hero text overlay: Improve text readability with darker gradient overlay
-- [ ] Hero fade-in animation: Add smooth fade-in when page loads
+- [x] Hero text overlay: Improve text readability with darker gradient overlay
+- [x] Hero fade-in animation: Add smooth fade-in when page loads

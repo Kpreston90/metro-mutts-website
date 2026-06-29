@@ -164,12 +164,12 @@ export default function HeroSection() {
             alt={slide.alt}
             className="w-full h-full object-cover"
           />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0f1f27]/70 via-[#1a2e38]/45 to-[#1a2e38]/15" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f1f27]/30 via-transparent to-[#0f1f27]/20" />
+          {/* Dark overlay for text readability — strong on left where text sits */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1820]/85 via-[#0f1f27]/60 to-[#1a2e38]/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1820]/25 via-transparent to-[#0a1820]/15" />
           {/* Morning glow accent */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/8 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#345460]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-600/6 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a1820]/35 to-transparent" />
         </div>
       ))}
 
