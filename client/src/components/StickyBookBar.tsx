@@ -73,23 +73,23 @@ export default function StickyBookBar() {
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             {/* SMS button — mobile only */}
             <a
               href={`sms:${SMS_NUMBER}?&body=${SMS_BODY}`}
-              className="flex sm:hidden items-center gap-1.5 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white font-medium text-sm rounded-full transition-colors border border-white/20"
+              className="flex sm:hidden items-center gap-1.5 px-3 py-2 bg-white/15 hover:bg-white/25 text-white font-medium text-xs rounded-full transition-colors border border-white/20 whitespace-nowrap"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-3.5 h-3.5 flex-shrink-0" />
               Text Us
             </a>
 
             {/* Book button */}
             <button
               onClick={openBookingModal}
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#48D597] hover:bg-[#3bc485] text-[#1a2e38] font-semibold text-sm rounded-full transition-colors shadow-md"
+              className="flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#48D597] hover:bg-[#3bc485] text-[#1a2e38] font-semibold text-xs sm:text-sm rounded-full transition-colors shadow-md whitespace-nowrap"
             >
               Book Now
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
             </button>
           </div>
         </div>
