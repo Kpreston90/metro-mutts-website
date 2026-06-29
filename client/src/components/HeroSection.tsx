@@ -214,16 +214,16 @@ function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
       </SlideTextWrapper>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
-        <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-8 max-w-xl drop-shadow-md">
+        <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-5 sm:mb-8 max-w-xl drop-shadow-md">
           7,000+ sq ft of play, rest & real care. Tulsa's premier dog daycare, boarding, and grooming facility.
         </p>
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
           <Button
             size="lg"
-            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
+            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-6 sm:px-8 h-12 sm:h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
             onClick={openBookingModal}
           >
             Book a Free Visit
@@ -232,7 +232,7 @@ function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
           <Button
             size="lg"
             variant="outline"
-            className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
+            className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-6 sm:px-8 h-12 sm:h-13 bg-transparent backdrop-blur-sm"
             onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
           >
             Explore Services
@@ -242,12 +242,12 @@ function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
 
       {/* Google Reviews badge */}
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "600ms" : "0ms" }}>
-        <div className="mt-6">
+        <div className="mt-4 sm:mt-6">
           <a
             href="https://www.google.com/maps/place/Metro+Mutts" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/15 transition-colors"
+            className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/15 transition-colors"
           >
             {/* Google G logo */}
             <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0">
