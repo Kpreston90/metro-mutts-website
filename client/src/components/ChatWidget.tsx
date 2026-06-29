@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, ArrowDown, MessageSquareText, Dog } from "lucide-react";
+import { MessageCircle, X, Send, ArrowDown, MessageSquareText, Megaphone } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { Streamdown } from "streamdown";
 
@@ -147,7 +147,7 @@ export default function ChatWidget() {
               {/* Avatar */}
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shadow-md">
-                  <Dog className="w-5 h-5 text-white" />
+                  <Megaphone className="w-5 h-5 text-white" />
                 </div>
                 {/* Online indicator */}
                 <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-400 border-2 border-[#345460] rounded-full" />
@@ -230,7 +230,7 @@ export default function ChatWidget() {
                     >
                       {msg.role === "assistant" && (
                         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shrink-0 mt-1 shadow-sm">
-                          <Dog className="w-3.5 h-3.5 text-white" />
+                          <Megaphone className="w-3.5 h-3.5 text-white" />
                         </div>
                       )}
                       <div
@@ -261,7 +261,7 @@ export default function ChatWidget() {
                       className="flex gap-2 items-start"
                     >
                       <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#48D597] to-[#3bc085] flex items-center justify-center shrink-0 shadow-sm">
-                        <Dog className="w-3.5 h-3.5 text-white" />
+                        <Megaphone className="w-3.5 h-3.5 text-white" />
                       </div>
                       <div className="bg-white border border-[#e8e8e0] rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
                         <div className="flex gap-1.5">
