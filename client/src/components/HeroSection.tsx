@@ -12,7 +12,7 @@ import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/hero-welcome-v4-AoYRMSTyzjVinFfTjXN5YV.webp";
-const DOTW_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/dog-of-the-week-placeholder-VJ6mxNFzD4qQ8ZkuvkbKMK.webp";
+const DOTW_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/dotw-real-pup_37baa9e9.webp";
 const TURF_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
 
 interface Slide {
@@ -214,25 +214,25 @@ function MainSlideContent({ openBookingModal }: { openBookingModal: () => void }
   );
 }
 
-/* ─── Slide 2: Dog of the Week ─── */
+/* ─── Slide 2: Dog of the Week (Coming Soon) ─── */
 function DOTWSlideContent({ openBookingModal }: { openBookingModal: () => void }) {
   return (
     <div>
       <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-sm font-semibold mb-6 border border-amber-400/30 backdrop-blur-sm">
         <Star className="w-3.5 h-3.5 fill-current" />
-        Dog of the Week
+        Coming Soon
       </span>
 
       <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-4 drop-shadow-lg">
-        Meet <span className="text-[#48D597]">Cooper</span>
+        Pup of the <span className="text-[#48D597]">Week</span>
       </h1>
 
       <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-3 max-w-xl drop-shadow-md">
-        Golden Retriever &bull; 3 years old
+        Every week, we spotlight one of our amazing regulars.
       </p>
 
       <p className="text-base text-white/70 leading-relaxed mb-8 max-w-xl drop-shadow-md">
-        Cooper's been coming to Metro Mutts since he was a puppy. His favorite thing? Starting a game of chase with every new friend that walks through the door. You'll always find him at the center of the action.
+        Get to know the pups that make Metro Mutts special. Their name, their story, their favorite game. Could your dog be next?
       </p>
 
       <div className="flex flex-wrap gap-4">
