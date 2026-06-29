@@ -95,6 +95,23 @@ export default function ChatWidget() {
     }
   };
 
+  // Detect if sticky book bar is visible (scrolled past hero)
+  const [stickyBarVisible, setStickyBarVisible] = useState(false);
+  useEffect(() => {
+    const heroEl = document.querySelector("[data-hero-section]");
+    if (!heroEl) {
+      const handleScroll = () => setStickyBarVisible(window.scrollY > 750);
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setStickyBarVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(heroEl);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/* Floating trigger button */}
@@ -106,7 +123,7 @@ export default function ChatWidget() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-[90] group"
+            className={`fixed right-6 z-[90] group transition-[bottom] duration-300 ${stickyBarVisible ? "bottom-20" : "bottom-6"}`}
             aria-label="Open chat assistant"
           >
             {/* Pulse ring */}
