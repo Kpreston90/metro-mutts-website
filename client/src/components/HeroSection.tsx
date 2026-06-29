@@ -370,20 +370,20 @@ function FacilitySlideContent({ openBookingModal, isActive }: { openBookingModal
       <SlideTextWrapper isActive={isActive}>
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
           <Play className="w-3.5 h-3.5 fill-current" />
-          Play All Day
+          Play. Learn. Belong.
         </span>
       </SlideTextWrapper>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "300ms" : "0ms" }}>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg">
-          7,000+ Sq Ft of{" "}
-          <span className="text-[#48D597]">Pure Joy</span>
+          Every Day Should Feel{" "}
+          <span className="text-[#48D597]">Like This.</span>
         </h1>
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
         <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-8 max-w-xl drop-shadow-md">
-          Indoor turf play areas, dedicated small dog zones, and a team that treats every pup like family. This is what dog daycare should be.
+          Safe playgroups. Dedicated small dog areas. Plenty of room to run, explore, and make new friends—all under the care of a team that truly loves dogs.
         </p>
       </div>
 
@@ -397,14 +397,7 @@ function FacilitySlideContent({ openBookingModal, isActive }: { openBookingModal
             Schedule a Tour
             <ArrowRight className="w-5 h-5 ml-1" />
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
-            onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            View Services
-          </Button>
+
         </div>
       </div>
     </div>
