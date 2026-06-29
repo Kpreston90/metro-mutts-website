@@ -3,7 +3,7 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 
-const SMS_NUMBER = "5398673841";
+const SMS_NUMBER = "19183597727";
 const SMS_BODY = encodeURIComponent("Hi! I'd like to book a free trial day for my dog.");
 
 export default function StickyBookBar() {

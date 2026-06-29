@@ -228,7 +228,7 @@ export default function ContactSection() {
                   Get Directions
                 </button>
                 <a
-                  href={`sms:5398673841?&body=${encodeURIComponent("Hi! I'd like to book a free trial day for my dog.")}`}
+                  href={`sms:19183597727?&body=${encodeURIComponent("Hi! I'd like to book a free trial day for my dog.")}`}
                   className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#48D597]/10 text-[#345460] text-sm font-semibold hover:bg-[#48D597]/20 transition-colors border border-[#48D597]/30"
                 >
                   <MessageCircle className="w-4 h-4 text-[#48D597]" />
