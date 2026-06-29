@@ -11,7 +11,7 @@ import { ArrowRight, Play, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/hero-welcome-v4-AoYRMSTyzjVinFfTjXN5YV.webp";
+const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/hero-dog-calm-leash-Ht69sKKfEUG2qQAqCFhYxg.webp";
 const DOTW_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/dotw-real-pup_37baa9e9.webp";
 const TURF_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
 
