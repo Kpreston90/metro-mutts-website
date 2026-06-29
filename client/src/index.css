@@ -162,7 +162,9 @@
   100% { transform: translateX(-50%); }
 }
 
-/* Smooth scrolling */
-html {
+/* Smooth scrolling & prevent horizontal overscroll */
+html,
+body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
