@@ -118,3 +118,4 @@
 - [x] Add blog post: "Why Your Dog Sleeps So Much After Daycare (And Why That's Actually a Good Thing)" (daycare tips article)
 - [x] Add blog post: "The Science of the Zoomies" (dog behavior/daycare article with hero image)
 - [x] Refresh homepage hero: new "Welcome" image (owner POV, dog pulling toward building) + Option 3 copy ("Where Every Dog Wants to Be")
+- [x] Remove "Spots filling up" floating toast popup (too invasive — availability still shown in ticker + hero badge)
