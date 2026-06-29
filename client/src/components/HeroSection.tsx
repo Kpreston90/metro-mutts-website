@@ -62,6 +62,8 @@ export default function HeroSection() {
   const [textVisible, setTextVisible] = useState(true);
   const { openBookingModal } = useBookingModal();
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const resetTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -102,8 +104,42 @@ export default function HeroSection() {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
+  // Swipe gesture handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = null;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(distance) >= minSwipeDistance) {
+      if (distance > 0) {
+        // Swiped left → next slide
+        changeSlide((currentSlide + 1) % slides.length);
+      } else {
+        // Swiped right → previous slide
+        changeSlide((currentSlide - 1 + slides.length) % slides.length);
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }, [changeSlide, currentSlide]);
+
   return (
-    <section className="relative overflow-hidden h-[600px] sm:h-[650px] lg:h-[700px]">
+    <section
+      className="relative overflow-hidden h-[600px] sm:h-[650px] lg:h-[700px]"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Background images — crossfade only */}
       {slides.map((slide, index) => (
         <div
