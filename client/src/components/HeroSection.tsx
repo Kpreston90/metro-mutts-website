@@ -95,10 +95,10 @@ export default function HeroSection() {
       ))}
 
       {/* Content — crossfade between slides, no vertical motion */}
-      <div className="relative h-full container flex items-center">
+      <div className="relative h-full container flex flex-col justify-center pb-28">
         <div className="max-w-2xl w-full">
           {/* All slide content stacked absolutely so height is fixed */}
-          <div className="relative min-h-[350px] sm:min-h-[370px]">
+          <div className="relative min-h-[320px] sm:min-h-[340px] lg:min-h-[360px]">
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -114,11 +114,13 @@ export default function HeroSection() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
 
-          {/* Live availability badge — always visible */}
-          <div className="mt-4">
-            <HeroAvailabilityBadge />
-          </div>
+      {/* Live availability badge — fixed position above dots */}
+      <div className="absolute bottom-28 left-0 right-0 z-10">
+        <div className="container">
+          <HeroAvailabilityBadge />
         </div>
       </div>
 
@@ -139,7 +141,7 @@ export default function HeroSection() {
       </button>
 
       {/* Dot indicators */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {slides.map((slide, index) => (
           <button
             key={slide.id}
