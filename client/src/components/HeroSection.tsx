@@ -10,7 +10,7 @@ import { Link } from "wouter";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
+const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/hero-welcome-v4-AoYRMSTyzjVinFfTjXN5YV.webp";
 
 export default function HeroSection() {
   const { openBookingModal } = useBookingModal();
@@ -20,7 +20,7 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <img
           src={HERO_IMG}
-          alt="Metro Mutts staff playing with dogs on indoor turf"
+          alt="Dog pulling on leash toward Metro Mutts entrance, excited for daycare"
           className="w-full h-full object-cover"
         />
         {/* Morning-light gradient overlay — brighter, warmer feel */}
