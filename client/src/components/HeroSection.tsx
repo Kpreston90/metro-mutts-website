@@ -135,7 +135,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden h-[600px] sm:h-[650px] lg:h-[700px]"
+      className="relative overflow-hidden h-[600px] sm:h-[700px] lg:h-[750px]"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -160,10 +160,10 @@ export default function HeroSection() {
       ))}
 
       {/* Content — crossfade between slides, no vertical motion */}
-      <div className="relative h-full container flex flex-col justify-center pb-36 sm:pb-28">
+      <div className="relative h-full container flex flex-col justify-center pb-36 sm:pb-36">
         <div className="max-w-2xl w-full">
           {/* All slide content stacked absolutely so height is fixed */}
-          <div className="relative min-h-[320px] sm:min-h-[340px] lg:min-h-[360px]">
+          <div className="relative min-h-[320px] sm:min-h-[360px] lg:min-h-[400px]">
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -183,7 +183,7 @@ export default function HeroSection() {
       </div>
 
       {/* Live availability badge — fixed position above dots */}
-      <div className="absolute bottom-16 sm:bottom-28 left-0 right-0 z-10">
+      <div className="absolute bottom-16 sm:bottom-24 left-0 right-0 z-10">
         <div className="container">
           <HeroAvailabilityBadge />
         </div>
