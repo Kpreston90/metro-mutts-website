@@ -135,6 +135,7 @@ export default function HeroSection() {
 
   return (
     <section
+      data-hero-section
       className="relative overflow-hidden h-[600px] sm:h-[700px] lg:h-[750px]"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}

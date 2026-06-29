@@ -18,6 +18,7 @@ import FirstVisitSection from "@/components/FirstVisitSection";
 import CTASection from "@/components/CTASection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import StickyBookBar from "@/components/StickyBookBar";
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
+      <StickyBookBar />
     </div>
   );
 }
