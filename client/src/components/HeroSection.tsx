@@ -331,22 +331,19 @@ function DOTWSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
       <SlideTextWrapper isActive={isActive}>
         <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-xs sm:text-sm font-semibold mb-4 sm:mb-6 border border-amber-400/30 backdrop-blur-sm">
           <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
-          Coming Soon
+          Coming Next Week
         </span>
       </SlideTextWrapper>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "300ms" : "0ms" }}>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-3 sm:mb-4 drop-shadow-lg">
-          Pup of the <span className="text-[#48D597]">Week</span>
+          Meet Tulsa's{" "}<span className="text-[#48D597]">Favorite Dogs.</span>
         </h1>
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
-        <p className="text-base sm:text-xl text-white/85 leading-relaxed mb-2 sm:mb-3 max-w-xl drop-shadow-md">
-          Every week, we spotlight one of our amazing regulars.
-        </p>
-        <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-5 sm:mb-8 max-w-xl drop-shadow-md">
-          Get to know the pups that make Metro Mutts special. Their name, their story, their favorite game. Could your dog be next?
+        <p className="text-base sm:text-xl text-white/85 leading-relaxed mb-5 sm:mb-8 max-w-xl drop-shadow-md">
+          Every week, we'll introduce one of the incredible pups that makes Metro Mutts feel like home.
         </p>
       </div>
 
