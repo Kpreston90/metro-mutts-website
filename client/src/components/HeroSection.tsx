@@ -261,14 +261,14 @@ function MainSlideContent({ openBookingModal, onPlayVideo, isActive }: { openBoo
 
       <SlideTextWrapper isActive={isActive}>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-3 sm:mb-6 drop-shadow-lg" style={{ transitionDelay: isActive ? "300ms" : "0ms" }}>
-          Where Every Dog{" "}
-          <span className="text-[#48D597]">Wants</span> to Be
+           Where Dogs Can't Wait{" "}
+           <span className="text-[#48D597]">To Come Back.</span>
         </h1>
       </SlideTextWrapper>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
         <p className="text-base sm:text-xl text-white/85 leading-relaxed mb-4 sm:mb-8 max-w-xl drop-shadow-md">
-          7,000+ sq ft of play, rest & real care. Tulsa's premier dog daycare, boarding, and grooming facility.
+           Play. Rest. Enrichment. Grooming. Boarding. Everything your dog needs to live their best life—under one roof.
         </p>
       </div>
 
