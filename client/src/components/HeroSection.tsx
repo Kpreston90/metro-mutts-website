@@ -275,36 +275,36 @@ function DOTWSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
   return (
     <div>
       <SlideTextWrapper isActive={isActive}>
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-sm font-semibold mb-6 border border-amber-400/30 backdrop-blur-sm">
-          <Star className="w-3.5 h-3.5 fill-current" />
+        <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-xs sm:text-sm font-semibold mb-4 sm:mb-6 border border-amber-400/30 backdrop-blur-sm">
+          <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
           Coming Soon
         </span>
       </SlideTextWrapper>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "300ms" : "0ms" }}>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-4 drop-shadow-lg">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-3 sm:mb-4 drop-shadow-lg">
           Pup of the <span className="text-[#48D597]">Week</span>
         </h1>
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
-        <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-3 max-w-xl drop-shadow-md">
+        <p className="text-base sm:text-xl text-white/85 leading-relaxed mb-2 sm:mb-3 max-w-xl drop-shadow-md">
           Every week, we spotlight one of our amazing regulars.
         </p>
-        <p className="text-base text-white/70 leading-relaxed mb-8 max-w-xl drop-shadow-md">
+        <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-5 sm:mb-8 max-w-xl drop-shadow-md">
           Get to know the pups that make Metro Mutts special. Their name, their story, their favorite game. Could your dog be next?
         </p>
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
           <Button
             size="lg"
-            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
+            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
             onClick={openBookingModal}
           >
             Book Your Pup's First Day
-            <ArrowRight className="w-5 h-5 ml-1" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
           </Button>
         </div>
       </div>
