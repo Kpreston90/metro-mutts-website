@@ -41,8 +41,25 @@ const slides: Slide[] = [
 
 const SLIDE_INTERVAL = 7000;
 
+/* Staggered fade-in wrapper for slide text elements */
+function SlideTextWrapper({ isActive, children }: { isActive: boolean; children: React.ReactNode }) {
+  return (
+    <div
+      className="transition-all duration-700 ease-out"
+      style={{
+        opacity: isActive ? 1 : 0,
+        transform: isActive ? "translateY(0)" : "translateY(12px)",
+        transitionDelay: isActive ? "200ms" : "0ms",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [textVisible, setTextVisible] = useState(true);
   const { openBookingModal } = useBookingModal();
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -53,25 +70,37 @@ export default function HeroSection() {
     }, SLIDE_INTERVAL);
   }, []);
 
-  const goToSlide = useCallback((index: number) => {
-    setCurrentSlide(index);
+  const changeSlide = useCallback((index: number) => {
+    setTextVisible(false);
+    setTimeout(() => {
+      setCurrentSlide(index);
+      setTimeout(() => setTextVisible(true), 100);
+    }, 300);
     resetTimer();
   }, [resetTimer]);
+
+  const goToSlide = useCallback((index: number) => {
+    changeSlide(index);
+  }, [changeSlide]);
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    resetTimer();
-  }, [resetTimer]);
+    changeSlide((currentSlide + 1) % slides.length);
+  }, [changeSlide, currentSlide]);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    resetTimer();
-  }, [resetTimer]);
+    changeSlide((currentSlide - 1 + slides.length) % slides.length);
+  }, [changeSlide, currentSlide]);
 
   useEffect(() => {
-    resetTimer();
+    timerRef.current = setInterval(() => {
+      setTextVisible(false);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+        setTimeout(() => setTextVisible(true), 100);
+      }, 300);
+    }, SLIDE_INTERVAL);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [resetTimer]);
+  }, []);
 
   return (
     <section className="relative overflow-hidden h-[600px] sm:h-[650px] lg:h-[700px]">
@@ -79,7 +108,7 @@ export default function HeroSection() {
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          className="absolute inset-0 transition-opacity duration-[1200ms] ease-in-out"
           style={{ opacity: index === currentSlide ? 1 : 0 }}
         >
           <img
@@ -102,15 +131,15 @@ export default function HeroSection() {
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
-                className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                className="absolute inset-0 transition-opacity duration-[800ms] ease-in-out"
                 style={{
                   opacity: index === currentSlide ? 1 : 0,
                   pointerEvents: index === currentSlide ? "auto" : "none",
                 }}
               >
-                {index === 0 && <MainSlideContent openBookingModal={openBookingModal} />}
-                {index === 1 && <DOTWSlideContent openBookingModal={openBookingModal} />}
-                {index === 2 && <FacilitySlideContent openBookingModal={openBookingModal} />}
+                {index === 0 && <MainSlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
+                {index === 1 && <DOTWSlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
+                {index === 2 && <FacilitySlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
               </div>
             ))}
           </div>
@@ -167,51 +196,61 @@ export default function HeroSection() {
 }
 
 /* ─── Slide 1: Main CTA ─── */
-function MainSlideContent({ openBookingModal }: { openBookingModal: () => void }) {
+function MainSlideContent({ openBookingModal, isActive }: { openBookingModal: () => void; isActive: boolean }) {
   return (
     <div>
-      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
-        <Play className="w-3.5 h-3.5 fill-current" />
-        Tulsa's Favorite Dog Daycare
-      </span>
+      <SlideTextWrapper isActive={isActive}>
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
+          <Play className="w-3.5 h-3.5 fill-current" />
+          Tulsa's Favorite Dog Daycare
+        </span>
+      </SlideTextWrapper>
 
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg">
-        Where Every Dog{" "}
-        <span className="text-[#48D597]">Wants</span> to Be
-      </h1>
+      <SlideTextWrapper isActive={isActive}>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg" style={{ transitionDelay: isActive ? "300ms" : "0ms" }}>
+          Where Every Dog{" "}
+          <span className="text-[#48D597]">Wants</span> to Be
+        </h1>
+      </SlideTextWrapper>
 
-      <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-8 max-w-xl drop-shadow-md">
-        7,000+ sq ft of play, rest & real care. Tulsa's premier dog daycare, boarding, and grooming facility.
-      </p>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
+        <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-8 max-w-xl drop-shadow-md">
+          7,000+ sq ft of play, rest & real care. Tulsa's premier dog daycare, boarding, and grooming facility.
+        </p>
+      </div>
 
-      <div className="flex flex-wrap gap-4">
-        <Button
-          size="lg"
-          className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
-          onClick={openBookingModal}
-        >
-          Book a Free Visit
-          <ArrowRight className="w-5 h-5 ml-1" />
-        </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
-          onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-        >
-          Explore Services
-        </Button>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
+        <div className="flex flex-wrap gap-4">
+          <Button
+            size="lg"
+            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
+            onClick={openBookingModal}
+          >
+            Book a Free Visit
+            <ArrowRight className="w-5 h-5 ml-1" />
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
+            onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            Explore Services
+          </Button>
+        </div>
       </div>
 
       {/* Trust badge */}
-      <div className="mt-8 pt-6 border-t border-white/15">
-        <div className="inline-flex items-center gap-2">
-          <div className="flex gap-0.5">
-            {[1,2,3,4,5].map((i) => (
-              <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-            ))}
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "600ms" : "0ms" }}>
+        <div className="mt-8 pt-6 border-t border-white/15">
+          <div className="inline-flex items-center gap-2">
+            <div className="flex gap-0.5">
+              {[1,2,3,4,5].map((i) => (
+                <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+              ))}
+            </div>
+            <span className="text-white/80 text-sm font-medium">Rated 5 stars by 100+ happy dog owners</span>
           </div>
-          <span className="text-white/80 text-sm font-medium">Rated 5 stars by 100+ happy dog owners</span>
         </div>
       </div>
     </div>
@@ -219,75 +258,90 @@ function MainSlideContent({ openBookingModal }: { openBookingModal: () => void }
 }
 
 /* ─── Slide 2: Dog of the Week (Coming Soon) ─── */
-function DOTWSlideContent({ openBookingModal }: { openBookingModal: () => void }) {
+function DOTWSlideContent({ openBookingModal, isActive }: { openBookingModal: () => void; isActive: boolean }) {
   return (
     <div>
-      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-sm font-semibold mb-6 border border-amber-400/30 backdrop-blur-sm">
-        <Star className="w-3.5 h-3.5 fill-current" />
-        Coming Soon
-      </span>
+      <SlideTextWrapper isActive={isActive}>
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 text-amber-300 text-sm font-semibold mb-6 border border-amber-400/30 backdrop-blur-sm">
+          <Star className="w-3.5 h-3.5 fill-current" />
+          Coming Soon
+        </span>
+      </SlideTextWrapper>
 
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-4 drop-shadow-lg">
-        Pup of the <span className="text-[#48D597]">Week</span>
-      </h1>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "300ms" : "0ms" }}>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-4 drop-shadow-lg">
+          Pup of the <span className="text-[#48D597]">Week</span>
+        </h1>
+      </div>
 
-      <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-3 max-w-xl drop-shadow-md">
-        Every week, we spotlight one of our amazing regulars.
-      </p>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
+        <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-3 max-w-xl drop-shadow-md">
+          Every week, we spotlight one of our amazing regulars.
+        </p>
+        <p className="text-base text-white/70 leading-relaxed mb-8 max-w-xl drop-shadow-md">
+          Get to know the pups that make Metro Mutts special. Their name, their story, their favorite game. Could your dog be next?
+        </p>
+      </div>
 
-      <p className="text-base text-white/70 leading-relaxed mb-8 max-w-xl drop-shadow-md">
-        Get to know the pups that make Metro Mutts special. Their name, their story, their favorite game. Could your dog be next?
-      </p>
-
-      <div className="flex flex-wrap gap-4">
-        <Button
-          size="lg"
-          className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
-          onClick={openBookingModal}
-        >
-          Book Your Pup's First Day
-          <ArrowRight className="w-5 h-5 ml-1" />
-        </Button>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
+        <div className="flex flex-wrap gap-4">
+          <Button
+            size="lg"
+            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
+            onClick={openBookingModal}
+          >
+            Book Your Pup's First Day
+            <ArrowRight className="w-5 h-5 ml-1" />
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
 
 /* ─── Slide 3: Facility / Play All Day ─── */
-function FacilitySlideContent({ openBookingModal }: { openBookingModal: () => void }) {
+function FacilitySlideContent({ openBookingModal, isActive }: { openBookingModal: () => void; isActive: boolean }) {
   return (
     <div>
-      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
-        <Play className="w-3.5 h-3.5 fill-current" />
-        Play All Day
-      </span>
+      <SlideTextWrapper isActive={isActive}>
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-semibold mb-6 border border-[#48D597]/30 backdrop-blur-sm">
+          <Play className="w-3.5 h-3.5 fill-current" />
+          Play All Day
+        </span>
+      </SlideTextWrapper>
 
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg">
-        7,000+ Sq Ft of{" "}
-        <span className="text-[#48D597]">Pure Joy</span>
-      </h1>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "300ms" : "0ms" }}>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg">
+          7,000+ Sq Ft of{" "}
+          <span className="text-[#48D597]">Pure Joy</span>
+        </h1>
+      </div>
 
-      <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-8 max-w-xl drop-shadow-md">
-        Indoor turf play areas, dedicated small dog zones, and a team that treats every pup like family. This is what dog daycare should be.
-      </p>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "400ms" : "0ms" }}>
+        <p className="text-lg sm:text-xl text-white/85 leading-relaxed mb-8 max-w-xl drop-shadow-md">
+          Indoor turf play areas, dedicated small dog zones, and a team that treats every pup like family. This is what dog daycare should be.
+        </p>
+      </div>
 
-      <div className="flex flex-wrap gap-4">
-        <Button
-          size="lg"
-          className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
-          onClick={openBookingModal}
-        >
-          Schedule a Tour
-          <ArrowRight className="w-5 h-5 ml-1" />
-        </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
-          onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-        >
-          View Services
-        </Button>
+      <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
+        <div className="flex flex-wrap gap-4">
+          <Button
+            size="lg"
+            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
+            onClick={openBookingModal}
+          >
+            Schedule a Tour
+            <ArrowRight className="w-5 h-5 ml-1" />
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent backdrop-blur-sm"
+            onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            View Services
+          </Button>
+        </div>
       </div>
     </div>
   );
