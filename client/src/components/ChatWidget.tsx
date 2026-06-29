@@ -9,25 +9,25 @@ function PawBubble({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
     >
       {/* Speech bubble */}
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      {/* Paw pads - filled */}
+      {/* Paw - large and bold to fill the bubble */}
       <g fill="currentColor" stroke="none">
         {/* Main pad */}
-        <ellipse cx="12" cy="12" rx="2.2" ry="1.8" />
+        <ellipse cx="12" cy="12.5" rx="3" ry="2.4" />
         {/* Top-left toe */}
-        <circle cx="9.5" cy="8.5" r="1.1" />
+        <circle cx="9" cy="8" r="1.5" />
         {/* Top-right toe */}
-        <circle cx="14.5" cy="8.5" r="1.1" />
-        {/* Left toe */}
-        <circle cx="8.5" cy="11" r="1" />
-        {/* Right toe */}
-        <circle cx="15.5" cy="11" r="1" />
+        <circle cx="15" cy="8" r="1.5" />
+        {/* Bottom-left toe */}
+        <circle cx="7.5" cy="11" r="1.3" />
+        {/* Bottom-right toe */}
+        <circle cx="16.5" cy="11" r="1.3" />
       </g>
     </svg>
   );
@@ -144,7 +144,7 @@ export default function ChatWidget() {
             <span className="absolute inset-0 rounded-full bg-[#48D597] animate-ping opacity-20" />
             {/* Button */}
             <span className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#48D597] to-[#345460] shadow-lg shadow-[#48D597]/30 group-hover:shadow-xl group-hover:shadow-[#48D597]/40 transition-shadow">
-              <PawBubble className="w-6 h-6 text-white" />
+              <PawBubble className="w-8 h-8 text-white" />
             </span>
             {/* Label tooltip */}
             <span className="absolute bottom-full right-0 mb-2 px-3 py-1.5 rounded-lg bg-[#345460] text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
