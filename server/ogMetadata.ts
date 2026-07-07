@@ -110,6 +110,13 @@ const routeOgMap: Record<string, OgMeta> = {
     image: `${CDN}/og-homepage-4Bvn5v2GYGM8G8Cq2fVJZq.png`,
     url: `${BASE_URL}/careers`,
   },
+  "/blog/why-does-your-dog-sigh": {
+    title: "Why Does Your Dog Sigh? | Metro Mutts Journal",
+    description:
+      "That big 'ahhhh...' might be the happiest sound you'll hear all day. Learn what your dog's sigh really means and why it's a sign of a fulfilled pup.",
+    image: `${CDN}/journal-005-hero-sigh-ahwBY4DH3NFcyNkZSxeMt8.webp`,
+    url: `${BASE_URL}/blog/why-does-your-dog-sigh`,
+  },
   "/blog": {
     title: "Dog Care Blog | Tips & Advice | Metro Mutts Tulsa",
     description:

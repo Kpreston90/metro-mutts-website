@@ -20,6 +20,50 @@ import {
   BookOpen,
 } from "lucide-react";
 
+/* Helper to render inline markdown (bold, italic, links) */
+function renderInline(text: string, baseKey: number): React.ReactNode[] {
+  // Split on bold, italic, and links
+  const parts: React.ReactNode[] = [];
+  // Regex to match [text](url), **bold**, or *italic*
+  const regex = /\[([^\]]+)\]\(([^)]+)\)|\*\*(.+?)\*\*|\*(.+?)\*/g;
+  let lastIndex = 0;
+  let match;
+  let i = 0;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1] && match[2]) {
+      // Link
+      parts.push(
+        <a key={`${baseKey}-${i}`} href={match[2]} className="text-[#48D597] font-semibold hover:underline">
+          {match[1]}
+        </a>
+      );
+    } else if (match[3]) {
+      // Bold
+      parts.push(
+        <strong key={`${baseKey}-${i}`} className="text-[#345460] font-semibold">
+          {match[3]}
+        </strong>
+      );
+    } else if (match[4]) {
+      // Italic
+      parts.push(
+        <em key={`${baseKey}-${i}`} className="italic text-[#345460]/65">
+          {match[4]}
+        </em>
+      );
+    }
+    lastIndex = match.index + match[0].length;
+    i++;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  return parts;
+}
+
 /* Simple Markdown-ish renderer for blog content */
 function renderContent(content: string) {
   const lines = content.split("\n");
@@ -91,19 +135,9 @@ function renderContent(content: string) {
       );
     } else {
       flushList();
-      // Handle inline bold
-      const parts = trimmed.split(/\*\*(.+?)\*\*/g);
       elements.push(
         <p key={key++} className="text-[#345460]/75 leading-relaxed mb-4">
-          {parts.map((part, i) =>
-            i % 2 === 1 ? (
-              <strong key={i} className="text-[#345460] font-semibold">
-                {part}
-              </strong>
-            ) : (
-              part
-            )
-          )}
+          {renderInline(trimmed, key)}
         </p>
       );
     }

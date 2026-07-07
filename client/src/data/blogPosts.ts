@@ -1881,6 +1881,96 @@ Give your dog a day of play, enrichment, and socialization.
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-zoomies-hero-oKuJchKK5JFvj59yhx9fjm.webp",
     tags: ["dog zoomies", "FRAPs", "dog behavior", "why dogs get zoomies", "dog energy", "dog daycare Tulsa", "Tulsa dog daycare", "dog enrichment"],
   },
+  {
+    slug: "why-does-your-dog-sigh",
+    title: "Why Does Your Dog Sigh?",
+    excerpt: "You hear it all the time. But what is your dog actually trying to tell you? That big \"ahhhh...\" might be the happiest sound you'll hear all day.",
+    content: `Have you ever been sitting on the couch when your dog circles a few times...
+
+Flops onto the floor...
+
+Lets out one giant...
+
+\"Siiiiiiigh...\"
+
+Most people assume it means they're bored.
+
+Or maybe disappointed.
+
+Sometimes people even joke that their dog is judging them.
+
+**The truth?**
+
+Usually it's the exact opposite.
+
+## A sigh is often a sign of comfort.
+
+When a dog's needs have been met\u2014exercise, social interaction, mental stimulation, and a sense of safety\u2014their body naturally begins to relax.
+
+That deep sigh is often part of that process.
+
+It's their nervous system shifting gears.
+
+They're finally able to let go.
+
+## A fulfilled dog is different than a tired dog.
+
+There's a big difference.
+
+A dog that's simply exhausted might crash.
+
+A fulfilled dog settles.
+
+They're calm.
+
+Content.
+
+Relaxed.
+
+It's one of the reasons we focus on much more than just running dogs around the yard.
+
+## What a day at Metro Mutts includes:
+
+- Social interaction with carefully matched play groups
+- Mental enrichment through new environments and experiences
+- Rest breaks throughout the day
+- Plenty of positive interaction with our staff
+
+When those needs are met, dogs don't just burn energy.
+
+They relax.
+
+Sometimes the happiest dog in the room is the one quietly taking the deepest nap.
+
+## That's our favorite sound.
+
+Every afternoon, after a full day of play, we start hearing it around the building.
+
+Dogs curl up.
+
+Stretch out.
+
+And let out one long...
+
+\"Ahhhhh...\"
+
+To us, that's one of the best signs we've done our job well.
+
+## Ready for your dog to have one of those sighs?
+
+Come let them spend a day with the pack.
+
+[Book Your Dog's Visit](/booking)
+
+*P.S. If you're traveling this summer, we're filling up quickly for boarding. Reserving early is the best way to guarantee your dog's stay.*
+`,
+    category: "Dog Care",
+    author: "Metro Mutts Team",
+    date: "2026-07-07",
+    readTime: "3 min read",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/journal-005-hero-sigh-ahwBY4DH3NFcyNkZSxeMt8.webp",
+    tags: ["dog sigh", "dog body language", "dog behavior", "fulfilled dog", "dog daycare Tulsa", "Metro Mutts journal", "dog enrichment", "dog relaxation"],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

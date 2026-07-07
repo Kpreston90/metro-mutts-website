@@ -132,3 +132,6 @@
 - [x] AI Chat Assistant: Integration into site layout (floating button, all pages)
 - [ ] AI Chat Assistant: Lead capture (name/email/phone) for after-hours follow-up (future enhancement)
 - [x] AI Chat Assistant: Add "Text Us" escalation option when visitor can't get the answer they need
+- [x] Journal Issue 005: Generate hero image (sleeping golden on turf)
+- [x] Journal Issue 005: Build full article page with editorial layout
+- [x] Journal Issue 005: Add route and navigation integration
