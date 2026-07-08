@@ -196,24 +196,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Rating badge — subtle, persistent across all slides */}
-      <div className="absolute bottom-28 sm:bottom-36 left-0 right-0 z-10">
-        <div className="container">
-          <a
-            href="https://www.google.com/maps/place/Metro+Mutts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white/70 hover:text-white/90 transition-colors"
-          >
-            <div className="flex gap-0.5">
-              {[1,2,3,4,5].map((i) => (
-                <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white/70 fill-white/70" />
-              ))}
-            </div>
-            <span className="text-xs sm:text-sm font-medium">4.8 · 108 reviews</span>
-          </a>
-        </div>
-      </div>
+
 
       {/* Live availability badge — fixed position above dots */}
       <div className="absolute bottom-16 sm:bottom-24 left-0 right-0 z-10">
@@ -292,7 +275,7 @@ function MainSlideContent({ openBookingModal, onPlayVideo, isActive }: { openBoo
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
-        <div className="flex flex-wrap gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <Button
             size="lg"
             className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-sm sm:text-base px-5 sm:px-8 h-11 sm:h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
@@ -310,6 +293,10 @@ function MainSlideContent({ openBookingModal, onPlayVideo, isActive }: { openBoo
             </span>
             See Our Pack in Action
           </button>
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-white/50 text-sm font-medium pl-2 border-l border-white/20">
+            <Star className="w-3.5 h-3.5 text-[#48D597] fill-[#48D597]" />
+            4.8 from 108 families
+          </span>
         </div>
       </div>
 
@@ -342,7 +329,7 @@ function DOTWSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
-        <div className="flex flex-wrap gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <Button
             size="lg"
             className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
@@ -351,6 +338,10 @@ function DOTWSlideContent({ openBookingModal, isActive }: { openBookingModal: ()
             Book Your Pup's First Day
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
           </Button>
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-white/50 text-sm font-medium pl-2 border-l border-white/20">
+            <Star className="w-3.5 h-3.5 text-[#48D597] fill-[#48D597]" />
+            4.8 from 108 families
+          </span>
         </div>
       </div>
     </div>
@@ -382,7 +373,7 @@ function FacilitySlideContent({ openBookingModal, isActive }: { openBookingModal
       </div>
 
       <div className="transition-all duration-700 ease-out" style={{ opacity: isActive ? 1 : 0, transform: isActive ? "translateY(0)" : "translateY(12px)", transitionDelay: isActive ? "500ms" : "0ms" }}>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <Button
             size="lg"
             className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25 transition-all hover:shadow-2xl hover:shadow-[#48D597]/30 hover:-translate-y-0.5"
@@ -391,7 +382,10 @@ function FacilitySlideContent({ openBookingModal, isActive }: { openBookingModal
             Schedule a Tour
             <ArrowRight className="w-5 h-5 ml-1" />
           </Button>
-
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-white/50 text-sm font-medium pl-2 border-l border-white/20">
+            <Star className="w-3.5 h-3.5 text-[#48D597] fill-[#48D597]" />
+            4.8 from 108 families
+          </span>
         </div>
       </div>
     </div>
