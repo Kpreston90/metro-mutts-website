@@ -197,7 +197,7 @@ export default function HeroSection() {
       </div>
 
       {/* Google Reviews badge — persistent across all slides */}
-      <div className="absolute bottom-24 sm:bottom-32 left-0 right-0 z-10">
+      <div className="absolute bottom-32 sm:bottom-40 left-0 right-0 z-10">
         <div className="container">
           <a
             href="https://www.google.com/maps/place/Metro+Mutts"
@@ -223,7 +223,7 @@ export default function HeroSection() {
       </div>
 
       {/* Live availability badge — fixed position above dots */}
-      <div className="absolute bottom-14 sm:bottom-22 left-0 right-0 z-10">
+      <div className="absolute bottom-20 sm:bottom-28 left-0 right-0 z-10">
         <div className="container">
           <HeroAvailabilityBadge />
         </div>
