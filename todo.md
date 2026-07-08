@@ -135,3 +135,10 @@
 - [x] Journal Issue 005: Generate hero image (sleeping golden on turf)
 - [x] Journal Issue 005: Build full article page with editorial layout
 - [x] Journal Issue 005: Add route and navigation integration
+- [x] Boarding LP: Generate boarding-specific hero image (cozy dog sleeping in suite)
+- [x] Boarding LP: Rebuild /boarding as high-converting landing page with premium design
+- [x] Boarding LP: Live availability integration from Gingr
+- [x] Boarding LP: Pricing section with clear overnight rates
+- [x] Boarding LP: Trust signals (overnight staff, cameras, vet on call)
+- [x] Boarding LP: Single focused CTA flow (Reserve Your Dog's Stay)
+- [x] Boarding LP: Mobile-optimized for LSA ad clicks

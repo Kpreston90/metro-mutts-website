@@ -1,194 +1,355 @@
-/*
- * Metro Mutts Boarding Landing Page
- * Dedicated landing page for prospective boarding clients
- * Brand: Green #48D597, Dark #345460
- * Designed for ad campaigns, social media, and SEO
+/**
+ * Metro Mutts — Boarding Landing Page (Conversion-Optimized)
+ * Designed for $347/week LSA ad traffic.
+ * Premium visual design with live availability, urgency, trust signals.
+ * Single focused CTA: Reserve Your Dog's Stay
  */
-import { motion } from "framer-motion";
-import { Link } from "wouter";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+
 import {
   Moon,
   Sun,
   Shield,
   Heart,
-  Dog,
   Phone,
   Clock,
   CheckCircle2,
   Star,
   ArrowRight,
+  ArrowDown,
   Users,
   Utensils,
   Gamepad2,
   Bed,
+  Camera,
+  Stethoscope,
+  CalendarCheck,
+  Sparkles,
+  MapPin,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
-import ServiceAvailabilityBar from "@/components/ServiceAvailabilityBar";
 import PageSEO from "@/components/PageSEO";
 import SEOFaqSection from "@/components/SEOFaqSection";
 import Footer from "@/components/Footer";
 import { trackPhoneCall, trackCTA } from "@/lib/analytics";
 import { useSectionTracking } from "@/hooks/usePageTracking";
 import { useBookingModal } from "@/contexts/BookingModalContext";
+import { trpc } from "@/lib/trpc";
 
+// Images
 const HERO_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/boarding-suites-staff-water_b9c9cf4a.png";
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/boarding-hero-sleeping-suite_1f0f065f.png";
 const FACILITY_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/boarding-playyard-enhanced_15fe1bd8.png";
-const KENNELS_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/boarding-suites-staff-water_b9c9cf4a.png";
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
+const PLAY_IMG =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/gallery-dogs-playing-BfSr5ehaeRPFzukQGEBYsh.webp";
+const STAFF_IMG =
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/new-staff-cuddle-PjhfHvXzFSDCVuoaoZZxq6.webp";
+
+// ─── Data ───────────────────────────────────────────────────────────────────
 
 const included = [
   {
     icon: Bed,
-    title: "Spacious Suites",
-    desc: "Private, climate-controlled boarding suites with elevated beds and cozy blankets — not cramped kennels.",
+    title: "Private Suite",
+    desc: "Climate-controlled, spacious suite with elevated bed and cozy blankets.",
   },
   {
     icon: Utensils,
     title: "Meals & Meds",
-    desc: "We follow your pup's feeding schedule with their own food. Medication administration included at no extra charge.",
+    desc: "Fed on your schedule with your food. Medication admin included free.",
   },
   {
     icon: Gamepad2,
-    title: "Daily Playtime",
-    desc: "Every boarding guest gets supervised group play sessions in our 7,000+ sq ft indoor and outdoor play areas.",
+    title: "Daily Play Sessions",
+    desc: "Supervised group play in our 7,000+ sq ft indoor & outdoor areas.",
   },
   {
     icon: Moon,
-    title: "Overnight Supervision",
-    desc: "Staff check-ins throughout the night ensure your dog is comfortable, safe, and settled.",
+    title: "Overnight Care",
+    desc: "Staff check-ins throughout the night. Your dog is never alone.",
   },
   {
     icon: Sun,
     title: "Morning & Evening Walks",
-    desc: "Potty breaks and short walks to start and end each day, keeping your pup on their routine.",
+    desc: "Potty breaks and walks to start and end each day on routine.",
   },
   {
     icon: Heart,
-    title: "Cuddles & Attention",
-    desc: "Our team genuinely loves dogs. Your pup will get belly rubs, ear scratches, and one-on-one attention every day.",
+    title: "Love & Attention",
+    desc: "Belly rubs, ear scratches, and genuine one-on-one time every day.",
   },
 ];
 
-const whyUs = [
-  "7,000+ sq ft facility (4K of turfed play space)",
-  "Climate-controlled facility year-round",
-  "Temperament-tested playgroups for safety",
-  "Trained, passionate staff on-site",
-  "Flexible drop-off & pick-up times",
-  "Multi-dog family discounts available",
-  "Convenient Tulsa location near downtown",
-  "Free first day of daycare for new clients",
+const trustSignals = [
+  { icon: Shield, text: "Fully insured & licensed" },
+  { icon: Camera, text: "Webcam access available" },
+  { icon: Stethoscope, text: "Vet partnership on call" },
+  { icon: Users, text: "Trained, passionate staff" },
+  { icon: Clock, text: "Flexible drop-off & pick-up" },
+  { icon: CalendarCheck, text: "Free temperament assessment" },
 ];
 
-const testimonials = [
-  {
-    name: "Sarah M.",
-    text: "We were so nervous leaving our golden for the first time, but the Metro Mutts team sent us updates and photos. He didn't want to leave when we picked him up!",
-    rating: 5,
-  },
-  {
-    name: "David & Lisa K.",
-    text: "Best boarding in Tulsa, hands down. Clean facility, caring staff, and our two pups always come home happy and tired. We won't go anywhere else.",
-    rating: 5,
-  },
-  {
-    name: "Jennifer R.",
-    text: "The fact that they include playtime with boarding is amazing. Our dog gets a vacation too! Worth every penny for the peace of mind.",
-    rating: 5,
-  },
+const schedule = [
+  { time: "7:00 AM", activity: "Morning potty break & walk", icon: Sun },
+  { time: "7:30 AM", activity: "Breakfast (your pup's own food)", icon: Utensils },
+  { time: "9:00 AM", activity: "Group play — supervised socialization", icon: Users },
+  { time: "12:00 PM", activity: "Midday rest & potty break", icon: Clock },
+  { time: "2:00 PM", activity: "Afternoon play & enrichment", icon: Gamepad2 },
+  { time: "5:00 PM", activity: "Dinner & evening walk", icon: Utensils },
+  { time: "7:00 PM", activity: "Wind-down with cuddles", icon: Heart },
+  { time: "9:00 PM", activity: "Final potty break & lights out", icon: Moon },
 ];
+
+// ─── Component ──────────────────────────────────────────────────────────────
 
 export default function Boarding() {
   const { openBookingModal } = useBookingModal();
-  useSectionTracking(["boarding-hero", "boarding-included", "boarding-facility", "boarding-schedule", "boarding-testimonials", "boarding-pricing", "boarding-cta"]);
+  const { data: availability } = trpc.availability.todayAndTomorrow.useQuery(
+    undefined,
+    { staleTime: 5 * 60 * 1000, retry: 1 }
+  );
+  useSectionTracking([
+    "boarding-hero",
+    "boarding-trust",
+    "boarding-included",
+    "boarding-facility",
+    "boarding-schedule",
+    "boarding-pricing",
+    "boarding-cta",
+  ]);
+
+  const boardingSpots = availability?.today?.boarding?.spotsLeft;
+  const isUrgent = boardingSpots !== undefined && boardingSpots <= 5;
+
+  // Parallax effect for hero
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 600], [0, 150]);
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0.3]);
+
   return (
-    <div className="min-h-screen bg-[oklch(0.98_0.003_90)]">
+    <div className="min-h-screen bg-[#fafaf8]">
       <PageSEO
-        title="Dog Boarding in Tulsa, OK | Luxury Overnight Suites | Metro Mutts"
-        description="Best dog boarding in Tulsa, Oklahoma. Spacious private suites with climate control, daily supervised play, evening walks, and overnight staff. Book your pup's stay today."
+        title="Dog Boarding in Tulsa | Overnight Suites from $50/night | Metro Mutts"
+        description="Tulsa's most trusted dog boarding. Private suites, daily play, overnight staff, and vet on call. 19 suites — book before they fill up. Call 539-867-3841."
         canonical="https://www.metromutts.com/boarding"
       />
       <Navbar />
-      <ServiceAvailabilityBar service="boarding" />
 
-      {/* Hero */}
-      <section id="boarding-hero" className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <img
-          src={HERO_IMG}
-          alt="Happy golden retriever relaxing in a cozy Metro Mutts boarding suite"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/90 via-[#1a2e38]/70 to-[#1a2e38]/40" />
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-6 tracking-wide uppercase">
-              <Moon className="w-4 h-4" />
-              Dog Boarding in Tulsa
+      {/* ═══════════════════════════════════════════════════════════════════════
+          HERO — Full-bleed immersive with parallax
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section
+        id="boarding-hero"
+        data-hero-section
+        className="relative h-[90vh] min-h-[600px] max-h-[900px] overflow-hidden"
+      >
+        <motion.div
+          className="absolute inset-0"
+          style={{ y: heroY }}
+        >
+          <img
+            src={HERO_IMG}
+            alt="Golden retriever sleeping peacefully in a cozy Metro Mutts boarding suite"
+            className="w-full h-[110%] object-cover"
+          />
+        </motion.div>
+        {/* Cinematic gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e38] via-[#1a2e38]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2e38]/50 to-transparent" />
+
+        {/* Content */}
+        <div className="absolute inset-0 flex items-end pb-16 lg:pb-20">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="max-w-3xl"
+              style={{ opacity: heroOpacity }}
+            >
+              {/* Urgency badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6 backdrop-blur-md border ${
+                  isUrgent
+                    ? "bg-amber-500/20 border-amber-400/40 text-amber-200"
+                    : "bg-[#48D597]/15 border-[#48D597]/30 text-[#48D597]"
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full animate-pulse ${isUrgent ? "bg-amber-400" : "bg-[#48D597]"}`} />
+                {boardingSpots === undefined
+                  ? "19 boarding suites · Book today"
+                  : isUrgent
+                    ? `Only ${boardingSpots} suite${boardingSpots === 1 ? "" : "s"} left tonight`
+                    : `${boardingSpots} boarding suites available`}
+              </motion.div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-5">
+                Go on your trip.
+                <br />
+                <span className="text-[#48D597]">We've got your best friend.</span>
+              </h1>
+              <p className="text-lg lg:text-xl text-white/70 max-w-2xl mb-8 leading-relaxed">
+                Private suites. Daily playtime. Overnight staff. Everything your dog needs
+                to feel safe, loved, and happy while you're away.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  size="lg"
+                  className="bg-[#48D597] hover:bg-[#3bc085] text-[#1a2e38] font-bold text-base px-8 h-14 shadow-2xl shadow-[#48D597]/30 transition-all hover:-translate-y-0.5 hover:shadow-[#48D597]/40 rounded-full"
+                  onClick={() => {
+                    trackCTA("boarding_hero_reserve");
+                    openBookingModal();
+                  }}
+                >
+                  Reserve Your Dog's Stay
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white/25 text-white hover:bg-white/10 font-semibold text-base px-8 h-14 bg-transparent rounded-full"
+                  asChild
+                >
+                  <a href="tel:5398673841" onClick={() => trackPhoneCall("boarding_hero")}>
+                    <Phone className="w-5 h-5 mr-2" />
+                    539-867-3841
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <ArrowDown className="w-5 h-5 text-white/40" />
+        </motion.div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          TRUST BAR — Quick credibility signals
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="boarding-trust" className="bg-[#345460] py-5 border-b border-white/10">
+        <div className="container">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 text-white/80 text-sm font-medium">
+            <span className="flex items-center gap-2">
+              <Star className="w-4 h-4 text-[#48D597]" fill="currentColor" />
+              4.9 Google Rating
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-5">
-              Dog Boarding in{" "}
-              <span className="text-[#48D597]">Tulsa, OK</span>
-              <br />
-              — Your Dog's Home Away From Home
-            </h1>
-            <p className="text-lg text-white/65 max-w-xl mb-8 leading-relaxed">
-              Spacious suites, daily playtime, and round-the-clock care — because
-              your pup deserves a vacation too. Tulsa's most trusted overnight
-              dog boarding facility.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="tel:539-867-3841"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#48D597] text-white font-bold hover:bg-[#3bc485] transition-all shadow-lg shadow-[#48D597]/25 hover:shadow-xl hover:shadow-[#48D597]/30"
-                onClick={() => trackPhoneCall("boarding_hero")}
-              >
-                <Phone className="w-4 h-4" />
-                Book a Stay — 539-867-3841
-              </a>
-              <Link
-                href="/pricing#boarding"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-white/25 text-white font-semibold hover:bg-white/10 transition-all"
-              >
-                View Pricing
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </motion.div>
+            <span className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-[#48D597]" />
+              Insured & Licensed
+            </span>
+            <span className="flex items-center gap-2">
+              <Moon className="w-4 h-4 text-[#48D597]" />
+              Overnight Staff
+            </span>
+            <span className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-[#48D597]" />
+              Midtown Tulsa
+            </span>
+            <span className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#48D597]" />
+              $50/night
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Quick stats bar */}
-      <div className="bg-white border-b border-black/5 shadow-sm">
-        <div className="container py-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { value: "$50", label: "Per Night" },
-              { value: "$45", label: "Additional Dogs" },
-              { value: "7,000+", label: "Sq Ft Facility" },
-              { value: "24/7", label: "Supervised Care" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className="text-2xl font-extrabold text-[#345460]">
-                  {stat.value}
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PRICING — Big, bold, clear
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="boarding-pricing" className="py-20 lg:py-28">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#345460] to-[#2a4550] p-10 lg:p-14 shadow-2xl"
+            >
+              {/* Decorative circles */}
+              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#48D597]/5 -translate-y-1/2 translate-x-1/3" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-[#48D597]/5 translate-y-1/3 -translate-x-1/4" />
+
+              <div className="relative grid lg:grid-cols-2 gap-10 items-center">
+                {/* Left: Pricing */}
+                <div className="text-center lg:text-left">
+                  <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-6 tracking-wide uppercase">
+                    Simple, Transparent Pricing
+                  </span>
+                  <div className="flex items-baseline justify-center lg:justify-start gap-2 mb-2">
+                    <span className="text-7xl lg:text-8xl font-extrabold text-white">$50</span>
+                    <span className="text-2xl text-white/50 font-medium">/ night</span>
+                  </div>
+                  <p className="text-white/50 text-lg mb-2">
+                    Additional dogs: <span className="text-white font-bold">$45/night</span>
+                  </p>
+                  <p className="text-white/40 text-sm mb-8">
+                    Everything included. No hidden fees. No surprises.
+                  </p>
+                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                    <Button
+                      size="lg"
+                      className="bg-[#48D597] hover:bg-[#3bc085] text-[#1a2e38] font-bold px-8 h-13 shadow-xl shadow-[#48D597]/25 rounded-full"
+                      onClick={() => {
+                        trackCTA("boarding_pricing_reserve");
+                        openBookingModal();
+                      }}
+                    >
+                      Reserve Now
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </div>
                 </div>
-                <div className="text-sm text-[#345460]/50 font-medium">
-                  {stat.label}
+
+                {/* Right: What's included list */}
+                <div className="space-y-3">
+                  {[
+                    "Private climate-controlled suite",
+                    "Daily supervised group play",
+                    "Meals on your schedule",
+                    "Medication administration",
+                    "Morning & evening walks",
+                    "Overnight staff check-ins",
+                    "Belly rubs & one-on-one time",
+                    "Report card at pickup",
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
+                      className="flex items-center gap-3"
+                    >
+                      <CheckCircle2 className="w-5 h-5 text-[#48D597] flex-shrink-0" />
+                      <span className="text-white/80 font-medium">{item}</span>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-            ))}
+            </motion.div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* What's Included */}
-      <section id="boarding-included" className="py-20 lg:py-28">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          WHAT'S INCLUDED — Feature cards
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="boarding-included" className="py-20 lg:py-28 bg-white">
         <div className="container">
           <motion.div
             className="text-center max-w-2xl mx-auto mb-14"
@@ -200,12 +361,12 @@ export default function Boarding() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
               What's Included
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-4">
-              Everything Your Pup Needs for a{" "}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#345460] tracking-tight mb-4">
+              Everything for a{" "}
               <span className="text-[#48D597]">Perfect Stay</span>
             </h2>
             <p className="text-[#345460]/55 text-lg">
-              Our boarding rate covers it all — no hidden fees, no surprise charges.
+              One rate covers it all — no hidden fees, no surprise charges.
             </p>
           </motion.div>
 
@@ -219,10 +380,10 @@ export default function Boarding() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="bg-white rounded-2xl p-6 shadow-md shadow-black/5 border border-black/5 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  className="group relative bg-[#fafaf8] rounded-2xl p-7 border border-black/5 hover:border-[#48D597]/30 hover:shadow-xl hover:shadow-[#48D597]/5 hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#48D597]/10 flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-[#48D597]" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#48D597]/15 to-[#48D597]/5 flex items-center justify-center mb-5 group-hover:from-[#48D597]/25 group-hover:to-[#48D597]/10 transition-colors">
+                    <Icon className="w-7 h-7 text-[#48D597]" />
                   </div>
                   <h3 className="text-lg font-bold text-[#345460] mb-2">
                     {item.title}
@@ -237,278 +398,231 @@ export default function Boarding() {
         </div>
       </section>
 
-      {/* Facility showcase */}
-      <section id="boarding-facility" className="py-20 lg:py-28 bg-[#345460]">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          FACILITY — Split image + trust signals
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="boarding-facility" className="py-20 lg:py-28">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Image stack */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="relative"
             >
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <div className="rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src={FACILITY_IMG}
-                  alt="Dogs playing together in Metro Mutts indoor play area"
-                  className="w-full aspect-[16/10] object-cover"
+                  alt="Dogs playing in Metro Mutts indoor facility"
+                  className="w-full aspect-[4/3] object-cover"
                 />
               </div>
+              {/* Floating accent image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="absolute -bottom-6 -right-6 lg:-right-8 w-40 h-40 lg:w-48 lg:h-48 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
+              >
+                <img
+                  src={STAFF_IMG}
+                  alt="Metro Mutts staff member cuddling a dog"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </motion.div>
+
+            {/* Trust signals */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
-                Our Facility
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-5 tracking-wide uppercase">
+                Why Tulsa Trusts Us
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-                Why Tulsa Families{" "}
-                <span className="text-[#48D597]">Trust Us</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-4 leading-tight">
+                Your dog deserves more than
+                <br />
+                <span className="text-[#48D597]">a kennel.</span>
               </h2>
-              <div className="grid gap-3">
-                {whyUs.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.15 + i * 0.05 }}
-                    className="flex items-start gap-3"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-[#48D597] mt-0.5 flex-shrink-0" />
-                    <span className="text-white/75 text-sm">{item}</span>
-                  </motion.div>
-                ))}
+              <p className="text-[#345460]/55 text-lg mb-8 leading-relaxed max-w-lg">
+                7,000+ sq ft of purpose-built space with 4,000 sq ft of turfed play area.
+                Temperament-tested playgroups. Climate control year-round. This isn't
+                traditional boarding — it's a vacation for your dog.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4">
+                {trustSignals.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.2 + i * 0.06 }}
+                      className="flex items-center gap-3 py-2"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-[#48D597]/10 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-4.5 h-4.5 text-[#48D597]" />
+                      </div>
+                      <span className="text-sm font-medium text-[#345460]/75">{item.text}</span>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* A Day in Boarding */}
-      <section className="py-20 lg:py-28">
+      {/* ═══════════════════════════════════════════════════════════════════════
+          DAILY SCHEDULE — Timeline
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="boarding-schedule" className="py-20 lg:py-28 bg-white">
         <div className="container">
-          <motion.div
-            className="text-center max-w-2xl mx-auto mb-14"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
-              Daily Schedule
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-4">
-              A Day in Your Dog's{" "}
-              <span className="text-[#48D597]">Boarding Life</span>
-            </h2>
-          </motion.div>
-
-          {/* Kennels photo */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-4xl mx-auto mb-12 rounded-2xl overflow-hidden shadow-xl"
-          >
-            <img
-              src={KENNELS_IMG}
-              alt="Dogs relaxing in cozy Metro Mutts boarding kennels with plush beds and toys"
-              className="w-full aspect-[16/9] object-cover"
-            />
-          </motion.div>
-
-          <div className="max-w-3xl mx-auto">
-            {[
-              { time: "7:00 AM", activity: "Morning potty break & walk", icon: Sun },
-              { time: "7:30 AM", activity: "Breakfast served (your pup's own food)", icon: Utensils },
-              { time: "9:00 AM", activity: "Group play session — supervised socialization", icon: Dog },
-              { time: "12:00 PM", activity: "Midday potty break & rest time", icon: Clock },
-              { time: "2:00 PM", activity: "Afternoon play session & enrichment", icon: Gamepad2 },
-              { time: "5:00 PM", activity: "Dinner served & evening walk", icon: Utensils },
-              { time: "7:00 PM", activity: "Wind-down time with cuddles & belly rubs", icon: Heart },
-              { time: "9:00 PM", activity: "Final potty break & lights out in cozy suite", icon: Moon },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -15 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: i * 0.06 }}
-                  className="flex items-center gap-5 py-4 border-b border-black/5 last:border-0"
-                >
-                  <div className="w-20 text-right flex-shrink-0">
-                    <span className="text-sm font-bold text-[#48D597]">
-                      {item.time}
-                    </span>
-                  </div>
-                  <div className="w-10 h-10 rounded-full bg-[#48D597]/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-[#48D597]" />
-                  </div>
-                  <span className="text-[#345460] font-medium">
-                    {item.activity}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 lg:py-28 bg-[oklch(0.97_0.003_90)]">
-        <div className="container">
-          <motion.div
-            className="text-center max-w-2xl mx-auto mb-14"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
-              Happy Guests
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight">
-              What Boarding Parents{" "}
-              <span className="text-[#48D597]">Say</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-md shadow-black/5 border border-black/5"
-              >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star
-                      key={j}
-                      className="w-4 h-4 text-[#FB923C]"
-                      fill="currentColor"
-                    />
-                  ))}
-                </div>
-                <p className="text-[#345460]/65 text-sm leading-relaxed mb-4 italic">
-                  "{t.text}"
-                </p>
-                <div className="text-sm font-bold text-[#345460]">{t.name}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing snapshot */}
-      <section className="py-20 lg:py-28">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left: Header + image */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl shadow-black/5 border border-black/5 text-center"
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-6 tracking-wide uppercase">
-                Simple Pricing
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
+                A Day in Their Life
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-2">
-                Overnight Boarding
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-4 leading-tight">
+                Your dog's day,{" "}
+                <span className="text-[#48D597]">planned to perfection.</span>
               </h2>
-              <div className="flex items-baseline justify-center gap-2 mb-2">
-                <span className="text-6xl font-extrabold text-[#48D597]">$50</span>
-                <span className="text-xl text-[#345460]/50 font-medium">/ night</span>
-              </div>
-              <p className="text-[#345460]/50 mb-8">
-                Additional dogs from the same family:{" "}
-                <span className="font-bold text-[#345460]">$45/night</span>
+              <p className="text-[#345460]/55 text-lg mb-8 leading-relaxed">
+                Every boarding guest gets a structured day of play, rest, meals, and
+                love — designed to keep them happy and on routine.
               </p>
-              <div className="grid sm:grid-cols-2 gap-3 text-left max-w-md mx-auto mb-8">
-                {[
-                  "Private boarding suite",
-                  "Daily group play sessions",
-                  "Meals on your schedule",
-                  "Medication administration",
-                  "Morning & evening walks",
-                  "Overnight staff check-ins",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#48D597] flex-shrink-0" />
-                    <span className="text-sm text-[#345460]/70">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="tel:539-867-3841"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#48D597] text-white font-bold hover:bg-[#3bc485] transition-all shadow-lg shadow-[#48D597]/25"
-                  onClick={() => trackPhoneCall("boarding_pricing")}
-                >
-                  <Phone className="w-4 h-4" />
-                  Book a Stay
-                </a>
-                <Link
-                  href="/pricing#boarding"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border-2 border-[#345460]/15 text-[#345460] font-semibold hover:bg-[#345460]/5 transition-colors"
-                >
-                  Full Pricing Details
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src={PLAY_IMG}
+                  alt="Dogs playing together at Metro Mutts"
+                  className="w-full aspect-[16/10] object-cover"
+                />
               </div>
             </motion.div>
+
+            {/* Right: Timeline */}
+            <div className="space-y-0">
+              {schedule.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: i * 0.06 }}
+                    className="flex items-center gap-4 py-4 border-b border-black/5 last:border-0"
+                  >
+                    <div className="w-16 text-right flex-shrink-0">
+                      <span className="text-sm font-bold text-[#48D597]">
+                        {item.time}
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <div className="w-10 h-10 rounded-full bg-[#48D597]/10 flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-[#48D597]" />
+                      </div>
+                      {i < schedule.length - 1 && (
+                        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-px h-[calc(100%+6px)] bg-[#48D597]/15" />
+                      )}
+                    </div>
+                    <span className="text-[#345460] font-medium text-sm sm:text-base">
+                      {item.activity}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 bg-[#345460]">
-        <div className="container text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-              Ready to Book Your Dog's{" "}
-              <span className="text-[#48D597]">Staycation</span>?
-            </h2>
-            <p className="text-white/55 text-lg mb-8 max-w-xl mx-auto">
-              Call us today to schedule a tour or book your pup's first overnight
-              stay. First-time boarding clients get a free temperament assessment.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <a
-                href="tel:539-867-3841"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#48D597] text-white font-bold text-lg hover:bg-[#3bc485] transition-all shadow-lg shadow-[#48D597]/25"
-                onClick={() => trackPhoneCall("boarding_bottom_cta")}
-              >
-                <Phone className="w-5 h-5" />
-                539-867-3841
-              </a>
-              <button
-                onClick={openBookingModal}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white/25 text-white font-semibold text-lg hover:bg-white/10 transition-all"
-              >
-                Schedule a Tour
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-            <p className="mt-6 text-white/30 text-sm">
-              1219 E 13th St, Tulsa, OK 74120 · Open Mon–Fri 7am–6pm, Sat–Sun 9am–5pm
-            </p>
-          </motion.div>
+      {/* ═══════════════════════════════════════════════════════════════════════
+          BOTTOM CTA — Bold, emotional, single action
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="boarding-cta" className="relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#345460] via-[#2f4f5c] to-[#1a2e38] py-20 lg:py-28">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-[#48D597]/5" />
+            <div className="absolute bottom-10 right-20 w-56 h-56 rounded-full bg-[#48D597]/5" />
+            <div className="absolute top-1/2 left-2/3 w-24 h-24 rounded-full bg-[#48D597]/5" />
+          </div>
+
+          <div className="container relative">
+            <motion.div
+              className="text-center max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Live urgency */}
+              {boardingSpots !== undefined && isUrgent && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-200 text-sm font-bold mb-6"
+                >
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  Only {boardingSpots} suite{boardingSpots === 1 ? "" : "s"} left — filling fast
+                </motion.div>
+              )}
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                Your dog's{" "}
+                <span className="text-[#48D597]">best sleepover</span>
+                <br />
+                starts with one call.
+              </h2>
+              <p className="text-white/60 text-lg lg:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+                Book a stay, schedule a tour, or just ask us anything.
+                First-time boarding guests get a free temperament assessment.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button
+                  size="lg"
+                  className="bg-[#48D597] hover:bg-[#3bc085] text-[#1a2e38] font-bold text-lg px-10 h-14 shadow-2xl shadow-[#48D597]/30 transition-all hover:-translate-y-0.5 rounded-full"
+                  onClick={() => {
+                    trackCTA("boarding_bottom_reserve");
+                    openBookingModal();
+                  }}
+                >
+                  Reserve Your Dog's Stay
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white/25 text-white hover:bg-white/10 font-semibold text-lg px-10 h-14 bg-transparent rounded-full"
+                  asChild
+                >
+                  <a href="tel:5398673841" onClick={() => trackPhoneCall("boarding_bottom_cta")}>
+                    <Phone className="w-5 h-5 mr-2" />
+                    539-867-3841
+                  </a>
+                </Button>
+              </div>
+              <p className="mt-8 text-white/30 text-sm">
+                1219 E 13th St, Tulsa, OK 74120 · Mon–Fri 7am–6pm, Sat–Sun 9am–5pm
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -520,32 +634,39 @@ export default function Boarding() {
         faqs={[
           {
             question: "How much does dog boarding cost in Tulsa?",
-            answer: "Dog boarding at Metro Mutts starts at $50 per night for a private suite. Multi-night stays and multi-dog families receive discounts. Every boarding stay includes daily supervised group play, meals on your schedule, evening walks, and overnight staff check-ins — no hidden fees."
+            answer:
+              "Dog boarding at Metro Mutts starts at $50 per night for a private suite. Multi-dog families pay $45/night for additional dogs. Every boarding stay includes daily supervised group play, meals on your schedule, evening walks, and overnight staff check-ins — no hidden fees.",
           },
           {
             question: "What is included in overnight dog boarding at Metro Mutts?",
-            answer: "Every boarding stay includes a private climate-controlled suite with cozy bedding, daily group play sessions, individual attention, meals served on your schedule, evening potty walks, and overnight staff monitoring. We also offer add-ons like grooming, extra play sessions, and webcam access."
+            answer:
+              "Every boarding stay includes a private climate-controlled suite with cozy bedding, daily group play sessions, individual attention, meals served on your schedule, evening potty walks, and overnight staff monitoring. We also offer add-ons like grooming and extra play sessions.",
           },
           {
             question: "What vaccinations are required for dog boarding?",
-            answer: "All dogs must be current on Rabies, DHPP (Distemper), and Bordetella (kennel cough) vaccinations. We also require a negative fecal test within the past 12 months. Puppies must have completed their full vaccination series. We verify records before every stay to keep all pups safe."
+            answer:
+              "All dogs must be current on Rabies, DHPP (Distemper), and Bordetella (kennel cough) vaccinations. We also require a negative fecal test within the past 12 months. Puppies must have completed their full vaccination series.",
           },
           {
             question: "Can I board my dog if they have never been to Metro Mutts before?",
-            answer: "Yes! We recommend scheduling a free daycare trial day first so your dog can get comfortable with our facility, staff, and other pups. This helps reduce stress during their first overnight stay. Call 539-867-3841 to schedule your pup's meet-and-greet."
+            answer:
+              "Yes! We recommend scheduling a free daycare trial day first so your dog can get comfortable with our facility, staff, and other pups. This helps reduce stress during their first overnight stay. Call 539-867-3841 to schedule.",
           },
           {
             question: "What makes Metro Mutts different from other dog boarding in Tulsa?",
-            answer: "Metro Mutts is Tulsa's newest purpose-built dog care facility with 7,000+ sq ft of indoor and outdoor space (4,000 sq ft of turfed play area). Unlike traditional kennels, our dogs aren't crated all day — they enjoy supervised group play, enrichment activities, and personalized attention. We're family-run by the team behind OKC's most waitlisted dog care spot."
+            answer:
+              "Metro Mutts is Tulsa's newest purpose-built dog care facility with 7,000+ sq ft of indoor and outdoor space. Unlike traditional kennels, our dogs aren't crated all day — they enjoy supervised group play, enrichment activities, and personalized attention from our passionate team.",
           },
           {
             question: "Do you offer boarding for large dogs in Tulsa?",
-            answer: "Absolutely! We welcome dogs of all sizes. Our spacious suites comfortably accommodate large and giant breeds. During play sessions, dogs are grouped by size and temperament to ensure safe, enjoyable interactions for everyone."
+            answer:
+              "Absolutely! We welcome dogs of all sizes. Our spacious suites comfortably accommodate large and giant breeds. During play sessions, dogs are grouped by size and temperament for safe interactions.",
           },
           {
             question: "What are your dog boarding hours for drop-off and pick-up?",
-            answer: "Drop-off is available Monday through Friday from 7:00 AM to 6:00 PM, and Saturday & Sunday 9:00 AM to 5:00 PM. We're flexible with scheduling — just let us know your travel plans and we'll work with you."
-          }
+            answer:
+              "Drop-off is available Monday through Friday from 7:00 AM to 6:00 PM, and Saturday & Sunday 9:00 AM to 5:00 PM. We're flexible — just let us know your travel plans and we'll work with you.",
+          },
         ]}
       />
 
