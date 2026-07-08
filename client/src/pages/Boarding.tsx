@@ -40,7 +40,7 @@ import { trpc } from "@/lib/trpc";
 
 // Images
 const HERO_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/boarding-hero-kennel-view-v2-QdugeeeW4JYJD7cLpKXaNL.webp";
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/boarding-hero-kennel-view-v3-LX2bQ5P5CC6Bzd8kEb5jQ8.webp";
 const FACILITY_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
 const PLAY_IMG =
