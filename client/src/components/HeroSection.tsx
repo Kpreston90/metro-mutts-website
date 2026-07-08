@@ -25,6 +25,11 @@ interface Slide {
 
 const slides: Slide[] = [
   {
+    id: "facility",
+    image: TURF_IMG,
+    alt: "Metro Mutts indoor play area with staff and happy dogs on turf",
+  },
+  {
     id: "main",
     image: HERO_IMG,
     alt: "Dog pulling on leash toward Metro Mutts entrance, excited for daycare",
@@ -34,14 +39,9 @@ const slides: Slide[] = [
     image: DOTW_IMG,
     alt: "Dog of the Week - Cooper the Golden Retriever at Metro Mutts",
   },
-  {
-    id: "facility",
-    image: TURF_IMG,
-    alt: "Metro Mutts indoor play area with staff and happy dogs on turf",
-  },
 ];
 
-const SLIDE_INTERVAL = 7000;
+const SLIDE_INTERVAL = 9000;
 
 /* Staggered fade-in wrapper for slide text elements */
 function SlideTextWrapper({ isActive, children }: { isActive: boolean; children: React.ReactNode }) {
