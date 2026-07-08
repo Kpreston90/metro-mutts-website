@@ -196,22 +196,21 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Rating badge — Metro Mutts branded, persistent across all slides */}
+      {/* Rating badge — subtle, persistent across all slides */}
       <div className="absolute bottom-28 sm:bottom-36 left-0 right-0 z-10">
         <div className="container">
           <a
             href="https://www.google.com/maps/place/Metro+Mutts"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-full bg-[#48D597]/15 backdrop-blur-sm border border-[#48D597]/30 hover:bg-[#48D597]/25 transition-colors"
+            className="inline-flex items-center gap-1.5 text-white/70 hover:text-white/90 transition-colors"
           >
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map((i) => (
-                <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#48D597] fill-[#48D597]" />
+                <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white/70 fill-white/70" />
               ))}
             </div>
-            <span className="text-white font-bold text-sm sm:text-base">4.8</span>
-            <span className="text-white/60 text-xs sm:text-sm">· 108 reviews</span>
+            <span className="text-xs sm:text-sm font-medium">4.8 · 108 reviews</span>
           </a>
         </div>
       </div>
