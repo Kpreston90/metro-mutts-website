@@ -187,9 +187,9 @@ export default function HeroSection() {
                   pointerEvents: index === currentSlide ? "auto" : "none",
                 }}
               >
-                {index === 0 && <MainSlideContent openBookingModal={openBookingModal} onPlayVideo={() => setVideoOpen(true)} isActive={index === currentSlide && textVisible} />}
-                {index === 1 && <DOTWSlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
-                {index === 2 && <FacilitySlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
+                {index === 0 && <FacilitySlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
+                {index === 1 && <MainSlideContent openBookingModal={openBookingModal} onPlayVideo={() => setVideoOpen(true)} isActive={index === currentSlide && textVisible} />}
+                {index === 2 && <DOTWSlideContent openBookingModal={openBookingModal} isActive={index === currentSlide && textVisible} />}
               </div>
             ))}
           </div>
