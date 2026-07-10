@@ -176,7 +176,7 @@ export default function Daycare() {
         <div className="container py-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { value: "$30", label: "Full Day" },
+              { value: "$32", label: "Full Day" },
               { value: "FREE", label: "First Day" },
               { value: "7,000+", label: "Sq Ft Facility" },
               { value: "7–6", label: "Mon–Fri Hours" },
@@ -431,13 +431,14 @@ export default function Daycare() {
               {[
                 {
                   title: "Drop-In",
-                  price: "$30",
+                  price: "$32",
                   unit: "/ full day",
                   desc: "Perfect for occasional visits",
                   features: [
                     "Full day (7am–6pm)",
                     "Supervised group play",
                     "Enrichment activities",
+                    "$24 per sibling dog",
                     "Half day available ($20)",
                   ],
                   highlight: false,
