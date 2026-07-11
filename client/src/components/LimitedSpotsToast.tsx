@@ -24,18 +24,16 @@ interface SpotMessage {
 function getFallbackMessage(): SpotMessage {
   const day = new Date().getDay();
   const messages: SpotMessage[] = [
-    { service: "grooming", spots: 2, timeframe: "this Saturday" },
     { service: "daycare", spots: 4, timeframe: "this week" },
     { service: "boarding", spots: 3, timeframe: "this weekend" },
-    { service: "grooming", spots: 1, timeframe: "tomorrow" },
     { service: "daycare", spots: 5, timeframe: "Monday" },
+    { service: "boarding", spots: 2, timeframe: "this Saturday" },
   ];
 
-  if (day === 0 || day === 6) return messages[2];
-  if (day === 4 || day === 5) return messages[0];
-  if (day === 1) return messages[4];
-  if (day === 3) return messages[3];
-  return messages[1];
+  if (day === 0 || day === 6) return messages[1];
+  if (day === 4 || day === 5) return messages[3];
+  if (day === 1) return messages[2];
+  return messages[0];
 }
 
 export default function LimitedSpotsToast() {
@@ -57,12 +55,6 @@ export default function LimitedSpotsToast() {
     // Find the service with the fewest spots left (most urgent)
     const options: SpotMessage[] = [];
 
-    if (today.grooming.spotsLeft <= 3 && today.grooming.spotsLeft > 0) {
-      options.push({ service: "grooming", spots: today.grooming.spotsLeft, timeframe: "today" });
-    }
-    if (tomorrow.grooming.spotsLeft <= 3 && tomorrow.grooming.spotsLeft > 0) {
-      options.push({ service: "grooming", spots: tomorrow.grooming.spotsLeft, timeframe: "tomorrow" });
-    }
     if (today.daycare.spotsLeft <= 8 && today.daycare.spotsLeft > 0) {
       options.push({ service: "daycare", spots: today.daycare.spotsLeft, timeframe: "today" });
     }

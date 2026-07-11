@@ -255,9 +255,6 @@ function ServiceStep({
     if (serviceId === "daycare" && today.daycare.spotsLeft <= 10) {
       return `${today.daycare.spotsLeft} spots left today`;
     }
-    if (serviceId === "grooming" && today.grooming.spotsLeft <= 4) {
-      return `${today.grooming.spotsLeft} spots left today`;
-    }
     if (serviceId === "boarding" && today.boarding.spotsLeft <= 6) {
       return `${today.boarding.spotsLeft} suites available`;
     }

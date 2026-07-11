@@ -416,7 +416,6 @@ function HeroAvailabilityBadge() {
     const { today } = availability;
     const parts: string[] = [];
     if (today.daycare.spotsLeft > 0) parts.push(`${today.daycare.spotsLeft} daycare`);
-    if (today.grooming.spotsLeft > 0) parts.push(`${today.grooming.spotsLeft} grooming`);
     if (today.boarding.spotsLeft > 0) parts.push(`${today.boarding.spotsLeft} boarding`);
     if (parts.length === 0) return null;
     return parts.join(" \u00B7 ") + " spots open today";

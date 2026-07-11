@@ -76,12 +76,11 @@ function buildAvailabilityMessages(
   if (!today) return [];
 
   const msgs: TickerMessage[] = [];
-  const { daycare, boarding, grooming } = today;
+  const { daycare, boarding } = today;
 
-  // Find the lowest availability for urgency
+  // Find the lowest availability for urgency (daycare & boarding only)
   const services = [
     { name: "daycare", spots: daycare.spotsLeft, label: "daycare spot" },
-    { name: "grooming", spots: grooming.spotsLeft, label: "grooming spot" },
     { name: "boarding", spots: boarding.spotsLeft, label: "boarding suite" },
   ];
 
@@ -108,7 +107,7 @@ function buildAvailabilityMessages(
   // Total spots message showing all services
   msgs.push({
     icon: <Dog className="w-3.5 h-3.5 text-[#48D597]" />,
-    text: `${daycare.spotsLeft} daycare · ${grooming.spotsLeft} grooming · ${boarding.spotsLeft} boarding spots open today`,
+    text: `${daycare.spotsLeft} daycare · ${boarding.spotsLeft} boarding spots open today`,
     highlight: "Book now →",
     bookable: true,
   });
