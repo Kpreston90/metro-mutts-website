@@ -142,3 +142,6 @@
 - [x] Boarding LP: Trust signals (overnight staff, cameras, vet on call)
 - [x] Boarding LP: Single focused CTA flow (Reserve Your Dog's Stay)
 - [x] Boarding LP: Mobile-optimized for LSA ad clicks
+- [x] Blog: Create "5 Signs Your Dog Is Ready for a Groom" editorial post with Apple/Linear aesthetic
+- [x] Blog: Add OG metadata for new grooming blog post
+- [x] Blog: Add custom CTA section (white bg, "Ready for a Fresh Start?", Schedule a Groom button)

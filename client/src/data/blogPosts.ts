@@ -1971,6 +1971,52 @@ Come let them spend a day with the pack.
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/journal-005-hero-sigh-ahwBY4DH3NFcyNkZSxeMt8.webp",
     tags: ["dog sigh", "dog body language", "dog behavior", "fulfilled dog", "dog daycare Tulsa", "Metro Mutts journal", "dog enrichment", "dog relaxation"],
   },
+  {
+    slug: "5-signs-your-dog-is-ready-for-a-groom",
+    title: "5 Signs Your Dog Is Ready for a Groom",
+    excerpt: "Grooming isn't just about keeping your dog looking cute. Here are five simple signs your pup is probably ready for a spa day.",
+    content: `Have you ever looked at your dog and thought... \"Eh... maybe it's time?\"
+
+Grooming isn't just about keeping your dog looking cute. Regular grooming helps keep skin healthy, prevents painful mats, improves comfort, and often catches little issues before they become bigger ones.
+
+Here are five simple signs your pup is probably ready for a spa day.
+
+## 1. The cuddles are getting... crunchy.
+
+If you run your hand through your dog's coat and feel tangles, rough patches, or clumps\u2014especially behind the ears, under the collar, or along the legs\u2014it's time. What starts as a small knot can quickly tighten into a mat that pulls on the skin underneath.
+
+Mats become painful surprisingly quickly. They trap moisture, restrict airflow, and can even cause skin irritation or infection if left too long.
+
+## 2. You hear click... click... click...
+
+If your dog's nails are clicking on hardwood floors, they're overdue for a trim. Long nails change how your dog distributes weight across their paws, which can affect posture, gait, and long-term joint health.
+
+Over time, nails that are consistently too long can splay the toes, strain the tendons, and make walking uncomfortable. A regular nail trim\u2014ideally every 2\u20134 weeks\u2014keeps everything aligned.
+
+## 3. They smell like... dog.
+
+There's a difference between healthy dog smell and the kind of odor that builds up from weeks of natural oils, dirt, and loose coat sitting on the skin. A professional bath removes built-up sebum, dead skin cells, and environmental debris that home baths often miss.
+
+## 4. You can't remember their last haircut.
+
+If you have a Doodle, Poodle, or any curly-coated breed, their hair doesn't stop growing. The general recommendation is approximately every 6\u20138 weeks, depending on coat type and lifestyle.
+
+## 5. They're scratching more than usual.
+
+Not all itching equals allergies. Sometimes the culprit is much simpler: dead coat that hasn't been brushed out, dry skin from product buildup, debris trapped close to the skin, or mats pulling and creating irritation.
+
+A thorough professional groom removes all of that. Many dogs stop scratching entirely after a good grooming session.
+
+Whether your pup needs a bath, tidy-up, nail trim, or the full spa treatment\u2014we'd love to help.
+
+[Schedule a Groom](/booking)`,
+    category: "Grooming",
+    author: "Metro Mutts Team",
+    date: "2026-07-14",
+    readTime: "5 min read",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-groom-hero_1f370a94.jpg",
+    tags: ["dog grooming Tulsa", "Tulsa dog groomer", "professional dog grooming", "dog nail trimming", "doodle grooming", "dog bath Tulsa", "pet grooming Tulsa", "Metro Mutts grooming"],
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

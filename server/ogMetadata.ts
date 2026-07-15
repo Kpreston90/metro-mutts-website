@@ -117,6 +117,13 @@ const routeOgMap: Record<string, OgMeta> = {
     image: `${CDN}/journal-005-hero-sigh-ahwBY4DH3NFcyNkZSxeMt8.webp`,
     url: `${BASE_URL}/blog/why-does-your-dog-sigh`,
   },
+  "/blog/5-signs-your-dog-is-ready-for-a-groom": {
+    title: "5 Signs Your Dog Is Ready for a Groom | Metro Mutts Tulsa",
+    description:
+      "Wondering if your dog is due for a groom? Learn five simple signs to watch for and why regular grooming keeps your pup healthier, happier, and more comfortable.",
+    image: `${CDN}/blog-groom-hero_1f370a94.jpg`,
+    url: `${BASE_URL}/blog/5-signs-your-dog-is-ready-for-a-groom`,
+  },
   "/blog": {
     title: "Dog Care Blog | Tips & Advice | Metro Mutts Tulsa",
     description:
