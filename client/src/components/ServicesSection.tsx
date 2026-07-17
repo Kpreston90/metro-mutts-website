@@ -31,8 +31,8 @@ const services = [
     title: "Overnight Boarding",
     tagline: "Home Away From Home",
     description:
-      "When you need to travel, your dog deserves a comfortable, loving stay. Our spacious boarding suites feature comfortable bedding, climate control, and plenty of playtime during the day. We provide evening walks, bedtime snacks, and around-the-clock care so you can travel worry-free.",
-    features: ["Spacious private suites", "24/7 supervised care", "Evening walks & playtime", "Full camera monitoring"],
+      "When you need to travel, your dog deserves a comfortable, loving stay. Our spacious boarding suites feature comfortable bedding, climate control, and plenty of playtime during the day. We provide evening walks, bedtime snacks, and camera-monitored overnight care so you can travel worry-free.",
+    features: ["Spacious private suites", "Camera-monitored overnight", "Evening walks & playtime", "Full camera system"],
     image: BOARDING_IMG,
     color: "#345460",
     bgColor: "rgba(52, 84, 96, 0.1)",

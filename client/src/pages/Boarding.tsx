@@ -133,7 +133,7 @@ export default function Boarding() {
     <div className="min-h-screen bg-[#fafaf8]">
       <PageSEO
         title="Dog Boarding in Tulsa | Overnight Suites from $50/night | Metro Mutts"
-        description="Tulsa's most trusted dog boarding. Private suites, daily play, overnight staff, and vet on call. 19 suites — book before they fill up. Call 539-867-3841."
+        description="Tulsa's most trusted dog boarding. Private suites, daily play, camera-monitored overnight, and vet on call. 19 suites — book before they fill up. Call 539-867-3841."
         canonical="https://www.metromutts.com/boarding"
       />
       <Navbar />
@@ -195,7 +195,7 @@ export default function Boarding() {
                 <span className="text-[#48D597]">We've got your best friend.</span>
               </h1>
               <p className="text-lg lg:text-xl text-white/70 max-w-2xl mb-8 leading-relaxed">
-                Private suites. Daily playtime. Overnight staff. Everything your dog needs
+                Private suites. Daily playtime. Camera-monitored overnight. Everything your dog needs
                 to feel safe, loved, and happy while you're away.
               </p>
 
@@ -323,7 +323,7 @@ export default function Boarding() {
                     "Meals on your schedule",
                     "Medication administration",
                     "Morning & evening walks",
-                    "Overnight staff check-ins",
+                    "Camera-monitored overnight",
                     "Belly rubs & one-on-one time",
                     "Report card at pickup",
                   ].map((item, i) => (
@@ -635,12 +635,12 @@ export default function Boarding() {
           {
             question: "How much does dog boarding cost in Tulsa?",
             answer:
-              "Dog boarding at Metro Mutts starts at $50 per night for a private suite. Multi-dog families pay $45/night for additional dogs. Every boarding stay includes daily supervised group play, meals on your schedule, evening walks, and overnight staff check-ins — no hidden fees.",
+              "Dog boarding at Metro Mutts starts at $50 per night for a private suite. Multi-dog families pay $45/night for additional dogs. Every boarding stay includes daily supervised group play, meals on your schedule, evening walks, and camera-monitored overnight care — no hidden fees.",
           },
           {
             question: "What is included in overnight dog boarding at Metro Mutts?",
             answer:
-              "Every boarding stay includes a private climate-controlled suite with cozy bedding, daily group play sessions, individual attention, meals served on your schedule, evening potty walks, and overnight staff monitoring. We also offer add-ons like grooming and extra play sessions.",
+              "Every boarding stay includes a private climate-controlled suite with cozy bedding, daily group play sessions, individual attention, meals served on your schedule, evening potty walks, and camera-monitored overnight care. We also offer add-ons like grooming and extra play sessions.",
           },
           {
             question: "What vaccinations are required for dog boarding?",

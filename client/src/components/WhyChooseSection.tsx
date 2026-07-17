@@ -10,7 +10,7 @@ const features = [
   {
     icon: ShieldCheck,
     title: "Safety Certified",
-    description: "Our facility meets or exceeds state safety standards with secure entry, fire suppression, and 24/7 monitoring.",
+    description: "Our facility meets or exceeds state safety standards with secure entry, fire suppression, and full camera monitoring.",
   },
   {
     icon: Camera,

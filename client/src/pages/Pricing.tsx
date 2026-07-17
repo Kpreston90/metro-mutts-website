@@ -895,7 +895,7 @@ export default function Pricing() {
                 },
                 {
                   q: "What's included with overnight boarding?",
-                  a: "Every boarding stay includes a full day of daycare, a private suite with comfortable bedding, evening walks, bedtime snacks, and 24/7 supervised care. Additional dogs from the same family receive a discounted rate of $45/night.",
+                  a: "Every boarding stay includes a full day of daycare, a private suite with comfortable bedding, evening walks, bedtime snacks, and camera-monitored overnight care. Additional dogs from the same family receive a discounted rate of $45/night.",
                 },
                 {
                   q: "How do I book a grooming appointment?",
