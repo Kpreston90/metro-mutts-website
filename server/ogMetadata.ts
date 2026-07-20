@@ -117,6 +117,13 @@ const routeOgMap: Record<string, OgMeta> = {
     image: `${CDN}/journal-005-hero-sigh-ahwBY4DH3NFcyNkZSxeMt8.webp`,
     url: `${BASE_URL}/blog/why-does-your-dog-sigh`,
   },
+  "/blog/which-one-is-your-dog": {
+    title: "Which One Is Your Dog? The 7 Daycare Personalities | Metro Mutts Tulsa",
+    description:
+      "From the Wrestler to the Observer, every dog has a daycare personality. Discover the 7 types we see every day and what they tell us about your pup.",
+    image: `${CDN}/dog-personalities-hero_70375c1c.png`,
+    url: `${BASE_URL}/blog/which-one-is-your-dog`,
+  },
   "/blog/5-signs-your-dog-is-ready-for-a-groom": {
     title: "5 Signs Your Dog Is Ready for a Groom | Metro Mutts Tulsa",
     description:

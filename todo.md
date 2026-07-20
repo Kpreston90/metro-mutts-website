@@ -145,3 +145,8 @@
 - [x] Blog: Create "5 Signs Your Dog Is Ready for a Groom" editorial post with Apple/Linear aesthetic
 - [x] Blog: Add OG metadata for new grooming blog post
 - [x] Blog: Add custom CTA section (white bg, "Ready for a Fresh Start?", Schedule a Groom button)
+- [x] Blog: Create "Which One Is Your Dog? The 7 Daycare Personalities" editorial post with hero illustration
+- [x] Blog: Add route, OG metadata, and blogPosts.ts entry for dog personalities post
+- [x] Remove all "overnight staff" and "24/7 supervised care" language site-wide (replaced with camera-monitored overnight)
+- [x] Update daycare drop-in pricing to $32/day + $24/sibling dog
+- [x] Remove grooming availability numbers from all frontend displays (HeroSection, StickyBookBar, BookingModal, SocialProofTicker, LimitedSpotsToast)

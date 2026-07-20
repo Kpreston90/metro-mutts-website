@@ -19,6 +19,18 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "which-one-is-your-dog",
+    title: "Which One Is Your Dog?",
+    excerpt: "The 7 daycare personalities we see every day — and what they tell us about your pup.",
+    content: `Every dog has a daycare personality. From the Wrestler to the Observer, we see the same seven types show up again and again. Which one sounds like yours? Read the full article at /blog/which-one-is-your-dog.`,
+    category: "Daycare Tips",
+    author: "Metro Mutts Team",
+    date: "2026-07-20",
+    readTime: "8 min read",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/dog-personalities-hero_70375c1c.png",
+    tags: ["daycare", "dog personalities", "play styles", "socialization", "tulsa", "dog behavior"]
+  },
+  {
     slug: "enrichment-beyond-the-walk-7-ways-to-tire-out-your-dogs-brain",
     title: "Enrichment Beyond the Walk: 7 Ways to Tire Out Your Dog's Brain",
     excerpt: "You walked your dog this morning. Maybe even twice. And yet here they are at 2 p.m., staring at you with those eyes that say 'I'm bored and I'm about to make it your problem.' Here's the fix.",
