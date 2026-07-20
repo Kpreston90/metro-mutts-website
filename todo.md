@@ -150,3 +150,9 @@
 - [x] Remove all "overnight staff" and "24/7 supervised care" language site-wide (replaced with camera-monitored overnight)
 - [x] Update daycare drop-in pricing to $32/day + $24/sibling dog
 - [x] Remove grooming availability numbers from all frontend displays (HeroSection, StickyBookBar, BookingModal, SocialProofTicker, LimitedSpotsToast)
+- [x] SEO Fix: Update structured data address from 1325 to 1219 E 13th St
+- [x] SEO Fix: Update structured data opening hours to M-F 7am-6pm, Sat-Sun 9am-5pm
+- [x] SEO Fix: Update structured data service description (remove "24/7 care")
+- [x] SEO Fix: Update canonical URLs to non-www (metromutts.com)
+- [x] SEO Fix: Remove "Overnight Staff" from Boarding trust bar, replace with "24/7 Monitoring via Webcams"
+- [x] SEO Fix: Expand sitemap.xml with all pages and blog posts

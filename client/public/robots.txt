@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /404
 
-Sitemap: https://www.metromutts.com/sitemap.xml
+Sitemap: https://metromutts.com/sitemap.xml

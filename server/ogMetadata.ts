@@ -15,7 +15,7 @@ export interface OgMeta {
   canonical?: string;
 }
 
-const BASE_URL = "https://www.metromutts.com";
+const BASE_URL = "https://metromutts.com";
 const CDN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb";
 
 // Default / fallback OG metadata (homepage)

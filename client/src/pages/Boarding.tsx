@@ -134,7 +134,7 @@ export default function Boarding() {
       <PageSEO
         title="Dog Boarding in Tulsa | Overnight Suites from $50/night | Metro Mutts"
         description="Tulsa's most trusted dog boarding. Private suites, daily play, camera-monitored overnight, and vet on call. 19 suites — book before they fill up. Call 539-867-3841."
-        canonical="https://www.metromutts.com/boarding"
+        canonical="https://metromutts.com/boarding"
       />
       <Navbar />
 
@@ -252,8 +252,8 @@ export default function Boarding() {
               Insured & Licensed
             </span>
             <span className="flex items-center gap-2">
-              <Moon className="w-4 h-4 text-[#48D597]" />
-              Overnight Staff
+              <Camera className="w-4 h-4 text-[#48D597]" />
+              24/7 Webcam Monitoring
             </span>
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-[#48D597]" />
