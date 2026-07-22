@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO seasonal_messages (message, highlight, bookable, isActive, startsAt, endsAt, priority) VALUES ('NEW: Weekend daycare now available! Sat & Sun 9am–5pm', 'Book weekends →', 'true', 'true', NULL, NULL, 10);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway05.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3qx1gYCRVX4Y331.root --database K74BFWniuFWtXDKrDiRtHb --execute INSERT INTO seasonal_messages (message, highlight, bookable, isActive, startsAt, endsAt, priority) VALUES ('NEW: Weekend daycare now available! Sat & Sun 9am–5pm', 'Book weekends →', 'true', 'true', NULL, NULL, 10);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 675
+}

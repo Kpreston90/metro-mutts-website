@@ -65,8 +65,9 @@ const funMessages: TickerMessage[] = [
   },
   {
     icon: <TrendingUp className="w-3.5 h-3.5 text-[#48D597]" />,
-    text: "Tulsa's fastest-growing dog daycare",
-    highlight: "Now open 7 days/week",
+    text: "Weekend daycare now available!",
+    highlight: "Sat & Sun 9am–5pm →",
+    bookable: true,
   },
 ];
 

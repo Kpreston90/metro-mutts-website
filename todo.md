@@ -156,3 +156,4 @@
 - [x] SEO Fix: Update canonical URLs to non-www (metromutts.com)
 - [x] SEO Fix: Remove "Overnight Staff" from Boarding trust bar, replace with "24/7 Monitoring via Webcams"
 - [x] SEO Fix: Expand sitemap.xml with all pages and blog posts
+- [x] Add weekend daycare announcement: customers can now book daycare Sat & Sun 9am-5pm

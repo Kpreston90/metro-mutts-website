@@ -22,6 +22,7 @@ import {
   Droplets,
   Smile,
   TreePine,
+  Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ServiceAvailabilityBar from "@/components/ServiceAvailabilityBar";
@@ -73,7 +74,7 @@ const whyUs = [
   "Climate-controlled facility year-round",
   "Temperament-tested playgroups for safety",
   "Trained, passionate staff on-site",
-  "Flexible drop-off & pick-up (7am–6pm)",
+  "Open 7 days/week — Mon–Fri 7am–6pm, Sat–Sun 9am–5pm",
   "Multi-dog family discounts available",
   "Convenient Tulsa location near downtown",
   "First day FREE for new clients",
@@ -135,10 +136,14 @@ export default function Daycare() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-6 tracking-wide uppercase">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/15 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
               <Sun className="w-4 h-4" />
               Dog Daycare in Tulsa
             </span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400/20 border border-amber-300/30 text-amber-200 text-sm font-bold mb-6 ml-0 sm:ml-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              NEW: Weekend daycare now available — Sat & Sun 9am–5pm
+            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-5">
               Your Dog's{" "}
               <span className="text-[#48D597]">Best Day</span>
@@ -351,6 +356,13 @@ export default function Daycare() {
                 </motion.div>
               );
             })}
+            <div className="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200/60 flex items-start gap-3">
+              <Sparkles className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-[#345460] font-bold text-sm">Weekend Daycare Now Available!</p>
+                <p className="text-[#345460]/60 text-sm mt-0.5">Saturdays & Sundays 9am–5pm. Same great supervised play, enrichment, and fun — now 7 days a week.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -435,7 +447,7 @@ export default function Daycare() {
                   unit: "/ full day",
                   desc: "Perfect for occasional visits",
                   features: [
-                    "Full day (7am–6pm)",
+                    "Mon\u2013Fri 7am\u20136pm, Sat\u2013Sun 9am\u20135pm",
                     "Supervised group play",
                     "Enrichment activities",
                     "$24 per sibling dog",
