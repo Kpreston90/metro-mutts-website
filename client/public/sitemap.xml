@@ -114,6 +114,12 @@
 
   <!-- Blog Posts -->
   <url>
+    <loc>https://metromutts.com/blog/too-hot-for-the-dog-park</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://metromutts.com/blog/which-one-is-your-dog</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>

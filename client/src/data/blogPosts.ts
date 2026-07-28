@@ -19,6 +19,18 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "too-hot-for-the-dog-park",
+    title: "Too Hot for the Dog Park? Here's Why Summer Is One of the Best Times for Daycare.",
+    excerpt: "Oklahoma heat limits safe outdoor exercise — but your dog's need for movement, stimulation, and social connection doesn't take a summer vacation. Here's what to do instead.",
+    content: `Your dog is staring at you. That look — the one that says I need to go somewhere, do something, chase something. You grab the leash. You open the door. And then it hits you: 97 degrees. The sidewalk is radiating heat, and the dog park looks like a ghost town. Now what?\n\nIf you live in Tulsa — or anywhere in Oklahoma — you know this feeling. June through September, the heat makes outdoor exercise dangerous. Yet your dog's need for movement and social connection doesn't take a summer vacation.\n\n## How Hot Is Too Hot for Dogs?\n\nWhen the air temperature hits 85°F, asphalt can reach 130°F or higher. At 95°F — a normal July afternoon in Tulsa — the ground can burn paw pads in under 60 seconds. Dogs regulate temperature primarily through panting, and when it's hot and humid, their cooling system becomes dangerously inefficient.\n\nBrachycephalic breeds (bulldogs, pugs, Boston terriers) can overheat at temperatures as mild as 70°F if humidity is high. Puppies and seniors are also at elevated risk.\n\n## Dogs Don't Just Need Exercise\n\nMental stimulation is just as critical as physical exercise. A dog who gets 30 minutes of enrichment and social play can be calmer and more satisfied than one who runs for an hour on a treadmill. Dogs need social interaction, novelty, problem solving, and confidence building.\n\n## Why Sitting Inside All Day Isn't the Answer\n\nDogs weren't built for sedentary living. Boredom leads to destructive behavior, excessive barking, anxiety, and nighttime zoomies. A backyard during Oklahoma summer isn't enough — even 15 minutes outside can push a dog into the danger zone.\n\n## What Makes Indoor Daycare Different?\n\nClimate-controlled play areas, structured playgroups by size and temperament, active staff supervision, rotation between activity and rest, and enrichment beyond fetch — puzzle toys, sensory games, agility, and scent work.\n\n## Built for Tulsa Summers\n\nMetro Mutts was designed from the ground up so dogs could enjoy safe, enriching play even when Oklahoma weather makes outdoor exercise unrealistic. Over 7,000 square feet of indoor and outdoor space means dogs have room to run without stepping on hot pavement.\n\nFamilies from Midtown, South Tulsa, Broken Arrow, Jenks, and Bixby bring their dogs here because summer doesn't have to mean boredom.\n\n## How to Tell Your Dog Needs More Enrichment\n\nPacing, demand barking, destructive chewing, sock stealing, late-night zoomies, and constantly asking to go outside — these are signs your dog is under-stimulated.\n\nSummer shouldn't mean fewer adventures. It just means changing where they happen. Come see why so many Tulsa dogs spend their summers playing indoors.`,
+    category: "Daycare Tips",
+    author: "Metro Mutts Team",
+    date: "2026-07-28",
+    readTime: "8 min read",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/blog-summer-heat-hero-Ge8ZFehA9knJ44NifDf4LE.webp",
+    tags: ["summer", "dog daycare", "tulsa", "heat safety", "indoor daycare", "enrichment", "oklahoma"]
+  },
+  {
     slug: "which-one-is-your-dog",
     title: "Which One Is Your Dog?",
     excerpt: "The 7 daycare personalities we see every day — and what they tell us about your pup.",

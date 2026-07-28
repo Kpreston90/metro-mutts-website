@@ -124,6 +124,13 @@ const routeOgMap: Record<string, OgMeta> = {
     image: `${CDN}/dog-personalities-hero_70375c1c.png`,
     url: `${BASE_URL}/blog/which-one-is-your-dog`,
   },
+  "/blog/too-hot-for-the-dog-park": {
+    title: "Too Hot for the Dog Park? Here's Why Summer Is One of the Best Times for Daycare | Metro Mutts",
+    description:
+      "Oklahoma heat limits safe outdoor exercise for dogs. Learn why climate-controlled daycare keeps dogs active, healthy and happy all summer long.",
+    image: `${CDN}/blog-summer-heat-hero-Ge8ZFehA9knJ44NifDf4LE.webp`,
+    url: `${BASE_URL}/blog/too-hot-for-the-dog-park`,
+  },
   "/blog/5-signs-your-dog-is-ready-for-a-groom": {
     title: "5 Signs Your Dog Is Ready for a Groom | Metro Mutts Tulsa",
     description:
