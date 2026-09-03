@@ -158,3 +158,6 @@
 - [x] SEO Fix: Expand sitemap.xml with all pages and blog posts
 - [x] Add weekend daycare announcement: customers can now book daycare Sat & Sun 9am-5pm
 - [x] Blog: Write and publish "Too Hot for the Dog Park?" summer daycare SEO article
+- [x] Boarding availability: Build a customer-facing calendar that displays live Gingr availability and links into booking
+- [x] Boarding availability: Make the Gingr booking handoff accurately explain date re-entry until selected dates can be passed into the portal
+- [x] Boarding availability: Verify the selected-stay booking handoff messaging and destination

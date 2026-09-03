@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, adminProcedure } from "./_core/trpc";
-import { getTodayAndTomorrowAvailability, getAvailability } from "./gingr";
+import { getTodayAndTomorrowAvailability, getAvailability, getBoardingCalendarAvailability } from "./gingr";
 import { notifyOwner } from "./_core/notification";
 import { sendPromoRedemptionEmail } from "./email";
 import { processChat } from "./chat";
@@ -71,6 +71,21 @@ export const appRouter = router({
       .input(z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }))
       .query(async ({ input }) => {
         return getAvailability(input.date);
+      }),
+
+    /**
+     * Live month-view boarding availability. This endpoint intentionally has
+     * no synthetic fallback, so customers never see made-up calendar results.
+     */
+    boardingCalendar: publicProcedure
+      .input(
+        z.object({
+          startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+          days: z.number().int().min(1).max(62),
+        })
+      )
+      .query(async ({ input }) => {
+        return getBoardingCalendarAvailability(input.startDate, input.days);
       }),
   }),
 

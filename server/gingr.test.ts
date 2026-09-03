@@ -141,4 +141,75 @@ describe("Gingr API Integration", () => {
     expect(result.today).toHaveProperty("daycare");
     expect(result.tomorrow).toHaveProperty("boarding");
   });
+
+  it("builds a per-night boarding calendar from active multi-night reservations", async () => {
+    const reservations = [
+      {
+        id: 1,
+        reservation_type_name: { type: "Boarding" },
+        start_date: "2026-09-10T07:00:00-05:00",
+        end_date: "2026-09-12T10:00:00-05:00",
+        cancelled_date: null,
+      },
+      {
+        id: 2,
+        reservation_type_name: "Boarding - Suite",
+        start_date: "2026-09-11T07:00:00-05:00",
+        end_date: "2026-09-13T10:00:00-05:00",
+        cancelled_date: null,
+      },
+      {
+        id: 3,
+        reservation_type_name: "Boarding - Suite",
+        start_date: "2026-09-10T07:00:00-05:00",
+        end_date: "2026-09-12T10:00:00-05:00",
+        cancelled_date: "2026-09-09T10:00:00-05:00",
+      },
+      {
+        id: 4,
+        reservation_type_name: "Daycare",
+        start_date: "2026-09-11T07:00:00-05:00",
+        end_date: "2026-09-11T18:00:00-05:00",
+        cancelled_date: null,
+      },
+    ];
+
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(reservations),
+    });
+
+    const { getBoardingCalendarAvailability } = await import("./gingr");
+    const result = await getBoardingCalendarAvailability("2026-09-10", 4);
+
+    expect(result.days).toEqual([
+      { date: "2026-09-10", status: "available" },
+      { date: "2026-09-11", status: "available" },
+      { date: "2026-09-12", status: "available" },
+      { date: "2026-09-13", status: "available" },
+    ]);
+  });
+
+  it("does not return fallback calendar inventory when Gingr is unreachable", async () => {
+    global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+
+    const { getBoardingCalendarAvailability } = await import("./gingr");
+
+    await expect(
+      getBoardingCalendarAvailability("2026-09-10", 7)
+    ).rejects.toThrow("Network error");
+  });
+
+  it("splits a two-month calendar into Gingr-safe reservation windows", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([]),
+    });
+
+    const { getBoardingCalendarAvailability } = await import("./gingr");
+    const result = await getBoardingCalendarAvailability("2026-07-01", 62);
+
+    expect(result.days).toHaveLength(62);
+    expect(global.fetch).toHaveBeenCalledTimes(3);
+  });
 });

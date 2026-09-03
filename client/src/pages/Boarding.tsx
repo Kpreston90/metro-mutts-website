@@ -33,6 +33,7 @@ import Navbar from "@/components/Navbar";
 import PageSEO from "@/components/PageSEO";
 import SEOFaqSection from "@/components/SEOFaqSection";
 import Footer from "@/components/Footer";
+import BoardingAvailabilityCalendar from "@/components/BoardingAvailabilityCalendar";
 import { trackPhoneCall, trackCTA } from "@/lib/analytics";
 import { useSectionTracking } from "@/hooks/usePageTracking";
 import { useBookingModal } from "@/contexts/BookingModalContext";
@@ -266,6 +267,8 @@ export default function Boarding() {
           </div>
         </div>
       </section>
+
+      <BoardingAvailabilityCalendar />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           PRICING — Big, bold, clear
