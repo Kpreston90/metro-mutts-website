@@ -202,14 +202,14 @@ export default function BoardingAvailabilityCalendar() {
                     showOutsideDays={false}
                     className="w-full p-0"
                     classNames={{
-                      root: "w-full",
-                      months: "flex flex-col gap-8 w-full md:flex-row md:gap-6",
-                      month: "w-full gap-4",
-                      table: "w-full table-fixed border-separate border-spacing-1 sm:border-spacing-1.5",
-                      weekdays: "grid w-full grid-cols-7 gap-1 sm:gap-1.5",
-                      weekday: "flex h-6 min-w-0 items-center justify-center overflow-hidden text-center text-[0.65rem] font-extrabold text-[#345460]/65 sm:text-xs",
-                      week: "w-full mt-1.5",
-                      day: "w-[14.285%] h-11 sm:h-13 text-center",
+                      root: "!w-full",
+                      months: "flex !w-full flex-col gap-8 md:flex-row md:gap-6",
+                      month: "flex !w-full min-w-0 flex-1 flex-col gap-4",
+                      table: "!w-full table-fixed border-separate border-spacing-1 sm:border-spacing-1.5",
+                      weekdays: "table-row",
+                      weekday: "h-8 w-[14.285%] p-0 text-center align-middle text-[0.7rem] font-extrabold text-[#345460]/70 sm:text-xs",
+                      week: "table-row",
+                      day: "h-12 w-[14.285%] text-center sm:h-14",
                       day_button: "pointer-events-none relative w-full h-full rounded-xl text-sm font-semibold cursor-default",
                       today: "[&_button]:ring-1 [&_button]:ring-[#345460]/30 [&_button]:ring-inset",
                       outside: "invisible",

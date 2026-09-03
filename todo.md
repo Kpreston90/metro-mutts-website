@@ -168,3 +168,4 @@
 - [x] Boarding availability: Show fully booked dates in bold red and extend live calendar navigation through December 31
 - [x] Boarding availability: Make month navigation clearly visible and fix weekday headers so each label is readable
 - [x] Copy accuracy: Replace remaining overnight staff and 24/7 supervised care claims with camera-monitored overnight language
+- [x] Boarding availability: Replace overlapping weekday headers with a robust readable seven-column row
