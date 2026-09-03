@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Star } from "lucide-react";
 import { useBookingModal } from "@/contexts/BookingModalContext";
-import { trpc } from "@/lib/trpc";
 
 const FACILITY_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
@@ -88,47 +87,11 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-20 left-0 right-0 z-10 sm:bottom-28">
-        <div className="container">
-          <HeroAvailabilityBadge />
-        </div>
-      </div>
-
       <div className="absolute bottom-0 left-0 right-0" aria-hidden="true">
         <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-auto w-full" preserveAspectRatio="none">
           <path d="M0 40L48 35C96 30 192 20 288 18C384 16 480 22 576 30C672 38 768 48 864 50C960 52 1056 46 1152 38C1248 30 1344 20 1392 15L1440 10V80H1392C1344 80 1248 80 1152 80C1056 80 960 80 864 80C768 80 672 80 576 80C480 80 384 80 288 80C192 80 96 80 48 80H0V40Z" fill="oklch(0.995 0.002 90)" />
         </svg>
       </div>
     </section>
-  );
-}
-
-function HeroAvailabilityBadge() {
-  const { data: availability } = trpc.availability.todayAndTomorrow.useQuery(undefined, {
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
-  });
-
-  const getSummary = () => {
-    if (!availability) return null;
-    const { today } = availability;
-    const parts: string[] = [];
-    if (today.daycare.spotsLeft > 0) parts.push(`${today.daycare.spotsLeft} daycare`);
-    if (today.boarding.spotsLeft > 0) parts.push(`${today.boarding.spotsLeft} boarding`);
-    if (parts.length === 0) return null;
-    return `${parts.join(" · ")} spots open today`;
-  };
-
-  const summary = getSummary();
-  const displayText = summary || "33 daycare · 12 boarding spots open today";
-
-  return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
-      <span className="relative flex h-2.5 w-2.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#48D597] opacity-75" />
-        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#48D597]" />
-      </span>
-      <span className="text-sm font-medium text-white/90">{displayText}</span>
-    </div>
   );
 }

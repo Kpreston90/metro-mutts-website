@@ -1,7 +1,7 @@
 /**
  * Metro Mutts — Boarding Landing Page (Conversion-Optimized)
  * Designed for $347/week LSA ad traffic.
- * Premium visual design with live availability, urgency, trust signals.
+ * Premium visual design with clear booking, care, and trust signals.
  * Single focused CTA: Reserve Your Dog's Stay
  */
 
@@ -37,7 +37,6 @@ import BoardingAvailabilityCalendar from "@/components/BoardingAvailabilityCalen
 import { trackPhoneCall, trackCTA } from "@/lib/analytics";
 import { useSectionTracking } from "@/hooks/usePageTracking";
 import { useBookingModal } from "@/contexts/BookingModalContext";
-import { trpc } from "@/lib/trpc";
 
 // Images
 const HERO_IMG =
@@ -70,7 +69,7 @@ const included = [
   {
     icon: Moon,
     title: "Overnight Care",
-    desc: "Staff check-ins throughout the night. Your dog is never alone.",
+    desc: "Camera-monitored overnight for added peace of mind.",
   },
   {
     icon: Sun,
@@ -108,10 +107,6 @@ const schedule = [
 
 export default function Boarding() {
   const { openBookingModal } = useBookingModal();
-  const { data: availability } = trpc.availability.todayAndTomorrow.useQuery(
-    undefined,
-    { staleTime: 5 * 60 * 1000, retry: 1 }
-  );
   useSectionTracking([
     "boarding-hero",
     "boarding-trust",
@@ -122,9 +117,6 @@ export default function Boarding() {
     "boarding-cta",
   ]);
 
-  const boardingSpots = availability?.today?.boarding?.spotsLeft;
-  const isUrgent = boardingSpots !== undefined && boardingSpots <= 5;
-
   // Parallax effect for hero
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 600], [0, 150]);
@@ -134,7 +126,7 @@ export default function Boarding() {
     <div className="min-h-screen bg-[#fafaf8]">
       <PageSEO
         title="Dog Boarding in Tulsa | Overnight Suites from $50/night | Metro Mutts"
-        description="Tulsa's most trusted dog boarding. Private suites, daily play, camera-monitored overnight, and vet on call. 19 suites — book before they fill up. Call 539-867-3841."
+        description="Tulsa's trusted dog boarding. Private suites, daily play, camera-monitored overnight, and vet on call. Call 539-867-3841 to plan your dog's stay."
         canonical="https://metromutts.com/boarding"
       />
       <Navbar />
@@ -171,25 +163,6 @@ export default function Boarding() {
               className="max-w-3xl"
               style={{ opacity: heroOpacity }}
             >
-              {/* Urgency badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6 backdrop-blur-md border ${
-                  isUrgent
-                    ? "bg-amber-500/20 border-amber-400/40 text-amber-200"
-                    : "bg-[#48D597]/15 border-[#48D597]/30 text-[#48D597]"
-                }`}
-              >
-                <span className={`w-2 h-2 rounded-full animate-pulse ${isUrgent ? "bg-amber-400" : "bg-[#48D597]"}`} />
-                {boardingSpots === undefined
-                  ? "19 boarding suites · Book today"
-                  : isUrgent
-                    ? `Only ${boardingSpots} suite${boardingSpots === 1 ? "" : "s"} left tonight`
-                    : `${boardingSpots} boarding suites available`}
-              </motion.div>
-
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-5">
                 Go on your trip.
                 <br />
@@ -574,19 +547,6 @@ export default function Boarding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              {/* Live urgency */}
-              {boardingSpots !== undefined && isUrgent && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-200 text-sm font-bold mb-6"
-                >
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                  Only {boardingSpots} suite{boardingSpots === 1 ? "" : "s"} left — filling fast
-                </motion.div>
-              )}
-
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
                 Your dog's{" "}
                 <span className="text-[#48D597]">best sleepover</span>

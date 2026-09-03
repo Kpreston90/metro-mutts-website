@@ -164,3 +164,5 @@
 - [x] Boarding availability: Simplify the live calendar to a read-only Available/Unavailable date viewer with no date selection
 - [x] Homepage hero: Remove the rotating slider and use the facility image with “Every Day Should Feel Like This” as the permanent hero
 - [x] AI Chat Assistant: Correct pricing, age, vaccination, and overnight-monitoring facts to match current Metro Mutts policies
+- [x] Remove live availability counts from homepage, Boarding, booking, sticky, and service-bar surfaces, plus availability messages from the rotating announcement bar
+- [x] Boarding availability: Show fully booked dates in bold red and extend live calendar navigation through December 31

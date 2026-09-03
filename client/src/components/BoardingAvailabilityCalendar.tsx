@@ -73,7 +73,7 @@ export default function BoardingAvailabilityCalendar() {
     setCurrentMonth(monthStart(nextMonth));
   };
   const lastBookableMonth = useMemo(
-    () => new Date(today.getFullYear() + 1, today.getMonth(), 1, 12),
+    () => new Date(today.getFullYear(), 11, 1, 12),
     [today]
   );
   const formattedUpdated = data
@@ -95,7 +95,7 @@ export default function BoardingAvailabilityCalendar() {
               Boarding availability at a glance.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-[#345460]/65">
-              Green dates are available. Gray dates are fully booked. It’s that simple.
+              Green dates are available. Red dates are fully booked. It’s that simple.
             </p>
           </div>
 
@@ -149,7 +149,7 @@ export default function BoardingAvailabilityCalendar() {
                     modifiers={modifiers}
                     modifiersClassNames={{
                       available: "bg-[#48D597]/20 text-[#214840] [&_button]:font-bold",
-                      unavailable: "bg-slate-100 text-slate-300 [&_button]:line-through",
+                      unavailable: "bg-red-600 text-white [&_button]:font-extrabold",
                       past: "text-[#345460]/25 [&_button]:bg-transparent",
                     }}
                     numberOfMonths={2}
@@ -181,7 +181,7 @@ export default function BoardingAvailabilityCalendar() {
 
                   <div className="flex flex-wrap gap-x-5 gap-y-2 mt-7 text-xs font-semibold text-[#345460]/65">
                     <span className="inline-flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-[#48D597]" />Available</span>
-                    <span className="inline-flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-slate-300" />Unavailable</span>
+                    <span className="inline-flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-red-600" />Fully booked</span>
                   </div>
                 </>
               )}

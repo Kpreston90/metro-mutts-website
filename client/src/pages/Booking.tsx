@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
-import { trpc } from "@/lib/trpc";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import {
   Phone,
@@ -51,7 +50,7 @@ const services = [
     icon: Moon,
     title: "Boarding",
     description: "Overnight luxury suites with daycare included",
-    highlight: "24/7 supervised",
+    highlight: "Camera-monitored overnight",
     color: "bg-sky-50 text-sky-500",
   },
   {
@@ -97,14 +96,6 @@ export default function Booking() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Live availability
-  const { data: availability } = trpc.availability.todayAndTomorrow.useQuery(
-    undefined,
-    { refetchInterval: 60_000 }
-  );
-
-  const todaySpots = availability?.today;
-
   return (
     <div className="min-h-screen flex flex-col">
       <PageSEO
@@ -144,19 +135,6 @@ export default function Booking() {
               Daycare, boarding, or grooming — pick your service and we'll take
               care of the rest. First day of daycare is always free.
             </p>
-
-            {/* Live availability badge */}
-            {todaySpots && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-8"
-              >
-                <span className="w-2 h-2 rounded-full bg-[#48D597] animate-pulse" />
-                {todaySpots.daycare.spotsLeft} daycare · {todaySpots.grooming.spotsLeft} grooming · {todaySpots.boarding.spotsLeft} boarding spots open today
-              </motion.div>
-            )}
 
             <div className="flex flex-wrap gap-4">
               <Button

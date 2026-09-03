@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import { trpc } from "@/lib/trpc";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 
 const SMS_NUMBER = "19183597727";
@@ -10,44 +9,20 @@ export default function StickyBookBar() {
   const [visible, setVisible] = useState(false);
   const { openBookingModal } = useBookingModal();
 
-  const { data: availability } = trpc.availability.todayAndTomorrow.useQuery(
-    undefined,
-    { staleTime: 5 * 60 * 1000, retry: 1 }
-  );
-
   useEffect(() => {
-    const heroEl = document.querySelector("[data-hero-section]");
-    if (!heroEl) {
-      // Fallback: show after scrolling 750px
+    const hero = document.querySelector("[data-hero-section]");
+    if (!hero) {
       const handleScroll = () => setVisible(window.scrollY > 750);
       window.addEventListener("scroll", handleScroll, { passive: true });
       return () => window.removeEventListener("scroll", handleScroll);
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Show bar when hero is NOT intersecting (scrolled past)
-        setVisible(!entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-
-    observer.observe(heroEl);
+    const observer = new IntersectionObserver(([entry]) => setVisible(!entry.isIntersecting), {
+      threshold: 0,
+    });
+    observer.observe(hero);
     return () => observer.disconnect();
   }, []);
-
-  const getSummary = () => {
-    if (!availability) return null;
-    const { today } = availability;
-    const parts: string[] = [];
-    if (today.daycare.spotsLeft > 0) parts.push(`${today.daycare.spotsLeft} daycare`);
-    if (today.boarding.spotsLeft > 0) parts.push(`${today.boarding.spotsLeft} boarding`);
-    if (parts.length === 0) return null;
-    return parts.join(" · ") + " spots open today";
-  };
-
-  const summary = getSummary();
-  const displayText = summary || "Spots available today";
 
   return (
     <div
@@ -55,40 +30,24 @@ export default function StickyBookBar() {
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <div className="bg-[#345460]/95 backdrop-blur-md border-t border-white/10 shadow-lg">
-        <div className="container py-3 flex items-center justify-between gap-4">
-          {/* Availability info */}
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#48D597] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#48D597]"></span>
-            </span>
-            <span className="text-white/90 text-sm font-medium hidden sm:inline">
-              {displayText}
-            </span>
-            <span className="text-white/90 text-xs font-medium sm:hidden">
-              Spots open today
-            </span>
-          </div>
-
-          {/* Action buttons */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {/* SMS button — mobile only */}
+      <div className="border-t border-white/10 bg-[#345460]/95 shadow-lg backdrop-blur-md">
+        <div className="container flex items-center justify-between gap-4 py-3">
+          <p className="hidden text-sm font-medium text-white/90 sm:block">Ready to plan your dog’s next great day?</p>
+          <p className="text-xs font-medium text-white/90 sm:hidden">Ready when you are.</p>
+          <div className="flex flex-shrink-0 items-center gap-2">
             <a
               href={`sms:${SMS_NUMBER}?&body=${SMS_BODY}`}
-              className="flex sm:hidden items-center gap-1.5 px-3 py-2 bg-white/15 hover:bg-white/25 text-white font-medium text-xs rounded-full transition-colors border border-white/20 whitespace-nowrap"
+              className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/15 px-3 py-2 text-xs font-medium whitespace-nowrap text-white transition-colors hover:bg-white/25 sm:hidden"
             >
-              <MessageCircle className="w-3.5 h-3.5 flex-shrink-0" />
+              <MessageCircle className="h-3.5 w-3.5 flex-shrink-0" />
               Text Us
             </a>
-
-            {/* Book button */}
             <button
               onClick={openBookingModal}
-              className="flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#48D597] hover:bg-[#3bc485] text-[#1a2e38] font-semibold text-xs sm:text-sm rounded-full transition-colors shadow-md whitespace-nowrap"
+              className="flex items-center gap-1.5 rounded-full bg-[#48D597] px-4 py-2 text-xs font-semibold whitespace-nowrap text-[#1a2e38] shadow-md transition-colors hover:bg-[#3bc485] sm:px-5 sm:py-2.5 sm:text-sm"
             >
               Book Now
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+              <ArrowRight className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" />
             </button>
           </div>
         </div>
