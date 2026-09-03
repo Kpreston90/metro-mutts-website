@@ -60,21 +60,24 @@ export default function BoardingAvailabilityCalendar() {
     }
   );
 
-  const statusByDate = useMemo(
-    () => new Map(data?.days.map(day => [day.date, day.status]) ?? []),
+  const calendarDayByDate = useMemo(
+    () => new Map(data?.days.map(day => [day.date, day]) ?? []),
     [data]
   );
 
   const modifiers = useMemo(
     () => ({
       available: (date: Date) => {
-        const status = statusByDate.get(dateToIso(date));
-        return date >= today && (status === "available" || status === "limited");
+        const status = calendarDayByDate.get(dateToIso(date))?.status;
+        return date >= today && status === "available";
       },
-      unavailable: (date: Date) => statusByDate.get(dateToIso(date)) === "unavailable",
+      limited: (date: Date) =>
+        date >= today && calendarDayByDate.get(dateToIso(date))?.status === "limited",
+      unavailable: (date: Date) =>
+        calendarDayByDate.get(dateToIso(date))?.status === "unavailable",
       past: (date: Date) => date < today,
     }),
-    [statusByDate, today]
+    [calendarDayByDate, today]
   );
 
   const handleMonthChange = (nextMonth: Date) => {
@@ -109,7 +112,7 @@ export default function BoardingAvailabilityCalendar() {
               Boarding availability at a glance.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-[#345460]/65">
-              Green dates are available. Red dates are fully booked. It’s that simple.
+              Green dates have plenty of room. Yellow dates are over 50% booked. Red dates are fully booked.
             </p>
           </div>
 
@@ -189,6 +192,7 @@ export default function BoardingAvailabilityCalendar() {
                     modifiers={modifiers}
                     modifiersClassNames={{
                       available: "bg-[#48D597]/20 text-[#214840] [&_button]:font-bold",
+                      limited: "bg-amber-300 text-amber-950 [&_button]:font-extrabold",
                       unavailable: "bg-red-600 text-white [&_button]:font-extrabold",
                       past: "text-[#345460]/25 [&_button]:bg-transparent",
                     }}
@@ -210,15 +214,55 @@ export default function BoardingAvailabilityCalendar() {
                       weekday: "h-8 w-[14.285%] p-0 text-center align-middle text-[0.7rem] font-extrabold text-[#345460]/70 sm:text-xs",
                       week: "table-row",
                       day: "h-12 w-[14.285%] text-center sm:h-14",
-                      day_button: "pointer-events-none relative w-full h-full rounded-xl text-sm font-semibold cursor-default",
+                      day_button: "group relative h-full w-full cursor-help rounded-xl text-sm font-semibold",
                       today: "[&_button]:ring-1 [&_button]:ring-[#345460]/30 [&_button]:ring-inset",
                       outside: "invisible",
                       month_caption: "h-9 flex items-center justify-center text-base font-bold text-[#345460]",
+                    }}
+                    components={{
+                      DayButton: ({ day, className, ...buttonProps }) => {
+                        const calendarDay = calendarDayByDate.get(dateToIso(day.date));
+                        const isCurrentOrFuture = day.date >= today;
+                        const bookedSummary = calendarDay
+                          ? `${calendarDay.booked} of ${calendarDay.capacity} suites booked`
+                          : "Availability is not shown for past dates";
+                        const statusLabel =
+                          calendarDay?.status === "unavailable"
+                            ? "Fully booked"
+                            : calendarDay?.status === "limited"
+                              ? "Over 50% booked"
+                              : "Available";
+
+                        return (
+                          <button
+                            {...buttonProps}
+                            type="button"
+                            className={className}
+                            title={isCurrentOrFuture ? bookedSummary : "Past date"}
+                            aria-label={`${day.date.toLocaleDateString("en-US", {
+                              weekday: "long",
+                              month: "long",
+                              day: "numeric",
+                            })}: ${isCurrentOrFuture ? `${bookedSummary}, ${statusLabel}` : "past date"}`}
+                          >
+                            {day.date.getDate()}
+                            {isCurrentOrFuture && calendarDay ? (
+                              <span
+                                role="tooltip"
+                                className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] left-1/2 z-20 w-max max-w-[11rem] -translate-x-1/2 rounded-lg bg-[#1a2e38] px-2.5 py-1.5 text-center text-[0.68rem] font-semibold leading-snug text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                              >
+                                {bookedSummary}
+                              </span>
+                            ) : null}
+                          </button>
+                        );
+                      },
                     }}
                   />
 
                   <div className="flex flex-wrap gap-x-5 gap-y-2 mt-7 text-xs font-semibold text-[#345460]/65">
                     <span className="inline-flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-[#48D597]" />Available</span>
+                    <span className="inline-flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-amber-300" />Over 50% booked</span>
                     <span className="inline-flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-red-600" />Fully booked</span>
                   </div>
                 </>

@@ -183,11 +183,36 @@ describe("Gingr API Integration", () => {
     const result = await getBoardingCalendarAvailability("2026-09-10", 4);
 
     expect(result.days).toEqual([
-      { date: "2026-09-10", status: "available" },
-      { date: "2026-09-11", status: "available" },
-      { date: "2026-09-12", status: "available" },
-      { date: "2026-09-13", status: "available" },
+      { date: "2026-09-10", status: "available", booked: 1, capacity: 19 },
+      { date: "2026-09-11", status: "available", booked: 2, capacity: 19 },
+      { date: "2026-09-12", status: "available", booked: 1, capacity: 19 },
+      { date: "2026-09-13", status: "available", booked: 0, capacity: 19 },
     ]);
+  });
+
+  it("marks dates above 50 percent boarding occupancy as limited", async () => {
+    const reservations = Array.from({ length: 10 }, (_, index) => ({
+      id: index + 1,
+      reservation_type_name: "Boarding - Suite",
+      start_date: "2026-09-10T07:00:00-05:00",
+      end_date: "2026-09-11T10:00:00-05:00",
+      cancelled_date: null,
+    }));
+
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(reservations),
+    });
+
+    const { getBoardingCalendarAvailability } = await import("./gingr");
+    const result = await getBoardingCalendarAvailability("2026-09-10", 1);
+
+    expect(result.days[0]).toEqual({
+      date: "2026-09-10",
+      status: "limited",
+      booked: 10,
+      capacity: 19,
+    });
   });
 
   it("does not return fallback calendar inventory when Gingr is unreachable", async () => {

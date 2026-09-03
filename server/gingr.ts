@@ -48,6 +48,8 @@ export type BoardingAvailabilityStatus = "available" | "limited" | "unavailable"
 export interface BoardingCalendarDay {
   date: string;
   status: BoardingAvailabilityStatus;
+  booked: number;
+  capacity: number;
 }
 
 export interface BoardingCalendarData {
@@ -298,11 +300,14 @@ export async function getBoardingCalendarAvailability(
       // included because the suite becomes available after the scheduled pickup.
       return checkInDate <= date && date < checkOutDate;
     }).length;
-    const spotsLeft = Math.max(0, CAPACITY.boarding - booked);
     const status: BoardingAvailabilityStatus =
-      spotsLeft === 0 ? "unavailable" : spotsLeft <= 3 ? "limited" : "available";
+      booked >= CAPACITY.boarding
+        ? "unavailable"
+        : booked / CAPACITY.boarding > 0.5
+          ? "limited"
+          : "available";
 
-    return { date, status };
+    return { date, status, booked, capacity: CAPACITY.boarding };
   });
 
   return {
