@@ -170,3 +170,18 @@
 - [x] Copy accuracy: Replace remaining overnight staff and 24/7 supervised care claims with camera-monitored overnight language
 - [x] Boarding availability: Replace overlapping weekday headers with a robust readable seven-column row
 - [x] Boarding availability: Add booked-versus-capacity hover details and yellow limited status above 50% occupancy
+- [x] Audit existing booking paths, first-visit instructions, prices, claims, reviews, and contact-link destinations
+- [x] Consolidate new-customer booking CTAs and add an existing-customer Gingr login route after verification
+- [x] Standardize verified first-visit, boarding, grooming, and availability messaging across all active pages
+- [x] Update homepage hero, booking form, and mobile conversion actions without changing the established visual identity
+- [ ] Correct confirmed pricing, phone/text links, review references, trust claims, SEO metadata, and structured data
+- [ ] Verify customer journeys, redirects, links, forms, accessibility, and desktop/mobile layouts; provide requested screenshots
+- [ ] Pricing: Reconcile grooming services and add-ons from an approved Gingr rate export when available
+- [x] Reviews: Replace unsupported hard-coded testimonial quotes with source-safe Google review presentation
+- [x] Mobile conversion: Prevent the chat control from overlapping the fixed call, text, and first-visit action tray
+- [x] Conversion UX: Keep the desktop sticky first-visit bar hidden until the homepage hero has been scrolled past
+- [x] Conversion UX: Replace ambiguous Get Started call-or-text links with distinct approved call and text actions
+- [x] Booking flow: Add a dedicated internal existing-customer login route that forwards to the Gingr Customer Portal
+- [x] Copy accuracy: Sweep active pages for remaining legacy age, vaccination, and first-visit language
+- [x] Copy accuracy: Update active Vet Referred first-visit language and complete a zero-mismatch active-page sweep
+- [x] Copy accuracy: Remove legacy meet-and-greet terminology from active copy and complete a clean policy-language sweep

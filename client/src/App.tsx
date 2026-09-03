@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Redirect, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
@@ -9,7 +9,6 @@ import { BookingModalProvider } from "./contexts/BookingModalContext";
 import Home from "./pages/Home";
 import ChatWidget from "./components/ChatWidget";
 import Pricing from "./pages/Pricing";
-import BookVisit from "./pages/BookVisit";
 import ReferFriend from "./pages/ReferFriend";
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
@@ -28,7 +27,7 @@ import VetReferred from "./pages/VetReferred";
 import AdminPromos from "./pages/AdminPromos";
 import AdminMessages from "./pages/AdminMessages";
 import GetStarted from "./pages/GetStarted";
-import Booking from "./pages/Booking";
+import CustomerLoginRedirect from "./pages/CustomerLoginRedirect";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 
@@ -38,7 +37,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/pricing"} component={Pricing} />
-      <Route path={"/book"} component={BookVisit} />
+      <Route path={"/book"}><Redirect to="/get-started" /></Route>
       <Route path={"/refer"} component={ReferFriend} />
       <Route path={"/careers"} component={Careers} />
       <Route path={"/blog"} component={Blog} />
@@ -55,7 +54,8 @@ function Router() {
       <Route path={"/tour"} component={Tour} />
       <Route path={"/vet-referred"} component={VetReferred} />
       <Route path={"/get-started"} component={GetStarted} />
-      <Route path={"/booking"} component={Booking} />
+      <Route path={"/customer-login"} component={CustomerLoginRedirect} />
+      <Route path={"/booking"}><Redirect to="/get-started" /></Route>
       <Route path={"/privacy"} component={PrivacyPolicy} />
       <Route path={"/terms"} component={TermsOfService} />
       <Route path={"/admin/promos"} component={AdminPromos} />

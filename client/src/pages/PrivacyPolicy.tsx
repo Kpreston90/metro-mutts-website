@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
       <PageSEO
         title="Privacy Policy | Metro Mutts"
         description="Metro Mutts Privacy Policy — how we collect, use, and protect your personal information when you use our website and services."
-        canonical="https://www.metromutts.com/privacy"
+        canonical="https://metromutts.com/privacy"
       />
       <Navbar />
       <main className="flex-1 bg-white">

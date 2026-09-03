@@ -33,6 +33,18 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  // Preserve search equity and remove the competing legacy booking journey.
+  // This is registered before the Vite/static fallback so direct visits receive
+  // an actual permanent HTTP redirect rather than a client-side route swap.
+  app.get(["/book", "/booking"], (_req, res) => {
+    res.redirect(301, "/get-started");
+  });
+  app.get("/customer-login", (_req, res) => {
+    res.redirect(
+      302,
+      "https://metromutts.portal.gingrapp.com/public/login/Ii9zZWN1cmUvaG9tZSI="
+    );
+  });
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // tRPC API

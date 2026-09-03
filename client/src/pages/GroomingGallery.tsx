@@ -159,8 +159,15 @@ export default function GroomingGallery() {
               </div>
               <div className="w-px h-10 bg-[#345460]/10 hidden sm:block" />
               <div className="hidden sm:block">
-                <p className="text-3xl font-extrabold text-[#345460]">5★</p>
-                <p className="text-sm text-[#345460]/50 font-medium">Rated Grooming</p>
+                <p className="text-lg font-extrabold text-[#345460]">Google</p>
+                <a
+                  href="https://www.google.com/maps/search/Metro+Mutts+1219+E+13th+St+Tulsa+OK"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-[#345460]/50 transition-colors hover:text-[#48D597]"
+                >
+                  Read current feedback
+                </a>
               </div>
             </div>
             <p className="text-sm text-[#345460]/40 italic max-w-xs">

@@ -43,7 +43,7 @@ export default function ChatWidget() {
         {
           role: "assistant",
           content:
-            "Sorry, I'm having a moment! 🐾 No worries though — just **text us at 539-867-3841** and our team will help you out directly.",
+            "Sorry, I’m having a moment. Please **text us at 918-359-7727** and our team will help you directly.",
         },
       ]);
     },
@@ -123,7 +123,7 @@ export default function ChatWidget() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             onClick={() => setIsOpen(true)}
-            className={`fixed right-6 z-[90] group transition-[bottom] duration-300 ${stickyBarVisible ? "bottom-20" : "bottom-6"}`}
+            className={`fixed bottom-24 right-4 z-[90] group transition-[bottom] duration-300 sm:right-6 ${stickyBarVisible ? "sm:bottom-20" : "sm:bottom-6"}`}
             aria-label="Open chat assistant"
           >
             {/* Pulse ring */}
@@ -148,7 +148,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-6 right-6 z-[91] w-[380px] max-w-[calc(100vw-2rem)] h-[600px] max-h-[calc(100vh-3rem)] flex flex-col rounded-2xl overflow-hidden shadow-2xl shadow-black/20 border border-white/20"
+            className="fixed bottom-24 right-4 z-[91] flex h-[600px] w-[380px] max-h-[calc(100vh-7rem)] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-white/20 shadow-2xl shadow-black/20 sm:bottom-6 sm:right-6 sm:max-h-[calc(100vh-3rem)]"
             style={{
               background:
                 "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,236,0.98) 100%)",

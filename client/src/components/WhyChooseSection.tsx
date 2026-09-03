@@ -4,23 +4,23 @@
  * Feature cards in a grid with icons
  */
 import { motion } from "framer-motion";
-import { Camera, ShieldCheck, Stethoscope, Clock, Smile, Award } from "lucide-react";
+import { Camera, ShieldCheck, HeartHandshake, Clock, Smile, MessageCircle } from "lucide-react";
 
 const features = [
   {
     icon: ShieldCheck,
-    title: "Safety Certified",
-    description: "Our facility meets or exceeds state safety standards with secure entry, fire suppression, and full camera monitoring.",
+    title: "Thoughtful Playgroups",
+    description: "Dogs are thoughtfully grouped by size, play style, and energy level for a more comfortable day of care.",
   },
   {
     icon: Camera,
-    title: "Full Camera Coverage",
-    description: "Cameras in every play area, boarding suite, and common space for complete safety monitoring around the clock.",
+    title: "Internal Camera Monitoring",
+    description: "Internal webcams support the team’s monitoring of the facility and overnight boarding areas. They are not customer-accessible.",
   },
   {
-    icon: Stethoscope,
-    title: "Vet on Call",
-    description: "Partnered with local Tulsa veterinarians for immediate care. Your dog's health is always our priority.",
+    icon: HeartHandshake,
+    title: "A Team That Knows Dogs",
+    description: "Our team gets to know each dog’s routines, preferences, and play style so care feels familiar—not one-size-fits-all.",
   },
   {
     icon: Clock,
@@ -29,13 +29,13 @@ const features = [
   },
   {
     icon: Smile,
-    title: "Expert Team",
-    description: "Every team member is pet first-aid certified and undergoes extensive hands-on education in dog behavior and safety.",
+    title: "Free First-Day Assessment",
+    description: "Every new daycare dog receives a complimentary first day with at least five hours of supervised evaluation and play.",
   },
   {
-    icon: Award,
-    title: "5-Star Rated",
-    description: "Consistently rated 5 stars by Tulsa dog owners for our exceptional care and clean facilities.",
+    icon: MessageCircle,
+    title: "Read Current Feedback",
+    description: "See the latest customer feedback directly on Google, where reviews and ratings are kept current.",
   },
 ];
 

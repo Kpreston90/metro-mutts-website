@@ -53,17 +53,17 @@ const faqCategories: FAQCategory[] = [
       {
         question: "Is there a temperament assessment?",
         answer:
-          "Yes! Every new dog goes through a complimentary temperament assessment on their first visit. This helps us understand your dog's play style, energy level, and social preferences so we can match them with the right group. The assessment typically takes about 30 minutes and is included with your free trial day.",
+          "Yes. Every new dog completes a complimentary temperament assessment during their free first daycare day. Our team observes at least five hours of supervised play, energy level, and social preferences so we can find the right group for your dog.",
       },
       {
         question: "Is the first day really free?",
         answer:
-          "Absolutely! Your dog's first day of daycare is completely free — no strings attached. It's our way of letting you and your pup try us out with zero risk. Just call us at 539-867-3841 or book online to schedule your free trial day.",
+          "Yes. Your dog’s first daycare day and temperament assessment are complimentary. Create an account, add your dog and vaccination records, then submit a requested date; our team will confirm the visit.",
       },
       {
         question: "What age does my dog need to be?",
         answer:
-          "Dogs must be at least 12 weeks old and have started their vaccination series. Puppies are welcome as long as they meet the vaccination requirements. We have separate play areas for different sizes and energy levels, so even young pups get appropriate socialization.",
+          "Dogs are welcome from 4 months old. We use separate play areas and thoughtfully matched groups so dogs can enjoy appropriate socialization for their size and energy level.",
       },
       {
         question: "Do you accept all breeds?",
@@ -95,7 +95,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: "Does my dog need to be spayed or neutered?",
         answer:
-          "Dogs over 7 months of age must be spayed or neutered to attend daycare and boarding. This helps maintain a safe, calm environment for all dogs in our care. Puppies under 7 months are welcome while they're still waiting for their procedure.",
+          "Metro Mutts does not provide veterinary procedures, including spay or neuter services. If you have a question about your dog’s eligibility, call or text our team before requesting a visit.",
       },
     ],
   },
@@ -399,7 +399,7 @@ export default function FAQ() {
                 Still Have Questions?
               </h2>
               <p className="text-white/70 text-lg max-w-xl mx-auto mb-8">
-                We're happy to help! Give us a call or book a free trial day to see Metro Mutts in person.
+                We’re happy to help. Give us a call or request your dog’s complimentary first daycare day.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
@@ -407,7 +407,7 @@ export default function FAQ() {
                   className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-xl shadow-[#48D597]/25"
                   onClick={openBookingModal}
                 >
-                  Book a Free Visit
+                  Request Your Dog&apos;s First Visit
                   <ArrowRight className="w-5 h-5 ml-1" />
                 </Button>
                 <Button

@@ -709,7 +709,7 @@ Daycare isn't a luxury — it's an investment in your dog's well-being. The scie
 
 If your dog hasn't tried daycare yet, there's never been a better time to start. At Metro Mutts, your pup's first day is free — no commitment, no pressure. Just a chance to see what a day of play, socialization, and expert care can do for your best friend.
 
-Call us at (918) 900-3637 or visit metromutts.com to book your free trial day.
+Call 539-867-3841 or visit [Get Started](/get-started) to request your dog’s first visit.
     `,
     category: "Daycare Tips",
     author: "Metro Mutts Team",
@@ -1363,7 +1363,7 @@ Metro Mutts was built by the family behind OKC's most waitlisted dog daycare. Wh
 
 **Transparent communication** — we send updates so you can relax knowing your pup is having the time of their life.
 
-Ready to see if Metro Mutts is the right fit? [Book a free visit](/booking) and tour our facility. Or call us at [539-867-3841](tel:5398673841) — we're happy to answer any questions about our boarding program.
+Ready to see if Metro Mutts is the right fit? [Request your dog’s first visit](/get-started). Or call us at [539-867-3841](tel:5398673841) — we’re happy to answer questions about our boarding program.
 
 ## The Bottom Line
 
@@ -1506,7 +1506,7 @@ And settled dogs tend to be happier dogs.
 
 ---
 
-[Book daycare](/booking) | [Explore boarding](/boarding) | Call us: [539-867-3841](tel:5398673841)
+[Request your dog’s first visit](/get-started) | [Explore boarding](/boarding) | Call us: [539-867-3841](tel:5398673841)
     `.trim(),
     category: "Dog Care",
     author: "Metro Mutts Team",
@@ -1782,7 +1782,7 @@ They're the ones who are finally ready for a really good nap.
 
 Whether your dog needs socialization, exercise, mental stimulation, or simply a better routine, we're here to help.
 
-[Book a daycare visit today](/booking)
+[Request your dog’s first visit](/get-started)
     `.trim(),
     category: "Daycare Tips",
     author: "Metro Mutts Team",
@@ -1896,7 +1896,7 @@ Which often means fewer surprise zoomie attacks in your living room.
 
 Give your dog a day of play, enrichment, and socialization.
 
-[Book a daycare visit](/booking) and let them zoom where it's safe — on 4,000 sq ft of turfed play space.
+[Request your dog’s first visit](/get-started) and let them zoom where it’s safe — on 4,000 sq ft of turfed play space.
 `,
     category: "Dog Care",
     author: "Metro Mutts Team",
@@ -1984,9 +1984,9 @@ To us, that's one of the best signs we've done our job well.
 
 Come let them spend a day with the pack.
 
-[Book Your Dog's Visit](/booking)
+[Request Your Dog’s First Visit](/get-started)
 
-*P.S. If you're traveling this summer, we're filling up quickly for boarding. Reserving early is the best way to guarantee your dog's stay.*
+*Planning a boarding stay? Check the live availability calendar on our [Boarding page](/boarding).* 
 `,
     category: "Dog Care",
     author: "Metro Mutts Team",
@@ -2033,7 +2033,7 @@ A thorough professional groom removes all of that. Many dogs stop scratching ent
 
 Whether your pup needs a bath, tidy-up, nail trim, or the full spa treatment\u2014we'd love to help.
 
-[Schedule a Groom](/booking)`,
+[Call 539-867-3841](tel:5398673841) to ask about grooming appointments.`,
     category: "Grooming",
     author: "Metro Mutts Team",
     date: "2026-07-14",

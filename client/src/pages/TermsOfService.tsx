@@ -8,7 +8,7 @@ export default function TermsOfService() {
       <PageSEO
         title="Terms of Service | Metro Mutts"
         description="Metro Mutts Terms of Service — the terms and conditions governing your use of our website and dog care services."
-        canonical="https://www.metromutts.com/terms"
+        canonical="https://metromutts.com/terms"
       />
       <Navbar />
       <main className="flex-1 bg-white">
@@ -47,11 +47,10 @@ export default function TermsOfService() {
               <h2 className="text-xl font-bold text-[#345460] mt-8 mb-3">3. Eligibility and Requirements</h2>
               <p>To use our services, your dog must:</p>
               <ul className="list-disc pl-6 space-y-1.5">
-                <li>Be current on all required vaccinations (Rabies, DHPP, Bordetella, and Canine Influenza)</li>
-                <li>Be spayed or neutered (required for dogs over 6 months of age)</li>
+                <li>Be at least 4 months old</li>
+                <li>Provide current vaccination records when the dog is 6 months or older</li>
                 <li>Pass a temperament assessment conducted by our staff</li>
                 <li>Be free of contagious illness, parasites, or open wounds</li>
-                <li>Be at least 12 weeks old with age-appropriate vaccinations</li>
               </ul>
               <p className="mt-3">
                 We reserve the right to refuse service to any dog that poses a safety risk to our staff, other dogs, or themselves. This determination is made at our sole discretion.

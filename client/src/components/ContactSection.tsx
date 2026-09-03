@@ -65,7 +65,7 @@ export default function ContactSection() {
             <span className="text-[#48D597]">Tulsa</span>
           </h2>
           <p className="text-[#345460]/70 text-lg leading-relaxed">
-            Come see our facility and schedule a free meet and greet for your pup.
+            Tell us about your dog and the service you need. Our team will follow up to confirm the next step.
           </p>
         </motion.div>
 
@@ -84,12 +84,15 @@ export default function ContactSection() {
                   <ArrowRight className="w-8 h-8 text-[#48D597]" />
                 </div>
                 <h3 className="text-2xl font-extrabold text-[#345460] mb-2">Thank You!</h3>
-                <p className="text-[#345460]/60">We received your message and will be in touch soon.</p>
+                <p className="text-[#345460]/60">We received your request. Our team will follow up to confirm the next step.</p>
               </div>
             ) : (<>
             <h3 className="text-2xl font-extrabold text-[#345460] mb-6">
-              Schedule a Free Meet & Greet
+              Request Your Dog&apos;s First Visit
             </h3>
+            <p className="-mt-3 mb-6 text-sm leading-relaxed text-[#345460]/60">
+              Tell us a little about your dog and the service you need. Our team will follow up to confirm the next step.
+            </p>
             <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit} className="space-y-5">
               <input type="hidden" name="form-name" value="contact" />
               <p className="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
@@ -173,7 +176,7 @@ export default function ContactSection() {
                 size="lg"
                 className="w-full bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base h-13 shadow-lg shadow-[#48D597]/20 transition-all hover:-translate-y-0.5"
               >
-                Book My Free Visit
+                Send My Request
                 <ArrowRight className="w-5 h-5 ml-1" />
               </Button>
             </form>
@@ -228,11 +231,11 @@ export default function ContactSection() {
                   Get Directions
                 </button>
                 <a
-                  href={`sms:19183597727?&body=${encodeURIComponent("Hi! I'd like to book a free trial day for my dog.")}`}
+                  href={`sms:19183597727?&body=${encodeURIComponent("Hi! I'd like to request my dog’s first visit.")}`}
                   className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#48D597]/10 text-[#345460] text-sm font-semibold hover:bg-[#48D597]/20 transition-colors border border-[#48D597]/30"
                 >
                   <MessageCircle className="w-4 h-4 text-[#48D597]" />
-                  Text Us to Book
+                  Text Us — 918-359-7727
                 </a>
               </div>
             </div>
@@ -254,12 +257,16 @@ export default function ContactSection() {
             <div className="bg-[#48D597] rounded-2xl p-6 text-[#345460]">
               <h4 className="font-extrabold text-lg mb-3">Questions?</h4>
               <p className="text-[#345460]/80 text-sm mb-4">
-                Give us a call or send an email — we'd love to hear from you!
+                Give us a call, send a text, or email — we&apos;d love to hear from you!
               </p>
               <div className="space-y-2.5">
                 <div className="flex items-center gap-2.5 text-sm font-medium">
                   <Phone className="w-4 h-4 flex-shrink-0" />
-                  <a href="tel:5398673841">539-867-3841</a>
+                  <a href="tel:5398673841">Call: 539-867-3841</a>
+                </div>
+                <div className="flex items-center gap-2.5 text-sm font-medium">
+                  <MessageCircle className="w-4 h-4 flex-shrink-0" />
+                  <a href="sms:19183597727">Text: 918-359-7727</a>
                 </div>
                 <div className="flex items-center gap-2.5 text-sm font-medium">
                   <Mail className="w-4 h-4 flex-shrink-0" />

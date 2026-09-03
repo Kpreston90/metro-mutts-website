@@ -30,6 +30,7 @@ import Footer from "@/components/Footer";
 import { trackPhoneCall, trackCTA } from "@/lib/analytics";
 import { useSectionTracking } from "@/hooks/usePageTracking";
 import { useBookingModal } from "@/contexts/BookingModalContext";
+import { formatCurrency, pricing } from "@/data/pricing";
 
 const HERO_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/daycare-hero-8mHoiByPEENzni474W7hiK.webp";
@@ -78,27 +79,6 @@ const whyUs = [
   "Multi-dog family discounts available",
   "Convenient Tulsa location near downtown",
   "First day FREE for new clients",
-];
-
-const testimonials = [
-  {
-    name: "Joseph O.",
-    text: "I love Metro Mutts!!! Truly the best doggy daycare in Tulsa. My puppy absolutely loves it there and is always so well taken care of. Drop-offs are easy because he's excited and ready to go!",
-    rating: 5,
-    source: "Google",
-  },
-  {
-    name: "Loghan A.",
-    text: "Nicole was amazing, patient and understanding of our situation. She took our new puppy and gave him his freedom back. We will definitely be returning! Thank you!",
-    rating: 5,
-    source: "Google",
-  },
-  {
-    name: "Verified Customer",
-    text: "Very thoughtful, very clean! Happy with my mini Schnauzer's grooming and she didn't seem stressed. Play yard is a great bonus!",
-    rating: 5,
-    source: "Yelp",
-  },
 ];
 
 export default function Daycare() {
@@ -181,7 +161,7 @@ export default function Daycare() {
         <div className="container py-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { value: "$32", label: "Full Day" },
+              { value: formatCurrency(pricing.daycare.fullDay), label: "Full Day" },
               { value: "FREE", label: "First Day" },
               { value: "7,000+", label: "Sq Ft Facility" },
               { value: "7–6", label: "Mon–Fri Hours" },
@@ -378,45 +358,24 @@ export default function Daycare() {
             transition={{ duration: 0.5 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
-              Happy Pups
+              Customer Feedback
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight">
-              What Daycare Parents{" "}
-              <span className="text-[#48D597]">Say</span>
+              Read Current Daycare{" "}
+              <span className="text-[#48D597]">Feedback</span>
             </h2>
+            <p className="mt-4 text-[#345460]/60 text-base">See the latest customer feedback directly on Google.</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-md shadow-black/5 border border-black/5"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star
-                        key={j}
-                        className="w-4 h-4 text-[#FB923C]"
-                        fill="currentColor"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-xs text-[#345460]/40 font-medium">
-                    {t.source}
-                  </span>
-                </div>
-                <p className="text-[#345460]/65 text-sm leading-relaxed mb-4 italic">
-                  "{t.text}"
-                </p>
-                <div className="text-sm font-bold text-[#345460]">{t.name}</div>
-              </motion.div>
-            ))}
-          </div>
+          <a
+            href="https://www.google.com/maps/search/Metro+Mutts+1219+E+13th+St+Tulsa+OK"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-auto flex max-w-xl items-center justify-center gap-2 rounded-full bg-[#48D597] px-7 py-3.5 font-bold text-[#345460] shadow-lg shadow-[#48D597]/20 transition-colors hover:bg-[#3bc085]"
+          >
+            Read Reviews on Google
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </section>
 
@@ -443,40 +402,40 @@ export default function Daycare() {
               {[
                 {
                   title: "Drop-In",
-                  price: "$32",
+                  price: formatCurrency(pricing.daycare.fullDay),
                   unit: "/ full day",
                   desc: "Perfect for occasional visits",
                   features: [
                     "Mon\u2013Fri 7am\u20136pm, Sat\u2013Sun 9am\u20135pm",
                     "Supervised group play",
                     "Enrichment activities",
-                    "$24 per sibling dog",
-                    "Half day available ($20)",
+                    `${formatCurrency(pricing.daycare.sibling)} per sibling dog`,
+                    `Half day available (${formatCurrency(pricing.daycare.halfDay)})`,
                   ],
                   highlight: false,
                 },
                 {
                   title: "10-Day Pack",
-                  price: "$250",
+                  price: formatCurrency(pricing.daycare.packages[0].price),
                   unit: "/ 10 days",
                   desc: "Most popular — save $50",
                   features: [
                     "10 full-day passes",
                     "Never expires",
-                    "$25 per day",
+                    `${formatCurrency(pricing.daycare.packages[0].price / pricing.daycare.packages[0].days)} per day`,
                     "Best for weekly regulars",
                   ],
                   highlight: true,
                 },
                 {
                   title: "20-Day Pack",
-                  price: "$440",
+                  price: formatCurrency(pricing.daycare.packages[1].price),
                   unit: "/ 20 days",
                   desc: "Best value — save $160",
                   features: [
                     "20 full-day passes",
                     "Never expires",
-                    "$22 per day",
+                    `${formatCurrency(pricing.daycare.packages[1].price / pricing.daycare.packages[1].days)} per day`,
                     "Best for daily daycare",
                   ],
                   highlight: false,

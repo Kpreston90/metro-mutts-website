@@ -65,7 +65,7 @@ describe("getOgMetaForPath", () => {
   it("returns default for unknown routes", () => {
     const meta = getOgMetaForPath("/some-random-page");
     expect(meta.title).toContain("Metro Mutts");
-    expect(meta.url).toBe("https://www.metromutts.com");
+    expect(meta.url).toBe("https://metromutts.com");
   });
 });
 
