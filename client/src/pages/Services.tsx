@@ -64,10 +64,10 @@ const services = [
     price: "From $50/night",
     freeOffer: "Includes daily play",
     description:
-      "Spacious, climate-controlled private suites with cozy bedding. Every boarding guest gets daily group play sessions, morning and evening walks, meals on your schedule, and overnight staff check-ins.",
+      "Spacious, climate-controlled private suites with cozy bedding. Every boarding guest gets daily group play sessions, morning and evening walks, meals on your schedule, and camera-monitored overnight care.",
     features: [
       "Private boarding suites",
-      "24/7 supervised care",
+      "Camera-monitored overnight",
       "Daily group play sessions",
       "Meals & medication included",
       "Evening walks & potty breaks",

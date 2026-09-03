@@ -167,3 +167,4 @@
 - [x] Remove live availability counts from homepage, Boarding, booking, sticky, and service-bar surfaces, plus availability messages from the rotating announcement bar
 - [x] Boarding availability: Show fully booked dates in bold red and extend live calendar navigation through December 31
 - [x] Boarding availability: Make month navigation clearly visible and fix weekday headers so each label is readable
+- [x] Copy accuracy: Replace remaining overnight staff and 24/7 supervised care claims with camera-monitored overnight language
