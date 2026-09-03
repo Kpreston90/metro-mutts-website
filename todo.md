@@ -161,3 +161,5 @@
 - [x] Boarding availability: Build a customer-facing calendar that displays live Gingr availability and links into booking
 - [x] Boarding availability: Make the Gingr booking handoff accurately explain date re-entry until selected dates can be passed into the portal
 - [x] Boarding availability: Verify the selected-stay booking handoff messaging and destination
+- [x] Boarding availability: Simplify the live calendar to a read-only Available/Unavailable date viewer with no date selection
+- [x] Homepage hero: Remove the rotating slider and use the facility image with “Every Day Should Feel Like This” as the permanent hero
