@@ -166,3 +166,4 @@
 - [x] AI Chat Assistant: Correct pricing, age, vaccination, and overnight-monitoring facts to match current Metro Mutts policies
 - [x] Remove live availability counts from homepage, Boarding, booking, sticky, and service-bar surfaces, plus availability messages from the rotating announcement bar
 - [x] Boarding availability: Show fully booked dates in bold red and extend live calendar navigation through December 31
+- [x] Boarding availability: Make month navigation clearly visible and fix weekday headers so each label is readable

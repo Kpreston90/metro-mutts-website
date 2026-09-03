@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { CalendarDays, Info, Phone } from "lucide-react";
+import { CalendarDays, ChevronLeft, ChevronRight, Info, Phone } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { trpc } from "@/lib/trpc";
 import { trackPhoneCall } from "@/lib/analytics";
@@ -26,6 +26,14 @@ function daysInMonth(date: Date): number {
 
 function nextMonthStart(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1, 12);
+}
+
+function previousMonthStart(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1, 12);
+}
+
+function isSameMonth(first: Date, second: Date): boolean {
+  return first.getFullYear() === second.getFullYear() && first.getMonth() === second.getMonth();
 }
 
 export default function BoardingAvailabilityCalendar() {
@@ -72,10 +80,16 @@ export default function BoardingAvailabilityCalendar() {
   const handleMonthChange = (nextMonth: Date) => {
     setCurrentMonth(monthStart(nextMonth));
   };
-  const lastBookableMonth = useMemo(
+  const lastVisibleStartMonth = useMemo(
+    () => new Date(today.getFullYear(), 10, 1, 12),
+    [today]
+  );
+  const finalCalendarMonth = useMemo(
     () => new Date(today.getFullYear(), 11, 1, 12),
     [today]
   );
+  const canGoBack = !isSameMonth(currentMonth, monthStart(today));
+  const canGoForward = !isSameMonth(currentMonth, lastVisibleStartMonth);
   const formattedUpdated = data
     ? new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(
         new Date(data.lastUpdated)
@@ -106,7 +120,7 @@ export default function BoardingAvailabilityCalendar() {
                   <h3 className="font-bold text-[#345460] text-lg">Live suite availability</h3>
                   <p className="text-sm text-[#345460]/50 mt-1">Availability refreshes as reservations are confirmed.</p>
                 </div>
-                <div className="flex items-center gap-3 text-xs font-medium text-[#345460]/65">
+                <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3 text-xs font-medium text-[#345460]/65">
                   {isFetching && !isLoading ? <span>Refreshing…</span> : null}
                   {formattedUpdated ? <span>Updated from Gingr at {formattedUpdated}</span> : null}
                 </div>
@@ -143,39 +157,63 @@ export default function BoardingAvailabilityCalendar() {
                 </div>
               ) : (
                 <>
+                  <div className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-[#345460]/10 bg-[#fafaf8] p-2.5 sm:p-3">
+                    <button
+                      type="button"
+                      onClick={() => setCurrentMonth(previousMonthStart(currentMonth))}
+                      disabled={!canGoBack}
+                      className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#345460]/15 bg-white px-3.5 py-2 text-sm font-bold text-[#345460] shadow-sm transition-colors hover:bg-[#345460]/5 disabled:cursor-not-allowed disabled:opacity-35"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                      <span className="hidden sm:inline">Earlier months</span>
+                      <span className="sm:hidden">Back</span>
+                    </button>
+                    <span className="text-center text-xs font-semibold text-[#345460]/60 sm:text-sm">
+                      Browse through December
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setCurrentMonth(nextMonthStart(currentMonth))}
+                      disabled={!canGoForward}
+                      className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#345460] px-3.5 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#2a4550] disabled:cursor-not-allowed disabled:opacity-35"
+                    >
+                      <span className="hidden sm:inline">Later months</span>
+                      <span className="sm:hidden">Next</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
                   <Calendar
                     month={currentMonth}
                     onMonthChange={handleMonthChange}
+                    hideNavigation
                     modifiers={modifiers}
                     modifiersClassNames={{
                       available: "bg-[#48D597]/20 text-[#214840] [&_button]:font-bold",
                       unavailable: "bg-red-600 text-white [&_button]:font-extrabold",
                       past: "text-[#345460]/25 [&_button]:bg-transparent",
                     }}
+                    formatters={{
+                      formatWeekdayName: date =>
+                        new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(date),
+                    }}
                     numberOfMonths={2}
                     startMonth={monthStart(today)}
-                    endMonth={lastBookableMonth}
+                    endMonth={finalCalendarMonth}
                     showOutsideDays={false}
                     className="w-full p-0"
                     classNames={{
                       root: "w-full",
                       months: "flex flex-col gap-8 w-full md:flex-row md:gap-6",
                       month: "w-full gap-4",
-                      table: "w-full border-separate border-spacing-1 sm:border-spacing-1.5",
-                      weekday: "w-[14.285%] text-center text-[0.68rem] font-bold uppercase tracking-wider text-[#345460]/35",
+                      table: "w-full table-fixed border-separate border-spacing-1 sm:border-spacing-1.5",
+                      weekdays: "grid w-full grid-cols-7 gap-1 sm:gap-1.5",
+                      weekday: "flex h-6 min-w-0 items-center justify-center overflow-hidden text-center text-[0.65rem] font-extrabold text-[#345460]/65 sm:text-xs",
                       week: "w-full mt-1.5",
                       day: "w-[14.285%] h-11 sm:h-13 text-center",
                       day_button: "pointer-events-none relative w-full h-full rounded-xl text-sm font-semibold cursor-default",
                       today: "[&_button]:ring-1 [&_button]:ring-[#345460]/30 [&_button]:ring-inset",
                       outside: "invisible",
-                      nav: "flex items-center justify-between absolute inset-x-0 top-0",
-                      button_previous: "h-9 w-9 rounded-full text-[#345460] hover:bg-[#345460]/5",
-                      button_next: "h-9 w-9 rounded-full text-[#345460] hover:bg-[#345460]/5",
                       month_caption: "h-9 flex items-center justify-center text-base font-bold text-[#345460]",
-                    }}
-                    components={{
-                      Chevron: ({ orientation, className }) =>
-                        orientation === "left" ? <span className={className}>‹</span> : <span className={className}>›</span>,
                     }}
                   />
 
