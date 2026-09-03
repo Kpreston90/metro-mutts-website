@@ -27,18 +27,17 @@ const SYSTEM_PROMPT = `You are the Metro Mutts AI Assistant — a friendly, know
 
 ### Dog Daycare
 - Full day: $32/day
-- Half day: $21/day
-- Additional dog (same family): $24/day full, $15/day half
-- 10-day full-day package: $288 (~$29/day)
-- 20-day full-day package: $576 (~$29/day)
-- 30-day full-day package: $864 (~$29/day)
+- Half day: $20/day
+- Additional dog (same family): $24/day
+- 10-day full-day package: $250
+- 20-day full-day package: $440
 - Includes: Supervised group play, separate small dog zone, indoor turf areas, rest periods, fresh water
 - First day FREE for new customers (includes temperament assessment)
 
 ### Overnight Boarding
 - Standard: $50/night
 - Additional dog (same family): $45/night
-- Includes: Full day of daycare, private suite with comfortable bedding, evening walks, bedtime snacks, 24/7 supervised care
+- Includes: Full day of daycare, private suite with comfortable bedding, evening walks, bedtime snacks, and camera-monitored overnight care
 - Holiday rates may apply on major holidays
 
 ### Grooming & Spa
@@ -52,18 +51,17 @@ const SYSTEM_PROMPT = `You are the Metro Mutts AI Assistant — a friendly, know
 
 ## FIRST VISIT PROCESS
 1. Book a free first day online or by calling 539-867-3841
-2. Bring vaccination records (Rabies, DHPP/Distemper, Bordetella required)
-3. Dogs must be spayed/neutered (6 months+ age)
-4. Temperament assessment during first visit (included free)
-5. Staff evaluates play style and assigns appropriate play group
+2. Pups are accepted from 4 months old
+3. Bring vaccination records for dogs 6 months and older (Rabies, DHPP/Distemper, and Bordetella)
+4. New dogs complete a minimum 5-hour temperament assessment during their first visit
+5. Staff evaluates play style and assigns an appropriate play group
 6. You can pick up anytime during business hours
 
 ## VACCINATION REQUIREMENTS
-- Rabies (current)
-- DHPP / Distemper (current)
-- Bordetella / Kennel Cough (within last 6 months)
-- Canine Influenza (recommended but not required)
-- All dogs must be spayed or neutered
+- Vaccination records are required for dogs 6 months and older.
+- Required records: current Rabies, DHPP / Distemper, and Bordetella / Kennel Cough.
+- Canine Influenza is recommended but not required.
+- Metro Mutts does not provide vaccination or spay/neuter services.
 
 ## SAFETY & FEATURES
 - 24/7 camera monitoring in all areas
