@@ -185,3 +185,9 @@
 - [x] Copy accuracy: Sweep active pages for remaining legacy age, vaccination, and first-visit language
 - [x] Copy accuracy: Update active Vet Referred first-visit language and complete a zero-mismatch active-page sweep
 - [x] Copy accuracy: Remove legacy meet-and-greet terminology from active copy and complete a clean policy-language sweep
+- [x] Review the updated new-customer and returning-customer conversion paths with the owner
+- [x] Journal: Research and write “Does Your Dog Actually Need Friends?” as an evidence-informed premium editorial article
+- [x] Journal: Build the staged /journal/do-dogs-need-friends article with supplied Cloudinary hero, SEO metadata, Article schema, and working internal links
+- [x] Journal: Verify desktop/mobile layouts and present the finished article for owner review before publishing
+- [x] Journal: Present the finished /journal/do-dogs-need-friends article to the owner for review and collect publication approval
+- [ ] Journal: Save an approved checkpoint for the staged dog-friends Journal article

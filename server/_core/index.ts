@@ -39,6 +39,9 @@ async function startServer() {
   app.get(["/book", "/booking"], (_req, res) => {
     res.redirect(301, "/get-started");
   });
+  app.get("/blog/do-dogs-need-friends", (_req, res) => {
+    res.redirect(301, "/journal/do-dogs-need-friends");
+  });
   app.get("/customer-login", (_req, res) => {
     res.redirect(
       302,

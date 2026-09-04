@@ -19,6 +19,18 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "do-dogs-need-friends",
+    title: "Does Your Dog Actually Need Friends?",
+    excerpt: "What dogs get from other dogs that they can’t always get from us—and why the answer depends on the dog.",
+    content: "Do dogs need dog friends? This evidence-informed Metro Mutts Journal guide explores canine communication, healthy play, social preferences, and where daycare can fit for the right dog. Read the full article at /journal/do-dogs-need-friends.",
+    category: "Daycare Tips",
+    author: "Metro Mutts",
+    date: "2026-09-04",
+    readTime: "10 min read",
+    image: "https://res.cloudinary.com/dbirizuja/image/upload/v1782835303/ChatGPT_Image_Jun_30_2026_10_01_22_AM_d8b0dg.png",
+    tags: ["dog socialization", "dog behavior", "dog friends", "dog daycare Tulsa", "healthy dog play"],
+  },
+  {
     slug: "too-hot-for-the-dog-park",
     title: "Too Hot for the Dog Park? Here's Why Summer Is One of the Best Times for Daycare.",
     excerpt: "Oklahoma heat limits safe outdoor exercise — but your dog's need for movement, stimulation, and social connection doesn't take a summer vacation. Here's what to do instead.",
