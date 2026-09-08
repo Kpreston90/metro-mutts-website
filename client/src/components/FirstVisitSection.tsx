@@ -7,39 +7,43 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Phone, CalendarCheck, ClipboardCheck, Users, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useBookingModal } from "@/contexts/BookingModalContext";
+import { trackPhoneCall } from "@/lib/analytics";
 
 const steps = [
   {
     number: "01",
     icon: CalendarCheck,
-    title: "Create Your Account",
+    title: "Book Your Free Trial",
     description:
-      "Create your Metro Mutts account so we have everything we need to welcome your dog.",
+      "Call us or book online to schedule your pup's first day — it's completely free, no strings attached.",
   },
   {
     number: "02",
     icon: ClipboardCheck,
-    title: "Add Your Dog & Records",
+    title: "Temperament Assessment",
     description:
-      "Add your dog and upload current vaccination records directly in the customer portal.",
+      "Our team gets to know your dog's personality, play style, and energy level to find their perfect play group.",
   },
   {
     number: "03",
     icon: Users,
-    title: "Request the Free First Day",
+    title: "Supervised Play Time",
     description:
-      "Request a free first daycare day; our team will confirm availability and the best next step.",
+      "Your dog joins a matched group on our 4,000 sq ft indoor turf for monitored, structured play sessions.",
   },
   {
     number: "04",
     icon: Heart,
-    title: "Supervised Daycare Assessment",
+    title: "One Happy Pup",
     description:
-      "During at least five hours of daycare, we evaluate your dog&apos;s play style, energy level, and group fit.",
+      "Pick up a tired, socialized, and tail-wagging dog. Most parents say their pup sleeps great that night!",
   },
 ];
 
 export default function FirstVisitSection() {
+  const { openBookingModal } = useBookingModal();
   return (
     <section className="pt-8 pb-8 lg:pt-10 lg:pb-10 bg-white relative overflow-hidden">
       {/* Subtle background accent */}
@@ -75,7 +79,7 @@ export default function FirstVisitSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Your dog&apos;s first daycare day is free and serves as their temperament assessment. Here&apos;s exactly what to expect.
+            We know leaving your dog somewhere new can feel nerve-wracking. Here's exactly what to expect — no surprises, just happy tails.
           </motion.p>
         </div>
 
@@ -130,20 +134,24 @@ export default function FirstVisitSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <Link
-            href="/get-started"
-            className="inline-flex h-13 items-center rounded-md bg-[#48D597] px-8 text-base font-bold text-[#345460] shadow-lg shadow-[#48D597]/20 transition-colors hover:bg-[#3bc085]"
+          <Button
+            size="lg"
+            className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base px-8 h-13 shadow-lg shadow-[#48D597]/20"
+            onClick={openBookingModal}
           >
-            Book Your Dog&apos;s First Visit
-            <ArrowRight className="ml-1 w-5 h-5" />
-          </Link>
-          <a
-            href="tel:5398673841"
-            className="inline-flex h-13 items-center rounded-md border border-[#345460]/20 px-8 text-base font-semibold text-[#345460] transition-colors hover:bg-[#345460]/5"
+            Schedule Your Free Day
+            <ArrowRight className="w-5 h-5 ml-1" />
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-[#345460]/20 text-[#345460] hover:bg-[#345460]/5 font-semibold text-base px-8 h-13"
+            asChild
           >
-            <Phone className="mr-2 h-4 w-4" />
-            Call or Text Us
-          </a>
+            <Link href="/faq">
+              Read Our FAQ
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

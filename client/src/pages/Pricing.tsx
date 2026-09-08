@@ -11,7 +11,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { useBookingModal } from "@/contexts/BookingModalContext";
-import { pricing } from "@/data/pricing";
 import {
   Sun,
   Moon,
@@ -77,10 +76,32 @@ const GROOMING_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/grooming-dog-enhanced_04ac8ef9.png";
 
 /* ─── Daycare Packages ─── */
-const fullDayPackages = pricing.daycare.packages.map((pkg) => ({
-  ...pkg,
-  popular: pkg.days === 20,
-}));
+const fullDayPackages = [
+  { days: 10, price: 288, popular: false },
+  { days: 20, price: 576, popular: true },
+  { days: 30, price: 864, popular: false },
+];
+const allFullDayPackages = [
+  { days: 5, price: 144 },
+  { days: 10, price: 288 },
+  { days: 15, price: 432 },
+  { days: 20, price: 576 },
+  { days: 25, price: 720 },
+  { days: 30, price: 864 },
+];
+const halfDayPackages = [
+  { days: 10, price: 189, popular: false },
+  { days: 20, price: 349, popular: true },
+  { days: 30, price: 473, popular: false },
+];
+const allHalfDayPackages = [
+  { days: 5, price: 99 },
+  { days: 10, price: 189 },
+  { days: 15, price: 271 },
+  { days: 20, price: 349 },
+  { days: 25, price: 420 },
+  { days: 30, price: 473 },
+];
 
 /* ─── Grooming Add-Ons ─── */
 const groomingAddOns = [
@@ -111,6 +132,7 @@ const sections = [
 export default function Pricing() {
   const { openBookingModal } = useBookingModal();
   const [daycareSub, setDaycareSub] = useState<"full" | "half">("full");
+  const [showAllPackages, setShowAllPackages] = useState(false);
   const [activeSection, setActiveSection] = useState("daycare");
 
   // Scroll to top on mount
@@ -139,9 +161,12 @@ export default function Pricing() {
     return () => observer.disconnect();
   }, []);
 
-  const singlePrice = daycareSub === "full" ? pricing.daycare.fullDay : pricing.daycare.halfDay;
-  const additionalPrice = pricing.daycare.sibling;
-  const fullRate = pricing.daycare.fullDay;
+  const packages = daycareSub === "full" ? fullDayPackages : halfDayPackages;
+  const allPackages =
+    daycareSub === "full" ? allFullDayPackages : allHalfDayPackages;
+  const singlePrice = daycareSub === "full" ? 32 : 21;
+  const additionalPrice = daycareSub === "full" ? 24 : 15;
+  const fullRate = daycareSub === "full" ? 32 : 21;
 
   return (
     <div className="min-h-screen flex flex-col bg-[oklch(0.98_0.003_90)]">
@@ -183,9 +208,9 @@ export default function Pricing() {
             {[
               {
                 label: "Daycare",
-                price: "$32",
+                price: "$21",
                 unit: "/day",
-                sub: "Full day drop-in",
+                sub: "Half day from",
                 icon: Sun,
                 anchor: "#daycare",
               },
@@ -303,6 +328,7 @@ export default function Pricing() {
               <button
                 onClick={() => {
                   setDaycareSub("full");
+                  setShowAllPackages(false);
                 }}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                   daycareSub === "full"
@@ -316,6 +342,7 @@ export default function Pricing() {
               <button
                 onClick={() => {
                   setDaycareSub("half");
+                  setShowAllPackages(false);
                 }}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                   daycareSub === "half"
@@ -373,36 +400,111 @@ export default function Pricing() {
               </div>
             </div>
 
-            {daycareSub === "full" ? (
-              <div className="rounded-2xl bg-[#345460] p-8 shadow-xl lg:p-10">
-                <h3 className="mb-1 text-xl font-extrabold text-white">Full Day Packages</h3>
-                <p className="mb-8 text-sm text-white/50">Save with an approved full-day package.</p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {fullDayPackages.map((pkg) => {
-                    const perDay = (pkg.price / pkg.days).toFixed(0);
-                    const savings = fullRate * pkg.days - pkg.price;
-                    return (
-                      <div
-                        key={pkg.days}
-                        className={`relative rounded-xl p-6 ${pkg.popular ? "bg-[#48D597] text-[#345460]" : "border border-white/10 bg-white/5 text-white"}`}
+            {/* Popular packages — 3 cards */}
+            <div className="bg-[#345460] rounded-2xl p-8 lg:p-10 shadow-xl">
+              <h3 className="text-xl font-extrabold text-white mb-1">
+                {daycareSub === "full" ? "Full Day" : "Half Day"} Packages
+              </h3>
+              <p className="text-white/50 text-sm mb-8">
+                Buy in bulk and save. Discount already applied.
+              </p>
+
+              <div className="grid sm:grid-cols-3 gap-4 mb-6">
+                {packages.map((pkg) => {
+                  const perDay = (pkg.price / pkg.days).toFixed(0);
+                  const savings = fullRate * pkg.days - pkg.price;
+                  return (
+                    <div
+                      key={pkg.days}
+                      className={`relative rounded-xl p-6 transition-colors ${
+                        pkg.popular
+                          ? "bg-[#48D597] text-[#345460]"
+                          : "bg-white/5 hover:bg-white/10 border border-white/10 text-white"
+                      }`}
+                    >
+                      {pkg.popular && (
+                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#FB923C] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                          Best Value
+                        </span>
+                      )}
+                      <p
+                        className={`text-sm font-bold mb-3 ${
+                          pkg.popular ? "text-[#345460]/70" : "text-white/50"
+                        }`}
                       >
-                        {pkg.popular && <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-[#FB923C] px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">Best Value</span>}
-                        <p className={`mb-3 text-sm font-bold ${pkg.popular ? "text-[#345460]/70" : "text-white/50"}`}>{pkg.days} Days</p>
-                        <p className="text-3xl font-extrabold">${pkg.price}</p>
-                        <div className="mt-3 flex items-center justify-between text-sm">
-                          <span className={pkg.popular ? "text-[#345460]/60" : "text-white/40"}>${perDay}/day</span>
-                          <span className={pkg.popular ? "font-semibold text-[#345460]/80" : "font-semibold text-[#48D597]"}>Save ${savings}</span>
-                        </div>
+                        {pkg.days} Days
+                      </p>
+                      <div className="flex items-baseline gap-1 mb-1">
+                        <span className="text-3xl font-extrabold">
+                          ${pkg.price}
+                        </span>
                       </div>
-                    );
-                  })}
-                </div>
+                      <div className="flex items-center justify-between text-sm mt-3">
+                        <span
+                          className={
+                            pkg.popular ? "text-[#345460]/60" : "text-white/40"
+                          }
+                        >
+                          ${perDay}/day
+                        </span>
+                        <span
+                          className={`font-semibold ${
+                            pkg.popular ? "text-[#345460]/80" : "text-[#48D597]"
+                          }`}
+                        >
+                          Save ${savings}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ) : (
-              <div className="rounded-2xl border border-[#345460]/10 bg-[#345460]/5 p-6 text-center text-sm leading-relaxed text-[#345460]/70">
-                Half-day daycare is $20 per dog. Contact our team for current multi-day options.
+
+              {/* See all packages toggle */}
+              <div className="text-center">
+                <button
+                  onClick={() => setShowAllPackages(!showAllPackages)}
+                  className="inline-flex items-center gap-1.5 text-white/50 hover:text-white text-sm font-medium transition-colors"
+                >
+                  {showAllPackages ? "Hide" : "See all"} package options
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      showAllPackages ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
               </div>
-            )}
+
+              {showAllPackages && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  className="mt-6 overflow-hidden"
+                >
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                    {allPackages.map((pkg) => {
+                      const perDay = (pkg.price / pkg.days).toFixed(0);
+                      return (
+                        <div
+                          key={pkg.days}
+                          className="bg-white/5 border border-white/10 rounded-lg p-4 text-center"
+                        >
+                          <p className="text-white/50 text-xs font-bold mb-1">
+                            {pkg.days} Days
+                          </p>
+                          <p className="text-white font-extrabold text-lg">
+                            ${pkg.price}
+                          </p>
+                          <p className="text-white/30 text-xs mt-1">
+                            ${perDay}/day
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </section>
 
@@ -456,7 +558,7 @@ export default function Pricing() {
                 </div>
                 <div className="flex items-baseline gap-1 mb-1">
                   <span className="text-4xl font-extrabold text-[#345460]">
-                    ${pricing.boarding.nightly}
+                    $50
                   </span>
                   <span className="text-[#345460]/50 text-sm font-medium">
                     / night

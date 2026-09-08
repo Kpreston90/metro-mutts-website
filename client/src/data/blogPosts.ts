@@ -19,18 +19,6 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "do-dogs-need-friends",
-    title: "Does Your Dog Actually Need Friends?",
-    excerpt: "What dogs get from other dogs that they can’t always get from us—and why the answer depends on the dog.",
-    content: "Do dogs need dog friends? This evidence-informed Metro Mutts Journal guide explores canine communication, healthy play, social preferences, and where daycare can fit for the right dog. Read the full article at /journal/do-dogs-need-friends.",
-    category: "Daycare Tips",
-    author: "Metro Mutts",
-    date: "2026-09-04",
-    readTime: "10 min read",
-    image: "https://res.cloudinary.com/dbirizuja/image/upload/v1782835303/ChatGPT_Image_Jun_30_2026_10_01_22_AM_d8b0dg.png",
-    tags: ["dog socialization", "dog behavior", "dog friends", "dog daycare Tulsa", "healthy dog play"],
-  },
-  {
     slug: "too-hot-for-the-dog-park",
     title: "Too Hot for the Dog Park? Here's Why Summer Is One of the Best Times for Daycare.",
     excerpt: "Oklahoma heat limits safe outdoor exercise — but your dog's need for movement, stimulation, and social connection doesn't take a summer vacation. Here's what to do instead.",
@@ -721,7 +709,7 @@ Daycare isn't a luxury — it's an investment in your dog's well-being. The scie
 
 If your dog hasn't tried daycare yet, there's never been a better time to start. At Metro Mutts, your pup's first day is free — no commitment, no pressure. Just a chance to see what a day of play, socialization, and expert care can do for your best friend.
 
-Call 539-867-3841 or visit [Get Started](/get-started) to request your dog’s first visit.
+Call us at (918) 900-3637 or visit metromutts.com to book your free trial day.
     `,
     category: "Daycare Tips",
     author: "Metro Mutts Team",
@@ -1375,7 +1363,7 @@ Metro Mutts was built by the family behind OKC's most waitlisted dog daycare. Wh
 
 **Transparent communication** — we send updates so you can relax knowing your pup is having the time of their life.
 
-Ready to see if Metro Mutts is the right fit? [Request your dog’s first visit](/get-started). Or call us at [539-867-3841](tel:5398673841) — we’re happy to answer questions about our boarding program.
+Ready to see if Metro Mutts is the right fit? [Book a free visit](/booking) and tour our facility. Or call us at [539-867-3841](tel:5398673841) — we're happy to answer any questions about our boarding program.
 
 ## The Bottom Line
 
@@ -1518,7 +1506,7 @@ And settled dogs tend to be happier dogs.
 
 ---
 
-[Request your dog’s first visit](/get-started) | [Explore boarding](/boarding) | Call us: [539-867-3841](tel:5398673841)
+[Book daycare](/booking) | [Explore boarding](/boarding) | Call us: [539-867-3841](tel:5398673841)
     `.trim(),
     category: "Dog Care",
     author: "Metro Mutts Team",
@@ -1794,7 +1782,7 @@ They're the ones who are finally ready for a really good nap.
 
 Whether your dog needs socialization, exercise, mental stimulation, or simply a better routine, we're here to help.
 
-[Request your dog’s first visit](/get-started)
+[Book a daycare visit today](/booking)
     `.trim(),
     category: "Daycare Tips",
     author: "Metro Mutts Team",
@@ -1908,7 +1896,7 @@ Which often means fewer surprise zoomie attacks in your living room.
 
 Give your dog a day of play, enrichment, and socialization.
 
-[Request your dog’s first visit](/get-started) and let them zoom where it’s safe — on 4,000 sq ft of turfed play space.
+[Book a daycare visit](/booking) and let them zoom where it's safe — on 4,000 sq ft of turfed play space.
 `,
     category: "Dog Care",
     author: "Metro Mutts Team",
@@ -1996,9 +1984,9 @@ To us, that's one of the best signs we've done our job well.
 
 Come let them spend a day with the pack.
 
-[Request Your Dog’s First Visit](/get-started)
+[Book Your Dog's Visit](/booking)
 
-*Planning a boarding stay? Check the live availability calendar on our [Boarding page](/boarding).* 
+*P.S. If you're traveling this summer, we're filling up quickly for boarding. Reserving early is the best way to guarantee your dog's stay.*
 `,
     category: "Dog Care",
     author: "Metro Mutts Team",
@@ -2045,7 +2033,7 @@ A thorough professional groom removes all of that. Many dogs stop scratching ent
 
 Whether your pup needs a bath, tidy-up, nail trim, or the full spa treatment\u2014we'd love to help.
 
-[Call 539-867-3841](tel:5398673841) to ask about grooming appointments.`,
+[Schedule a Groom](/booking)`,
     category: "Grooming",
     author: "Metro Mutts Team",
     date: "2026-07-14",

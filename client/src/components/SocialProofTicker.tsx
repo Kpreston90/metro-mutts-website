@@ -4,7 +4,7 @@
  * admin-managed announcements. Live capacity counts are deliberately excluded.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Dog, Heart, Megaphone, Sparkles, TrendingUp } from "lucide-react";
+import { Dog, Heart, Megaphone, Sparkles, Star, TrendingUp } from "lucide-react";
 import { useBookingModal } from "@/contexts/BookingModalContext";
 import { trpc } from "@/lib/trpc";
 
@@ -14,6 +14,34 @@ interface TickerMessage {
   highlight?: string;
   bookable?: boolean;
 }
+
+const reviewMessages: TickerMessage[] = [
+  {
+    icon: <Star className="h-3.5 w-3.5 fill-[#FB923C] text-[#FB923C]" />,
+    text: "5★ Yelp:",
+    highlight: '"My corgis love spending their days playing at Metro Mutts!!" — Misty P.',
+  },
+  {
+    icon: <Star className="h-3.5 w-3.5 fill-[#FB923C] text-[#FB923C]" />,
+    text: "5★ Yelp:",
+    highlight: '"These people are fantastic. You’d swear they had degrees in dog psychology." — Betty C.',
+  },
+  {
+    icon: <Star className="h-3.5 w-3.5 fill-[#FB923C] text-[#FB923C]" />,
+    text: "5★ Yelp:",
+    highlight: '"Jacque, the groomer is excellent. Years of experience!" — Kelly & Mitch B.',
+  },
+  {
+    icon: <Star className="h-3.5 w-3.5 fill-[#FB923C] text-[#FB923C]" />,
+    text: "5★ Yelp:",
+    highlight: '"Very thoughtful, very clean! Play yard is great bonus!" — Margaret C.',
+  },
+  {
+    icon: <Star className="h-3.5 w-3.5 fill-[#FB923C] text-[#FB923C]" />,
+    text: "5★ Google:",
+    highlight: '"Truly the best doggy daycare in Tulsa. My puppy absolutely loves it!"',
+  },
+];
 
 const funMessages: TickerMessage[] = [
   {
@@ -59,14 +87,15 @@ function useTickerMessages() {
   return useMemo(() => {
     const seasonalMessages = buildSeasonalMessages(seasonalData);
     const messages: TickerMessage[] = [];
-    const maxLength = Math.max(funMessages.length, seasonalMessages.length);
+    const maxLength = Math.max(reviewMessages.length, funMessages.length, seasonalMessages.length);
 
     for (let index = 0; index < maxLength; index += 1) {
       if (seasonalMessages[index]) messages.push(seasonalMessages[index]);
+      if (reviewMessages[index]) messages.push(reviewMessages[index]);
       if (funMessages[index]) messages.push(funMessages[index]);
     }
 
-    return messages.length ? messages : [...funMessages];
+    return messages.length ? messages : [...reviewMessages, ...funMessages];
   }, [seasonalData]);
 }
 

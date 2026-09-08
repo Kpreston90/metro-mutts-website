@@ -33,13 +33,6 @@ const defaultOg: OgMeta = {
  * More specific routes should come first.
  */
 const routeOgMap: Record<string, OgMeta> = {
-  "/journal/do-dogs-need-friends": {
-    title: "Do Dogs Need Dog Friends? A Guide to Canine Socialization | Metro Mutts Journal",
-    description:
-      "Do dogs actually need dog friends? Learn how dogs socialize, what healthy play looks like, and how to tell what kind of social life your dog enjoys.",
-    image: "https://res.cloudinary.com/dbirizuja/image/upload/v1782835303/ChatGPT_Image_Jun_30_2026_10_01_22_AM_d8b0dg.png",
-    url: `${BASE_URL}/journal/do-dogs-need-friends`,
-  },
   "/vet-referred": {
     title: "Free Trial Day | Metro Mutts — Recommended by Your Vet",
     description:

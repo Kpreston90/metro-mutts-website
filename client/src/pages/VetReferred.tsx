@@ -1,7 +1,7 @@
 /*
  * Metro Mutts — Vet Referred Landing Page
  * Dedicated page for pet parents referred by veterinary partners.
- * Supports visitors arriving through a veterinary referral.
+ * Offers a free trial day and builds trust through vet endorsement messaging.
  * Brand: Green #48D597, Dark #345460
  */
 import { useState } from "react";
@@ -110,11 +110,11 @@ export default function VetReferred() {
       });
       setSubmitted(true);
       trackFormSubmit("vet_referral", true);
-      toast.success("Thanks! Our team will follow up to confirm the next step.");
+      toast.success("We'll be in touch soon to schedule your free trial day!");
     } catch {
       setSubmitted(true);
       trackFormSubmit("vet_referral", false);
-      toast.success("Thanks! Our team will follow up to confirm the next step.");
+      toast.success("We'll be in touch soon to schedule your free trial day!");
     } finally {
       setSubmitting(false);
     }
@@ -145,16 +145,16 @@ export default function VetReferred() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48D597]/20 text-[#48D597] text-sm font-bold mb-5 backdrop-blur-sm">
               <Stethoscope className="w-4 h-4" />
-              Here Through a Vet Referral
+              Recommended by Your Vet
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight">
-              A Caring Next Step{" "}
-              <span className="text-[#48D597]">for Your Pup.</span>
+              Your Vet Trusts Us.{" "}
+              <span className="text-[#48D597]">Your Pup Will Love Us.</span>
             </h1>
             <p className="text-white/80 text-lg lg:text-xl leading-relaxed max-w-xl mb-8">
-              If your veterinarian suggested Metro Mutts, request your dog’s
-              complimentary first daycare day below. Our team will confirm the
-              visit and complete the initial assessment during supervised daycare.
+              Your veterinarian recommended Metro Mutts because they know we
+              share the same commitment to your dog's health, safety, and
+              happiness. Claim your free trial day below.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
@@ -167,7 +167,7 @@ export default function VetReferred() {
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Request Your Dog&apos;s First Visit
+                Claim Your Free Trial Day
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <a href="tel:5398673841">

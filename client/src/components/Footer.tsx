@@ -6,6 +6,7 @@
  */
 import { Facebook, Instagram } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useBookingModal } from "@/contexts/BookingModalContext";
 
 const LOGO_WHITE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/mm-logo-white_a0eef0bd.png";
 
@@ -25,15 +26,27 @@ const footerLinks = {
     { label: "Facility Tour", href: "/tour" },
   ],
   Support: [
-    { label: "Get Started", href: "/get-started" },
+    { label: "Book a Visit", href: "/book" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact Us", href: "/#contact" },
     { label: "Refer a Friend", href: "/refer" },
   ],
 };
 
-function FooterLink({ label, href }: { label: string; href: string }) {
+function FooterLink({ label, href, onClick }: { label: string; href: string; onClick?: () => void }) {
   const [location] = useLocation();
+
+  // Handle custom onClick (e.g., booking modal)
+  if (onClick) {
+    return (
+      <button
+        onClick={onClick}
+        className="text-sm text-white/60 hover:text-[#48D597] transition-colors"
+      >
+        {label}
+      </button>
+    );
+  }
 
   // Handle homepage anchor links (e.g., "/#about")
   if (href.startsWith("/#")) {
@@ -71,6 +84,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 }
 
 export default function Footer() {
+  const { openBookingModal } = useBookingModal();
   return (
     <footer className="bg-[#345460] text-white">
       <div className="container py-16 lg:py-20">
@@ -85,7 +99,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-sm mb-6">
-              Dog daycare, boarding, and grooming in Tulsa—one familiar place for play, rest, and care.
+              Tulsa's most trusted dog care provider. Award-winning daycare, luxury boarding, and professional grooming — all under one roof.
             </p>
             <div className="flex gap-3">
               <a
@@ -118,7 +132,11 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <FooterLink label={link.label} href={link.href} />
+                    <FooterLink
+                      label={link.label}
+                      href={link.href}
+                      onClick={link.href === "/book" ? openBookingModal : undefined}
+                    />
                   </li>
                 ))}
               </ul>

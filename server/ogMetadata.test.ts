@@ -52,14 +52,6 @@ describe("getOgMetaForPath", () => {
     expect(meta.title).toContain("Blog");
   });
 
-  it("returns Journal article metadata for the canonical dog-friends URL", () => {
-    const meta = getOgMetaForPath("/journal/do-dogs-need-friends");
-    expect(meta.title).toContain("Do Dogs Need Dog Friends");
-    expect(meta.description).toContain("dog friends");
-    expect(meta.image).toContain("res.cloudinary.com");
-    expect(meta.url).toBe("https://metromutts.com/journal/do-dogs-need-friends");
-  });
-
   it("strips query params and hash before matching", () => {
     const meta = getOgMetaForPath("/refer?utm_source=email#top");
     expect(meta.title).toContain("Refer a Friend");
@@ -73,7 +65,7 @@ describe("getOgMetaForPath", () => {
   it("returns default for unknown routes", () => {
     const meta = getOgMetaForPath("/some-random-page");
     expect(meta.title).toContain("Metro Mutts");
-    expect(meta.url).toBe("https://metromutts.com");
+    expect(meta.url).toBe("https://www.metromutts.com");
   });
 });
 

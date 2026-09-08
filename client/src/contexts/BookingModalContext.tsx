@@ -35,10 +35,7 @@ export function BookingModalProvider({ children }: { children: ReactNode }) {
   return (
     <BookingModalContext.Provider
       value={{
-        // The public site now has one clear new-customer journey. Existing
-        // buttons still call this helper, so route them through Get Started
-        // instead of opening a competing service-selection flow.
-        openBookingModal: () => window.location.assign("/get-started"),
+        openBookingModal: () => setIsOpen(true),
         closeBookingModal: () => setIsOpen(false),
       }}
     >

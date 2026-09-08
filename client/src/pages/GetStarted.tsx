@@ -13,7 +13,6 @@ import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
 import {
   ArrowRight,
-  MessageCircle,
   Phone,
   ExternalLink,
   UserPlus,
@@ -34,6 +33,7 @@ import {
 
 const GINGR_NEW_CUSTOMER_URL =
   "https://metromutts.portal.gingrapp.com/public/new_customer";
+
 const HERO_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/vet-referred-facility-v3-DCNGQE4pnuuDpVkZkPVYMQ.webp";
 
@@ -57,13 +57,13 @@ const servicePaths = [
     iconBg: "bg-amber-100",
     prerequisite: "None — start here!",
     description:
-      "Your dog’s free first daycare day is their temperament assessment. During at least five hours of supervised daycare, we observe play style, energy level, and social behavior.",
+      "Your first day of daycare IS your temperament test. We observe your dog's play style, energy level, and social behavior. It's 100% free — no strings attached.",
     steps: [
       "Create your Gingr account",
       "Add your dog's profile + vaccination records",
-      "Request your free first daycare day",
-      "Our team confirms the visit and evaluates your dog during supervised daycare",
-      "Once approved, request future daycare visits",
+      "Book your first daycare day (free!)",
+      "We assess temperament during supervised play",
+      "Once approved, book daycare anytime",
     ],
     badge: "FREE FIRST DAY",
     badgeColor: "bg-[#48D597] text-[#345460]",
@@ -73,13 +73,13 @@ const servicePaths = [
     icon: Moon,
     color: "bg-sky-50 text-sky-500 border-sky-100",
     iconBg: "bg-sky-100",
-    prerequisite: "Free daycare assessment required first",
+    prerequisite: "Requires 1 day of daycare first",
     description:
-      "New boarding dogs must first complete and pass their free daycare assessment day. Once approved, submit your requested boarding dates and our team will confirm availability.",
+      "For your dog's safety and comfort, we need to know how they do in our environment before an overnight stay. Complete one day of daycare (your free temperament test day counts!) and you're cleared for boarding.",
     steps: [
-      "Complete and pass your free first daycare day",
-      "Create your account and submit your requested boarding dates",
-      "Our team confirms availability",
+      "Complete your free daycare/temperament test day",
+      "Receive approval from our team",
+      "Book boarding for any future dates",
     ],
     badge: "AFTER DAYCARE APPROVAL",
     badgeColor: "bg-sky-100 text-sky-600",
@@ -89,14 +89,13 @@ const servicePaths = [
     icon: Scissors,
     color: "bg-purple-50 text-purple-500 border-purple-100",
     iconBg: "bg-purple-100",
-    prerequisite: "No daycare assessment required",
+    prerequisite: "No prerequisites — book anytime",
     description:
-      "Grooming does not require a daycare assessment and may be requested at any time. Create your account, add your dog's information, and submit a requested date.",
+      "Grooming and spa services don't require a temperament test or prior daycare visit. Just create your account, add your dog's info, and book an appointment.",
     steps: [
       "Create your Gingr account",
       "Add your dog's profile",
-      "Submit your requested grooming date",
-      "Our team confirms availability",
+      "Book a grooming appointment",
     ],
     badge: "BOOK ANYTIME",
     badgeColor: "bg-purple-100 text-purple-600",
@@ -126,22 +125,25 @@ const accountSteps = [
     icon: Syringe,
     title: "Upload Vaccinations",
     description:
-      "For dogs 6 months and older, upload current vaccination records. You can take a photo of the records from your vet.",
+      "Upload your dog's current vaccination records. We require Rabies, DHPP, and Bordetella. You can take a photo of the records from your vet.",
     time: "~2 minutes",
   },
   {
     number: "4",
     icon: CalendarCheck,
-    title: "Request Your Free First Day",
+    title: "Book Your First Day",
     description:
-      "Request your free first daycare day. Metro Mutts confirms the visit and evaluates your dog during supervised daycare.",
-    time: "Staff confirmation required",
+      "Choose your service and pick a date. For daycare and boarding, start with a free daycare day (your temperament test). For grooming, book directly.",
+    time: "Instant confirmation",
   },
 ];
 
 /* ─── Vaccination Requirements ─── */
 const vaccinations = [
-  { name: "Dogs 6 months and older", note: "Current records required" },
+  { name: "Rabies", note: "Must be current" },
+  { name: "DHPP / Distemper", note: "Must be current" },
+  { name: "Bordetella", note: "Within last 6 months" },
+  { name: "Canine Influenza", note: "Recommended but not required" },
 ];
 
 export default function GetStarted() {
@@ -149,8 +151,8 @@ export default function GetStarted() {
     <div className="min-h-screen flex flex-col">
       <PageSEO
         title="Get Started | New Customer Sign-Up | Metro Mutts Tulsa"
-        description="Book your dog’s first free daycare visit at Metro Mutts in Tulsa. Create an account, upload vaccination records, and submit your requested date for team confirmation."
-        canonical="https://metromutts.com/get-started"
+        description="New to Metro Mutts? Create your free account, book your dog's free temperament test day, and unlock daycare, boarding, and grooming services in Tulsa, OK."
+        canonical="https://www.metromutts.com/get-started"
       />
       <Navbar />
 
@@ -174,13 +176,13 @@ export default function GetStarted() {
               New Customers
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight">
-              Book Your Dog&apos;s{" "}
-              <span className="text-[#48D597]">First Visit</span>
+              Get Started at{" "}
+              <span className="text-[#48D597]">Metro Mutts</span>
             </h1>
             <p className="text-white/75 text-lg lg:text-xl leading-relaxed mb-8 max-w-xl">
-              Create an account, add your dog, upload vaccination records when applicable,
-              and request a free first daycare day. Our team confirms the visit
-              and evaluates your dog during supervised daycare.
+              Everything you need to know to sign up and book your dog's first
+              visit. Your first day of daycare is free — it's our way of saying
+              welcome.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
@@ -197,27 +199,18 @@ export default function GetStarted() {
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </a>
               </Button>
-              <a
-                href="tel:5398673841"
-                className="inline-flex h-13 items-center rounded-md border border-white/30 bg-transparent px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 h-13 bg-transparent"
+                asChild
               >
-                <Phone className="mr-2 h-5 w-5" />
-                Call 539-867-3841
-              </a>
-              <a
-                href="sms:19183597727?&body=Hi!%20I%27d%20like%20to%20request%20my%20dog%27s%20first%20visit."
-                className="inline-flex h-13 items-center rounded-md border border-white/30 bg-transparent px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Text 918-359-7727
-              </a>
+                <a href="tel:5398673841">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call for Help
+                </a>
+              </Button>
             </div>
-            <a
-              href="/customer-login"
-              className="mt-4 inline-block text-sm font-semibold text-white/75 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
-            >
-              Already a customer? Log in
-            </a>
           </motion.div>
         </div>
       </section>
@@ -237,10 +230,11 @@ export default function GetStarted() {
                 Step by Step
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-4">
-                Your First Visit, Step by Step
+                Setting Up Your Account
               </h2>
               <p className="text-[#345460]/60 text-lg max-w-2xl mx-auto">
-                Four clear steps for your dog&apos;s first day with Metro Mutts.
+                The whole process takes about 7 minutes. Here's what you'll do on
+                our booking portal.
               </p>
             </motion.div>
 
@@ -300,7 +294,7 @@ export default function GetStarted() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Create Your Account
+                  Start Your Account Now
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </a>
               </Button>
@@ -403,7 +397,7 @@ export default function GetStarted() {
                   Your Free First Day
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight mb-4">
-                  Your Free First Day Is the Assessment
+                  What Is the Temperament Test?
                 </h2>
               </motion.div>
 
@@ -417,13 +411,13 @@ export default function GetStarted() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <h3 className="text-xl font-bold text-[#345460] mb-4">
-                      One day, one purpose
+                      It's just a regular day of daycare
                     </h3>
                     <p className="text-[#345460]/65 text-sm leading-relaxed mb-4">
-                      Your dog comes in for a complimentary full day of daycare,
-                      and our trained staff evaluates
-                      behavior, play style, and interactions during at least five
-                      hours of supervised care.
+                      There's no formal "test" — your dog simply comes in for a
+                      normal day of daycare. While they play, our trained staff
+                      observes their behavior, play style, and how they interact
+                      with other dogs.
                     </p>
                     <p className="text-[#345460]/65 text-sm leading-relaxed mb-4">
                       We're looking at things like: Are they comfortable in a
@@ -432,9 +426,9 @@ export default function GetStarted() {
                       the best possible experience every time they visit.
                     </p>
                     <p className="text-[#345460]/65 text-sm leading-relaxed">
-                      Submit a requested date and our team will confirm the visit.
-                      If we have any concerns after the assessment, we&apos;ll talk
-                      through the next steps together.
+                      The vast majority of dogs pass with flying colors. If we
+                      have any concerns, we'll talk to you about it and work
+                      together on next steps.
                     </p>
                   </div>
                   <div className="space-y-4">
@@ -446,20 +440,20 @@ export default function GetStarted() {
                         </span>
                       </div>
                       <p className="text-sm text-[#345460]/60">
-                        Your first daycare day and temperament assessment are
-                        completely on us.
+                        Your first day of daycare is completely on us. No charge,
+                        no commitment.
                       </p>
                     </div>
                     <div className="bg-white rounded-xl p-5 shadow-sm">
                       <div className="flex items-center gap-3 mb-2">
                         <Clock className="w-5 h-5 text-sky-500" />
                         <span className="font-bold text-[#345460]">
-                          5-Hour Minimum
+                          Full Day
                         </span>
                       </div>
                       <p className="text-sm text-[#345460]/60">
-                        The assessment takes place during at least five hours of
-                        supervised daycare, with play, rest, and socialization.
+                        Drop off in the morning, pick up in the evening. Your dog
+                        gets a full day of play, rest, and socialization.
                       </p>
                     </div>
                     <div className="bg-white rounded-xl p-5 shadow-sm">
@@ -498,7 +492,7 @@ export default function GetStarted() {
                 Vaccination Requirements
               </h2>
               <p className="text-[#345460]/60 text-lg max-w-2xl mx-auto">
-                Dogs 6 months and older need current vaccination records. You can
+                Have these records ready when you create your account. You can
                 upload photos of your vet paperwork directly in the portal.
               </p>
             </motion.div>
@@ -545,9 +539,9 @@ export default function GetStarted() {
                   </p>
                   <p className="text-sm text-[#345460]/60">
                     No problem — you can create your account now and upload
-                    vaccination records later. For dogs 6 months and older, make
-                    sure they’re uploaded before the first visit. Your vet can
-                    usually email or fax them to you quickly.
+                    vaccination records later. Just make sure they're uploaded
+                    before your first visit. Your vet can usually email or fax
+                    them to you quickly.
                   </p>
                 </div>
               </motion.div>
@@ -568,8 +562,9 @@ export default function GetStarted() {
                 Ready to Get Started?
               </h2>
               <p className="text-white/60 text-lg mb-8 max-w-lg mx-auto">
-                Create your account, upload vaccination records, and request your
-                dog&apos;s free first daycare day. Our team will confirm the visit.
+                Create your free account on our booking portal. The whole
+                sign-up takes about 7 minutes, and your first day of daycare is
+                on us.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
@@ -598,12 +593,6 @@ export default function GetStarted() {
                   </a>
                 </Button>
               </div>
-              <a
-                href="/customer-login"
-                className="mt-5 inline-block text-sm font-semibold text-white/75 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
-              >
-                Already a customer? Log in
-              </a>
               <p className="text-white/40 text-sm mt-6">
                 Questions? Call us anytime — we're happy to walk you through it
                 over the phone.

@@ -7,8 +7,10 @@
  */
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, MapPin, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { trackPhoneCall, trackNavClick } from "@/lib/analytics";
+import { useBookingModal } from "@/contexts/BookingModalContext";
 import SocialProofTicker, { SocialProofTickerMobile } from "@/components/SocialProofTicker";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/mm-logo-dark_455bad7b.png";
@@ -91,6 +93,7 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const [location] = useLocation();
+  const { openBookingModal } = useBookingModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -227,14 +230,22 @@ export default function Navbar() {
               <Phone className="w-4 h-4" />
               539-867-3841
             </a>
-            <Link
-              href="/get-started"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-[#48D597] px-4 text-sm font-bold text-[#345460] shadow-lg shadow-[#48D597]/20 transition-colors hover:bg-[#3bc085]"
-              onClick={() => trackNavClick("book_first_visit_desktop")}
-            >
-              <PawIcon className="mr-1 w-4 h-4" />
-              Book Your Dog&apos;s First Visit
+            <Link href="/get-started">
+              <Button
+                variant="outline"
+                className="border-[#FB923C] text-[#FB923C] hover:bg-[#FB923C]/10 font-semibold"
+                onClick={() => trackNavClick("get_started_desktop")}
+              >
+                <PawIcon className="w-4 h-4 mr-1" />
+                Get Started
+              </Button>
             </Link>
+            <Button
+              className="bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold shadow-lg shadow-[#48D597]/20"
+              onClick={() => openBookingModal()}
+            >
+              Book a Visit
+            </Button>
           </div>
 
           {/* Mobile actions */}
@@ -307,20 +318,24 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="pt-3 flex flex-col gap-2">
-                <Link
-                  href="/get-started"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex w-full items-center justify-center rounded-md bg-[#48D597] px-4 py-3 text-sm font-bold text-[#345460] transition-colors hover:bg-[#3bc085]"
-                >
-                  <PawIcon className="mr-1 w-4 h-4" />
-                  Book Your Dog&apos;s First Visit
+                <Link href="/get-started" onClick={() => setMobileOpen(false)}>
+                  <Button
+                    variant="outline"
+                    className="w-full border-[#FB923C] text-[#FB923C] hover:bg-[#FB923C]/10 font-bold"
+                  >
+                    <PawIcon className="w-4 h-4 mr-1" />
+                    Get Started — New Customers
+                  </Button>
                 </Link>
-                <div className="flex items-center justify-center gap-4 py-2 text-sm font-medium text-[#345460]/70">
-                  <a href="tel:5398673841" className="inline-flex items-center gap-1.5 hover:text-[#48D597]" onClick={() => trackPhoneCall("navbar_mobile")}>
-                    <Phone className="w-4 h-4" /> Call 539-867-3841
-                  </a>
-                  <a href="sms:19183597727" className="hover:text-[#48D597]">Text Us</a>
-                </div>
+                <Button
+                  className="w-full bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold"
+                  onClick={() => { openBookingModal(); setTimeout(() => setMobileOpen(false), 50); }}
+                >
+                  Book a Visit
+                </Button>
+                <a href="tel:5398673841" className="flex items-center justify-center gap-2 py-2 text-sm font-medium text-[#345460]/70" onClick={() => trackPhoneCall("navbar_mobile")}>
+                  <Phone className="w-4 h-4" /> 539-867-3841
+                </a>
               </div>
             </div>
           </div>

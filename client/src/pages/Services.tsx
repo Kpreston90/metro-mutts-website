@@ -24,7 +24,6 @@ import Footer from "@/components/Footer";
 import { trackPhoneCall, trackCTA } from "@/lib/analytics";
 import { useSectionTracking } from "@/hooks/usePageTracking";
 import { useBookingModal } from "@/contexts/BookingModalContext";
-import { formatCurrency, pricing } from "@/data/pricing";
 
 const HERO_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/services-hero-v2_cd3ef501.png";
@@ -41,7 +40,7 @@ const services = [
     icon: Sun,
     title: "Dog Daycare",
     tagline: "Play All Day",
-    price: `${formatCurrency(pricing.daycare.fullDay)}/day`,
+    price: "From $30/day",
     freeOffer: "First day FREE",
     description:
       "Supervised group play in 7,000+ sq ft of indoor and outdoor space (4K of turfed play area). Dogs are grouped by size and temperament. Enrichment activities, puzzle toys, and agility equipment keep your pup mentally stimulated and physically tired.",
@@ -83,7 +82,7 @@ const services = [
     icon: Scissors,
     title: "Grooming & Spa",
     tagline: "Fresh Cuts by Jacque",
-    price: "Call for a quote",
+    price: "From $30",
     freeOffer: "Premium products",
     description:
       "Professional grooming from basic baths to full breed-specific styling by Jacque, Tulsa's favorite dog groomer. We use premium, pet-safe products and offer spa add-ons including teeth brushing, nail grinding, and oatmeal baths.",
@@ -98,6 +97,27 @@ const services = [
     image: GROOMING_IMG,
     link: "/grooming",
     cta: "Learn About Grooming",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Joseph O.",
+    text: "I love Metro Mutts!!! Truly the best doggy daycare in Tulsa. My puppy absolutely loves it there and is always so well taken care of.",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    name: "Marvin M.",
+    text: "This is the only place Allie has not turned and ran to the door when we walk in. Jacque, the groomer is the absolute BEST!",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    name: "Amy",
+    text: "I have an older dog and the groomer is wonderful! She's very good with her and she comes out looking beautiful!",
+    rating: 5,
+    source: "Google",
   },
 ];
 
@@ -360,7 +380,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Customer feedback */}
+      {/* Testimonials */}
       <section id="services-testimonials" className="py-20 lg:py-28 bg-[oklch(0.97_0.003_90)]">
         <div className="container">
           <motion.div
@@ -371,24 +391,97 @@ export default function Services() {
             transition={{ duration: 0.5 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
-              Customer Feedback
+              Real Reviews
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight">
-              Read Current Customer{" "}
-              <span className="text-[#48D597]">Feedback</span>
+              What Tulsa Dog Parents{" "}
+              <span className="text-[#48D597]">Say</span>
             </h2>
-            <p className="mt-4 text-base text-[#345460]/60">Explore current reviews directly on Google.</p>
           </motion.div>
 
-          <a
-            href="https://www.google.com/maps/search/Metro+Mutts+1219+E+13th+St+Tulsa+OK"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto flex max-w-xl items-center justify-center gap-2 rounded-full bg-[#48D597] px-7 py-3.5 font-bold text-[#345460] shadow-lg shadow-[#48D597]/20 transition-colors hover:bg-[#3bc085]"
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 shadow-md shadow-black/5 border border-black/5"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star
+                        key={j}
+                        className="w-4 h-4 text-[#FB923C]"
+                        fill="currentColor"
+                      />
+                    ))}
+                  </div>
+                  <span className="text-xs text-[#345460]/40 font-medium">
+                    {t.source}
+                  </span>
+                </div>
+                <p className="text-[#345460]/65 text-sm leading-relaxed mb-4 italic">
+                  "{t.text}"
+                </p>
+                <div className="text-sm font-bold text-[#345460]">{t.name}</div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Google rating bar */}
+          <motion.div
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
           >
-            Read Reviews on Google
-            <ArrowRight className="h-4 w-4" />
-          </a>
+            <div className="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" className="w-5 h-5">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              <span className="text-sm font-semibold text-[#345460]">4.9</span>
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4].map((i) => (
+                  <Star
+                    key={i}
+                    className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C]"
+                  />
+                ))}
+                <Star className="w-3.5 h-3.5 text-[#FB923C] fill-[#FB923C] opacity-70" />
+              </div>
+              <span className="text-xs text-[#345460]/50">
+                96 reviews on Google
+              </span>
+            </div>
+            <span className="hidden sm:block text-[#345460]/20">|</span>
+            <a
+              href="https://www.google.com/maps/place/Metro+Mutts/@36.1468,-95.9868,17z/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-[#48D597] hover:underline underline-offset-2"
+            >
+              Leave us a review on Google →
+            </a>
+          </motion.div>
         </div>
       </section>
 

@@ -11,6 +11,7 @@ import {
   Phone,
   ArrowRight,
   CheckCircle2,
+  Star,
   Droplets,
   Sparkles,
   Heart,
@@ -66,6 +67,24 @@ const services = [
   },
 ];
 
+const testimonials = [
+  {
+    name: "Amanda T.",
+    text: "Jacque is absolutely incredible with our anxious poodle. She takes her time, keeps him calm, and he always comes out looking like a show dog. Best groomer in Tulsa!",
+    rating: 5,
+  },
+  {
+    name: "Marcus W.",
+    text: "We've tried every groomer in town for our doodle. Jacque's teddy bear cuts are on another level. Our dog actually gets excited to go now.",
+    rating: 5,
+  },
+  {
+    name: "Rachel & Tom S.",
+    text: "The attention to detail is unmatched. Jacque noticed a skin issue we hadn't seen and let us know right away. She genuinely cares about the dogs.",
+    rating: 5,
+  },
+];
+
 export default function Grooming() {
   useSectionTracking(["grooming-hero", "grooming-meet", "grooming-services", "grooming-gallery", "grooming-reviews", "grooming-cta"]);
   return (
@@ -73,7 +92,7 @@ export default function Grooming() {
       <PageSEO
         title="Dog Grooming in Tulsa, OK | Professional Styling | Metro Mutts"
         description="Professional dog grooming in Tulsa by certified stylist Jacque. Full-service baths, breed-specific haircuts, nail trims, de-shedding, and spa add-ons. All breeds welcome. Book today."
-        canonical="https://metromutts.com/grooming"
+        canonical="https://www.metromutts.com/grooming"
       />
       <Navbar />
       <ServiceAvailabilityBar service="grooming" />
@@ -412,7 +431,7 @@ export default function Grooming() {
         </div>
       </section>
 
-      {/* Current feedback */}
+      {/* Testimonials */}
       <section className="py-20 lg:py-28">
         <div className="container">
           <motion.div
@@ -423,26 +442,40 @@ export default function Grooming() {
             transition={{ duration: 0.5 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#48D597]/10 text-[#48D597] text-sm font-bold mb-4 tracking-wide uppercase">
-              Customer Feedback
+              Reviews
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#345460] tracking-tight">
-              Read Current Grooming{" "}
-              <span className="text-[#48D597]">Feedback</span>
+              What Grooming Clients{" "}
+              <span className="text-[#48D597]">Say</span>
             </h2>
-            <p className="mt-4 text-[#345460]/60 text-base">
-              See the latest customer feedback directly on Google.
-            </p>
           </motion.div>
 
-          <a
-            href="https://www.google.com/maps/search/Metro+Mutts+1219+E+13th+St+Tulsa+OK"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto flex max-w-xl items-center justify-center gap-2 rounded-full bg-[#48D597] px-7 py-3.5 font-bold text-[#345460] shadow-lg shadow-[#48D597]/20 transition-colors hover:bg-[#3bc085]"
-          >
-            Read Reviews on Google
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 shadow-md shadow-black/5 border border-black/5"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star
+                      key={j}
+                      className="w-4 h-4 text-[#FB923C]"
+                      fill="currentColor"
+                    />
+                  ))}
+                </div>
+                <p className="text-[#345460]/65 text-sm leading-relaxed mb-4 italic">
+                  "{t.text}"
+                </p>
+                <div className="text-sm font-bold text-[#345460]">{t.name}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -495,7 +528,7 @@ export default function Grooming() {
         faqs={[
           {
             question: "How much does dog grooming cost in Tulsa?",
-            answer: "Grooming costs vary by service, breed, size, and coat condition. Call 539-867-3841 for a personalized quote from our team."
+            answer: "Dog grooming at Metro Mutts starts at $30 for a bath & brush. Full-service grooming (bath, haircut, nails, ears) starts at $55 and varies by breed, size, and coat condition. We provide a personalized quote during your pup's first visit. Call 539-867-3841 for pricing."
           },
           {
             question: "What dog grooming services do you offer?",
@@ -503,7 +536,7 @@ export default function Grooming() {
           },
           {
             question: "Do I need an appointment for dog grooming?",
-            answer: "Yes, grooming is by appointment so each pup gets dedicated one-on-one time with our groomer Jacque. Call 539-867-3841 to ask about current appointment options."
+            answer: "Yes, grooming is by appointment only to ensure each pup gets dedicated one-on-one time with our groomer Jacque. We recommend booking 1-2 weeks in advance, especially for weekend slots. Call 539-867-3841 or book through our online portal."
           },
           {
             question: "How often should I get my dog groomed?",
@@ -515,7 +548,7 @@ export default function Grooming() {
           },
           {
             question: "What should I expect during my dog's first grooming appointment?",
-            answer: "For first-time visits, we schedule extra time for a consultation. Jacque will assess your dog's coat condition, discuss your preferred style, and ensure your pup is comfortable. We go at your dog's pace — no rushing, no stress. Dogs are accepted from 4 months old; vaccination records are required for dogs 6 months and older."
+            answer: "For first-time visits, we schedule extra time for a consultation. Jacque will assess your dog's coat condition, discuss your preferred style, and ensure your pup is comfortable. We go at your dog's pace — no rushing, no stress. Puppies should be at least 12 weeks old with up-to-date vaccinations."
           },
           {
             question: "Can I get my dog groomed while they're at daycare or boarding?",
