@@ -65,7 +65,25 @@ describe("getOgMetaForPath", () => {
   it("returns default for unknown routes", () => {
     const meta = getOgMetaForPath("/some-random-page");
     expect(meta.title).toContain("Metro Mutts");
-    expect(meta.url).toBe("https://www.metromutts.com");
+    expect(meta.url).toBe("https://metromutts.com");
+  });
+
+  it("returns canonical Article metadata for the new Journal route", () => {
+    const meta = getOgMetaForPath("/journal/why-does-my-dog-follow-me-everywhere");
+
+    expect(meta.url).toBe(
+      "https://metromutts.com/journal/why-does-my-dog-follow-me-everywhere"
+    );
+    expect(meta.title).toBe(
+      "Why Does My Dog Follow Me Everywhere? 7 Common Reasons | Metro Mutts"
+    );
+    expect(meta.image).toBe(
+      "https://metromutts.com/manus-storage/Shadow_email_84ae3f1b.png"
+    );
+    expect(meta.structuredData).toMatchObject({
+      "@type": "Article",
+      headline: "Why Does My Dog Follow Me Everywhere? 7 Common Reasons",
+    });
   });
 });
 
@@ -120,5 +138,16 @@ describe("injectOgMeta", () => {
     const result = injectOgMeta(sampleHtml, meta);
 
     expect(result).toContain('name="description" content="Professional dog grooming');
+  });
+
+  it("injects Journal Article schema into crawler-visible HTML", () => {
+    const meta = getOgMetaForPath("/journal/why-does-my-dog-follow-me-everywhere");
+    const result = injectOgMeta(sampleHtml, meta);
+
+    expect(result).toContain('id="page-structured-data"');
+    expect(result).toContain('"@type":"Article"');
+    expect(result).toContain(
+      "https://metromutts.com/journal/why-does-my-dog-follow-me-everywhere"
+    );
   });
 });

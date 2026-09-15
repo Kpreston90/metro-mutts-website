@@ -17,6 +17,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogGroomingSigns from "./pages/BlogGroomingSigns";
 import BlogDogPersonalities from "./pages/BlogDogPersonalities";
 import BlogSummerHeat from "./pages/BlogSummerHeat";
+import JournalWhyDogFollows from "./pages/JournalWhyDogFollows";
 import GroomingGallery from "./pages/GroomingGallery";
 import Boarding from "./pages/Boarding";
 import Grooming from "./pages/Grooming";
@@ -45,6 +46,8 @@ function Router() {
       <Route path={"/blog/5-signs-your-dog-is-ready-for-a-groom"} component={BlogGroomingSigns} />
       <Route path={"/blog/which-one-is-your-dog"} component={BlogDogPersonalities} />
       <Route path={"/blog/too-hot-for-the-dog-park"} component={BlogSummerHeat} />
+      <Route path={"/blog/why-does-my-dog-follow-me-everywhere"} component={JournalWhyDogFollows} />
+      <Route path={"/journal/why-does-my-dog-follow-me-everywhere"} component={JournalWhyDogFollows} />
       <Route path={"/blog/:slug"} component={BlogPost} />
       <Route path={"/grooming-gallery"} component={GroomingGallery} />
       <Route path={"/boarding"} component={Boarding} />

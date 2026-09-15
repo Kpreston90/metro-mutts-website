@@ -19,6 +19,14 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
+function getPostHref(slug: string) {
+  if (slug === "why-does-my-dog-follow-me-everywhere") {
+    return "/journal/why-does-my-dog-follow-me-everywhere";
+  }
+
+  return `/blog/${slug}`;
+}
+
 export default function Blog() {
   const { openBookingModal } = useBookingModal();
   const [activeCategory, setActiveCategory] = useState("All");
@@ -81,7 +89,7 @@ export default function Blog() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Link href={`/blog/${featured.slug}`}>
+                <Link href={getPostHref(featured.slug)}>
                   <div className="group grid lg:grid-cols-2 gap-8 bg-white rounded-2xl overflow-hidden shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 transition-all duration-300 cursor-pointer">
                     <div className="relative h-64 lg:h-auto overflow-hidden">
                       <img
@@ -181,7 +189,7 @@ export default function Blog() {
             >
               {rest.map((post) => (
                 <motion.div key={post.slug} variants={fadeUp}>
-                  <Link href={`/blog/${post.slug}`}>
+                  <Link href={getPostHref(post.slug)}>
                     <article className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/8 transition-all duration-300 cursor-pointer h-full flex flex-col">
                       <div className="relative h-48 overflow-hidden">
                         <img

@@ -4,6 +4,7 @@ interface PageSEOProps {
   title: string;
   description: string;
   canonical?: string;
+  structuredData?: Record<string, unknown>;
 }
 
 /**
@@ -12,7 +13,7 @@ interface PageSEOProps {
  * via ogMetadata.ts, but this ensures the browser tab title updates
  * for real users navigating the SPA.
  */
-export default function PageSEO({ title, description, canonical }: PageSEOProps) {
+export default function PageSEO({ title, description, canonical, structuredData }: PageSEOProps) {
   useEffect(() => {
     document.title = title;
 
@@ -29,7 +30,22 @@ export default function PageSEO({ title, description, canonical }: PageSEOProps)
         link.href = canonical;
       }
     }
-  }, [title, description, canonical]);
+
+    const scriptId = "page-structured-data";
+    const existingScript = document.getElementById(scriptId);
+    if (!structuredData) {
+      existingScript?.remove();
+      return;
+    }
+
+    const schemaScript = existingScript ?? document.createElement("script");
+    schemaScript.id = scriptId;
+    schemaScript.setAttribute("type", "application/ld+json");
+    schemaScript.textContent = JSON.stringify(structuredData);
+    if (!existingScript) {
+      document.head.appendChild(schemaScript);
+    }
+  }, [title, description, canonical, structuredData]);
 
   return null;
 }

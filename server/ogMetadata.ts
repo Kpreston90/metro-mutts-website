@@ -13,10 +13,39 @@ export interface OgMeta {
   image: string;
   url: string;
   canonical?: string;
+  structuredData?: Record<string, unknown>;
 }
 
 const BASE_URL = "https://metromutts.com";
 const CDN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb";
+
+const dogFollowsArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Why Does My Dog Follow Me Everywhere? 7 Common Reasons",
+  description:
+    "Why does your dog follow you everywhere—even to the bathroom? Here are 7 common reasons dogs shadow their owners and what the behavior may mean.",
+  image: [`${BASE_URL}/manus-storage/Shadow_email_84ae3f1b.png`],
+  datePublished: "2026-09-15",
+  dateModified: "2026-09-15",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${BASE_URL}/journal/why-does-my-dog-follow-me-everywhere`,
+  },
+  author: {
+    "@type": "Organization",
+    name: "Metro Mutts Team",
+    url: BASE_URL,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Metro Mutts",
+    logo: {
+      "@type": "ImageObject",
+      url: `${CDN}/mm-logo-dark_455bad7b.png`,
+    },
+  },
+};
 
 // Default / fallback OG metadata (homepage)
 const defaultOg: OgMeta = {
@@ -116,6 +145,22 @@ const routeOgMap: Record<string, OgMeta> = {
       "That big 'ahhhh...' might be the happiest sound you'll hear all day. Learn what your dog's sigh really means and why it's a sign of a fulfilled pup.",
     image: `${CDN}/journal-005-hero-sigh-ahwBY4DH3NFcyNkZSxeMt8.webp`,
     url: `${BASE_URL}/blog/why-does-your-dog-sigh`,
+  },
+  "/journal/why-does-my-dog-follow-me-everywhere": {
+    title: "Why Does My Dog Follow Me Everywhere? 7 Common Reasons | Metro Mutts",
+    description:
+      "Why does your dog follow you everywhere—even to the bathroom? Here are 7 common reasons dogs shadow their owners and what the behavior may mean.",
+    image: `${BASE_URL}/manus-storage/Shadow_email_84ae3f1b.png`,
+    url: `${BASE_URL}/journal/why-does-my-dog-follow-me-everywhere`,
+    structuredData: dogFollowsArticleSchema,
+  },
+  "/blog/why-does-my-dog-follow-me-everywhere": {
+    title: "Why Does My Dog Follow Me Everywhere? 7 Common Reasons | Metro Mutts",
+    description:
+      "Why does your dog follow you everywhere—even to the bathroom? Here are 7 common reasons dogs shadow their owners and what the behavior may mean.",
+    image: `${BASE_URL}/manus-storage/Shadow_email_84ae3f1b.png`,
+    url: `${BASE_URL}/journal/why-does-my-dog-follow-me-everywhere`,
+    structuredData: dogFollowsArticleSchema,
   },
   "/blog/which-one-is-your-dog": {
     title: "Which One Is Your Dog? The 7 Daycare Personalities | Metro Mutts Tulsa",
@@ -239,6 +284,17 @@ export function injectOgMeta(html: string, meta: OgMeta): string {
     /<link rel="canonical" href="[^"]*" \/>/,
     `<link rel="canonical" href="${meta.url}" />`
   );
+
+  if (meta.structuredData) {
+    const schema = JSON.stringify(meta.structuredData)
+      .replace(/</g, "\\u003c")
+      .replace(/>/g, "\\u003e")
+      .replace(/&/g, "\\u0026");
+    html = html.replace(
+      "</head>",
+      `<script id="page-structured-data" type="application/ld+json">${schema}</script>\n  </head>`
+    );
+  }
 
   return html;
 }

@@ -19,6 +19,18 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "why-does-my-dog-follow-me-everywhere",
+    title: "Why Does Your Dog Follow You Everywhere?",
+    excerpt: "Seven reasons you might have a four-legged shadow—and what your dog may actually be trying to tell you.",
+    content: "Read the full Metro Mutts Journal article at /journal/why-does-my-dog-follow-me-everywhere.",
+    category: "Dog Care",
+    author: "Metro Mutts Team",
+    date: "2026-09-15",
+    readTime: "8 min read",
+    image: "/manus-storage/Shadow_email_84ae3f1b.png",
+    tags: ["dog behavior", "dog attachment", "velcro dog", "separation anxiety", "dog enrichment", "Metro Mutts Journal"],
+  },
+  {
     slug: "too-hot-for-the-dog-park",
     title: "Too Hot for the Dog Park? Here's Why Summer Is One of the Best Times for Daycare.",
     excerpt: "Oklahoma heat limits safe outdoor exercise — but your dog's need for movement, stimulation, and social connection doesn't take a summer vacation. Here's what to do instead.",
