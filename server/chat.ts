@@ -1,5 +1,6 @@
 import { invokeLLM } from "./_core/llm";
 import type { Message } from "./_core/llm";
+import { ENV } from "./_core/env";
 
 /**
  * Metro Mutts AI Chat Assistant
@@ -114,6 +115,10 @@ const SYSTEM_PROMPT = `You are the Metro Mutts AI Assistant — a friendly, know
 export async function processChat(
   messages: { role: "user" | "assistant"; content: string }[]
 ): Promise<string> {
+  if (!ENV.forgeApiKey) {
+    return "Our online assistant is unavailable right now, but our team can help. Call us at **539-867-3841** or text **918-359-7727** during business hours.";
+  }
+
   // Build the full message array with system prompt
   const fullMessages: Message[] = [
     { role: "system", content: SYSTEM_PROMPT },

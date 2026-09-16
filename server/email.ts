@@ -1,7 +1,13 @@
 import { Resend } from "resend";
 import { ENV } from "./_core/env";
 
-const resend = new Resend(ENV.resendApiKey);
+function getResendClient(): Resend | null {
+  if (!ENV.resendApiKey) {
+    return null;
+  }
+
+  return new Resend(ENV.resendApiKey);
+}
 
 const FRONT_DESK_EMAIL = "info@metromutts.com";
 const FROM_EMAIL = "Metro Mutts <noreply@metromutts.com>";
@@ -24,7 +30,8 @@ export interface PromoRedemptionEmailData {
 export async function sendPromoRedemptionEmail(
   data: PromoRedemptionEmailData
 ): Promise<boolean> {
-  if (!ENV.resendApiKey) {
+  const resend = getResendClient();
+  if (!resend) {
     console.warn("[Email] Resend API key not configured, skipping email");
     return false;
   }
