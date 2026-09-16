@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { inquiryAttribution } from "@/lib/attribution";
+import { prepareMetaLead, reportMetaLead } from "@/lib/metaLead";
 import { GINGR_SIGNUP_URL, GINGR_LOGIN_URL } from "@shared/attribution";
 import PageSEO from "@/components/PageSEO";
 
@@ -60,6 +61,7 @@ export default function StartSignup() {
                 attribution: inquiryAttribution(consent),
               });
               setSaved(true);
+              await reportMetaLead(id, consent);
               continueToGingr();
             } catch {
               setError(
@@ -94,13 +96,16 @@ export default function StartSignup() {
               type="checkbox"
               checked={consent}
               disabled={saved || mutation.isPending}
-              onChange={event => setConsent(event.target.checked)}
+              onChange={event => {
+                setConsent(event.target.checked);
+                void prepareMetaLead(event.target.checked);
+              }}
               className="mt-1"
             />
             <span>
               Optional: allow Metro Mutts to connect this inquiry and resulting
               bookings to the ad that brought me here to measure advertising
-              results.
+              results, including sharing an inquiry conversion event with Meta.
             </span>
           </label>
           {error && (
