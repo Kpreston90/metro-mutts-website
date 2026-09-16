@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     author: "Metro Mutts Team",
     date: "2026-09-15",
     readTime: "8 min read",
-    image: "/manus-storage/Shadow_email_84ae3f1b.png",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663503607069/rGUwpGVqZkauGXqQ.png",
     tags: ["dog behavior", "dog attachment", "velcro dog", "separation anxiety", "dog enrichment", "Metro Mutts Journal"],
   },
   {

@@ -78,7 +78,7 @@ describe("getOgMetaForPath", () => {
       "Why Does My Dog Follow Me Everywhere? 7 Common Reasons | Metro Mutts"
     );
     expect(meta.image).toBe(
-      "https://metromutts.com/manus-storage/Shadow_email_84ae3f1b.png"
+      "https://files.manuscdn.com/user_upload_by_module/session_file/310519663503607069/rGUwpGVqZkauGXqQ.png"
     );
     expect(meta.structuredData).toMatchObject({
       "@type": "Article",

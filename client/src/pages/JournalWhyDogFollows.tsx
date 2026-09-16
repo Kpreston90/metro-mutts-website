@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import PageSEO from "@/components/PageSEO";
 
 const HERO_IMAGE =
-  "/manus-storage/Shadow_email_84ae3f1b.png";
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663503607069/rGUwpGVqZkauGXqQ.png";
 
 const DAYCARE_IMAGE =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663503607069/K74BFWniuFWtXDKrDiRtHb/new-daycare-9JTdpbodWw4zW5xQhTfmzM.webp";
@@ -19,7 +19,7 @@ const articleSchema = {
   headline: "Why Does My Dog Follow Me Everywhere? 7 Common Reasons",
   description:
     "Why does your dog follow you everywhere—even to the bathroom? Here are 7 common reasons dogs shadow their owners and what the behavior may mean.",
-  image: [`https://metromutts.com${HERO_IMAGE}`],
+  image: [HERO_IMAGE],
   datePublished: "2026-09-15",
   dateModified: "2026-09-15",
   mainEntityOfPage: {
