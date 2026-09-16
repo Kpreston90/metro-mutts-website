@@ -25,6 +25,32 @@ Prefer a Gingr-supported analytics/tag integration using the same GA4 web data s
 
 If that is unavailable, an identified handoff (email captured before Gingr registration) could link the click to the owner through the API, but it adds friction and is not made mandatory by this PR. The existing inquiry form is optional; direct registrations bypass it. Creating a new owner would measure signup, while a completed paid visit measures a different business outcome. Both should be separate events.
 
+## Live portal hook verification — September 16, 2026
+
+Verified the signed-in Metro Mutts account under Admin → Advanced Settings → Custom Configurations. The account exposes Customer app JS, Customer app footer (described as supporting Google Analytics), and webhook integration fields. These descriptions establish available settings, not compatibility with the current registration flow.
+
+The active registration URL is `https://metromutts.portal.gingrapp.com/public/new_customer`. Its loaded script elements did not include the Metro Mutts Google tag/container during inspection.
+
+Tested two temporary diagnostics through the normal admin UI:
+
+1. Saved Customer app JS that set an invisible attribute on the HTML element. Confirmed the saved configuration after reload. Reloaded the registration portal, confirmed its registration form had rendered, and observed no diagnostic attribute.
+2. Saved Customer app footer containing an invisible HTML element and a script marker. Confirmed both were present in the saved admin configuration. Reloaded the registration portal and confirmed the registration form had rendered; neither the element nor either script marker was present.
+
+Both diagnostic fields were restored to their original empty values, then reloaded and verified empty. The existing webhook integration was left unchanged. No Google/Meta tag was installed, customer account created, payment entered, agreement accepted, or customer information uploaded during this verification.
+
+**Result:** the tested custom-code fields did not apply to the current registration page in this session. This does not establish that Gingr never supports portal tracking: the settings may be for a different portal generation or require vendor configuration. Do not promise seamless signup attribution or ship a signup-completed detector based on a button click or form submission.
+
+### Specific vendor confirmation needed
+
+For our current customer portal at the registration URL above:
+
+- Do Customer app JS and Customer app footer apply to this portal generation? If not, what supported mechanism installs our GA4/Google Tag Manager tag on registration and confirmation pages?
+- Is there a documented callback/event or confirmation route for a successfully completed registration, distinct from the owner-info step and from clicking Continue to Pet(s)?
+- Does the portal preserve and consume Google's cross-domain `_gl` linker, or support a stable anonymous attribution token that can be associated with the created owner?
+- Which webhook event confirms customer registration, what stable owner ID does it include, and can it carry a website attribution token? Owner creation alone does not identify the advertising source.
+
+Use Gingr's answer and a controlled registration test to establish a supported implementation before changing portal tracking. The registration flow currently requires payment-card entry and legal agreements, so do not fabricate a live test registration or accept agreements on behalf of a customer. Existing webhook workflows must be preserved.
+
 ## Automatic matching and uploads: deliberately not activated
 
 Gingr's API documents owner lookup, reservations by owner, and invoice listing, but we have not verified this account's response shape, payment semantics, customer matching cardinality, or location boundary. Do not infer payment from `closed_only` or assume a card authorization is revenue.
