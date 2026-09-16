@@ -1,3 +1,4 @@
+import { isAdEntry, signupEntryHref } from "@/lib/attribution";
 /*
  * Metro Mutts — /booking Landing Page
  * A clean, shareable entry point for emails, ads, and social links.
@@ -300,7 +301,7 @@ export default function Booking() {
                   className="w-full bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold"
                   asChild
                 >
-                  <a href={GINGR_SIGNUP} target="_blank" rel="noopener noreferrer">
+                  <a href={isAdEntry() ? signupEntryHref() : GINGR_SIGNUP} target="_blank" rel="noopener noreferrer">
                     Create Account
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </a>

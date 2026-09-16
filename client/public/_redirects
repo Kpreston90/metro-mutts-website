@@ -1,5 +1,6 @@
-/schedule-yourself  /book  301
-/new-customer       /book  301
+/about-us           /#about  301
+/schedule-yourself  /get-started  301
+/new-customer       /get-started  301
 /contact            /#contact  301
 /$                  /  301
 /*    /index.html   200

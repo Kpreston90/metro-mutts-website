@@ -48,6 +48,17 @@ async function startServer() {
       createContext,
     })
   );
+  // Keep legacy advertising URLs useful when Express serves the site.
+  for (const [source, target] of Object.entries({
+    "/schedule-yourself": "/get-started", "/new-customer": "/get-started",
+    "/about-us": "/#about", "/contact": "/#contact",
+  })) {
+    app.get(source, (req, res) => {
+      const query = req.originalUrl.includes("?") ? req.originalUrl.slice(req.originalUrl.indexOf("?")) : "";
+      const [path, fragment] = target.split("#");
+      res.redirect(301, `${path}${query}${fragment ? `#${fragment}` : ""}`);
+    });
+  }
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);

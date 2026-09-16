@@ -112,3 +112,35 @@ export const seasonalMessages = mysqlTable("seasonal_messages", {
 
 export type SeasonalMessage = typeof seasonalMessages.$inferSelect;
 export type InsertSeasonalMessage = typeof seasonalMessages.$inferInsert;
+/** Durable website inquiries; attribution is optional and consent gated. */
+export const websiteInquiries = mysqlTable("website_inquiries", {
+  kind: mysqlEnum("kind", ["contact", "signup_handoff"]).default("contact").notNull(),
+  id: varchar("id", { length: 36 }).primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  phone: varchar("phone", { length: 30 }),
+  service: varchar("service", { length: 30 }).notNull(),
+  message: text("message").notNull(),
+  attribution: text("attribution"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+/** Staff-verified outcomes, deduplicated by stable Gingr invoice ID. No payment details. */
+export const bookingOutcomes = mysqlTable("booking_outcomes", {
+  invoiceId: varchar("invoiceId", { length: 100 }).primaryKey(),
+  inquiryId: varchar("inquiryId", { length: 36 }).notNull().references(() => websiteInquiries.id),
+  ownerId: varchar("ownerId", { length: 100 }).notNull(),
+  paidAt: timestamp("paidAt").notNull(),
+  valueCents: int("valueCents").notNull(),
+  verifiedBy: int("verifiedBy").notNull().references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+/** A registration is recorded only after staff verify a new owner and exact email match. */
+export const gingrRegistrations = mysqlTable("gingr_registrations", {
+  inquiryId: varchar("inquiryId", { length: 36 }).primaryKey().references(() => websiteInquiries.id),
+  ownerId: varchar("ownerId", { length: 100 }).notNull().unique(),
+  registeredAt: timestamp("registeredAt").notNull(),
+  verifiedBy: int("verifiedBy").notNull().references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
