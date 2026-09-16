@@ -287,6 +287,7 @@ export default function AdminPromos() {
               <Link href="/admin/messages" className="text-[#345460]/60 hover:text-[#345460] text-sm transition-colors">
                 Ticker Messages
               </Link>
+              <Link href="/admin/attribution" className="text-[#345460]/60 hover:text-[#345460] text-sm">Inquiries & Bookings</Link>
             </div>
             <h1 className="text-2xl font-bold text-[#345460]">Promo Codes</h1>
             <p className="text-[#345460]/60 text-sm">

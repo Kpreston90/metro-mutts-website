@@ -22,6 +22,20 @@
       "when": 1778563705161,
       "tag": "0002_charming_captain_america",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1789590678171,
+      "tag": "0003_website_attribution",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1789592632248,
+      "tag": "0004_signup_handoff",
+      "breakpoints": true
     }
   ]
 }

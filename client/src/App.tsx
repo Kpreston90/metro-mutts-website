@@ -1,3 +1,5 @@
+import StartSignup from "./pages/StartSignup";
+import AdminAttribution from "./pages/AdminAttribution";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -57,11 +59,13 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/tour"} component={Tour} />
       <Route path={"/vet-referred"} component={VetReferred} />
+      <Route path={"/start"} component={StartSignup} />
       <Route path={"/get-started"} component={GetStarted} />
       <Route path={"/booking"} component={Booking} />
       <Route path={"/privacy"} component={PrivacyPolicy} />
       <Route path={"/terms"} component={TermsOfService} />
       <Route path={"/admin/promos"} component={AdminPromos} />
+      <Route path={"/admin/attribution"} component={AdminAttribution} />
       <Route path={"/admin/messages"} component={AdminMessages} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

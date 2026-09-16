@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 // Mock the ENV module
 vi.mock("./_core/env", () => ({
   ENV: {
-    gingrApiKey: "4f62cac94f0ddf0aeb5ef38210a62207",
+    gingrApiKey: "test-gingr-key-not-live",
     gingrBaseUrl: "https://metromutts.gingrapp.com",
   },
 }));
