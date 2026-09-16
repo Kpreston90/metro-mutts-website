@@ -4,7 +4,7 @@
 https://metromutts.gingrapp.com/api/v1/
 
 ## Authentication
-All requests require `key` parameter: `4f62cac94f0ddf0aeb5ef38210a62207`
+All requests require `key` parameter: `[REMOVED — rotate in Gingr; configure GINGR_API_KEY server-side]`
 
 ## Key Endpoints for Availability
 
@@ -35,3 +35,5 @@ All requests require `key` parameter: `4f62cac94f0ddf0aeb5ef38210a62207`
 2. Call reservation_widget_data for today/tomorrow to get current occupancy
 3. Call reservations with date range to count booked slots
 4. Compare against capacity to determine availability
+
+Security: a credential was previously committed here. Removing it from this file does not remove it from Git history. Rotate/revoke it in Gingr before connecting any new integration. History cleanup requires a coordinated repository maintenance action.

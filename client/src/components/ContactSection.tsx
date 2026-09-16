@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, ArrowRight, Navigation, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { inquiryAttribution } from "@/lib/attribution";
 import { trackFormSubmit, trackPhoneCall } from "@/lib/analytics";
 
 export default function ContactSection() {
@@ -14,28 +16,28 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
-    service: "",
+    service: "" as "" | "daycare" | "boarding" | "grooming" | "multiple",
     message: "",
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const submitInquiry = trpc.attribution.submit.useMutation();
+  const [inquiryId] = useState(() => crypto.randomUUID());
+  const [measurementConsent, setMeasurementConsent] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submitInquiry.isPending) return;
+    const botField = String(new FormData(e.currentTarget).get("bot-field") ?? "");
+    setSubmitError("");
     try {
-      const body = new URLSearchParams({
-        "form-name": "contact",
-        ...formData,
-      });
-      await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
-      });
+      await submitInquiry.mutateAsync({ ...formData, id: inquiryId, botField, attribution: inquiryAttribution(measurementConsent) });
       setFormSubmitted(true);
       trackFormSubmit("contact", true);
     } catch {
-      setFormSubmitted(true);
+      setSubmitError("We couldn't save your message. Please try again or call 539-867-3841.");
       trackFormSubmit("contact", false);
     }
   };
@@ -90,7 +92,7 @@ export default function ContactSection() {
             <h3 className="text-2xl font-extrabold text-[#345460] mb-6">
               Schedule a Free Meet & Greet
             </h3>
-            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit} className="space-y-5">
+            <form name="contact" method="POST" onSubmit={handleSubmit} className="space-y-5">
               <input type="hidden" name="form-name" value="contact" />
               <p className="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
               <div className="grid sm:grid-cols-2 gap-5">
@@ -144,7 +146,7 @@ export default function ContactSection() {
                   <select
                     name="service"
                     value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value as typeof formData.service })}
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-[#345460] focus:outline-none focus:ring-2 focus:ring-[#48D597]/30 focus:border-[#48D597] transition-all"
                   >
                     <option value="">Select a service</option>
@@ -168,12 +170,18 @@ export default function ContactSection() {
                   placeholder="Breed, age, any special needs..."
                 />
               </div>
+              <label className="flex items-start gap-2 text-sm text-[#345460]/70">
+                <input type="checkbox" checked={measurementConsent} onChange={e => setMeasurementConsent(e.target.checked)} className="mt-1" />
+                <span>Optional: allow Metro Mutts to connect this inquiry and resulting bookings to the ad that brought me here to measure advertising results. <a href="/privacy" className="underline">Privacy policy</a></span>
+              </label>
+              {submitError && <p role="alert" className="text-red-700">{submitError}</p>}
               <Button
+                disabled={submitInquiry.isPending}
                 type="submit"
                 size="lg"
                 className="w-full bg-[#48D597] hover:bg-[#3bc085] text-[#345460] font-bold text-base h-13 shadow-lg shadow-[#48D597]/20 transition-all hover:-translate-y-0.5"
               >
-                Book My Free Visit
+                {submitInquiry.isPending ? "Sending…" : "Request My Free Visit"}
                 <ArrowRight className="w-5 h-5 ml-1" />
               </Button>
             </form>

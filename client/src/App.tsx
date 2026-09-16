@@ -1,3 +1,4 @@
+import AdminAttribution from "./pages/AdminAttribution";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -62,6 +63,7 @@ function Router() {
       <Route path={"/privacy"} component={PrivacyPolicy} />
       <Route path={"/terms"} component={TermsOfService} />
       <Route path={"/admin/promos"} component={AdminPromos} />
+      <Route path={"/admin/attribution"} component={AdminAttribution} />
       <Route path={"/admin/messages"} component={AdminMessages} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
