@@ -43,20 +43,6 @@ export interface AvailabilityData {
   lastUpdated: string;
 }
 
-export type BoardingAvailabilityStatus = "available" | "limited" | "unavailable";
-
-export interface BoardingCalendarDay {
-  date: string;
-  status: BoardingAvailabilityStatus;
-  booked: number;
-  capacity: number;
-}
-
-export interface BoardingCalendarData {
-  days: BoardingCalendarDay[];
-  lastUpdated: string;
-}
-
 // Actual Metro Mutts facility capacities
 const CAPACITY = {
   daycare: 40, // max dogs per day
@@ -213,107 +199,6 @@ export async function getAvailability(date: string): Promise<AvailabilityData> {
       lastUpdated: new Date().toISOString(),
     };
   }
-}
-
-function reservationTypeName(reservation: Reservation): string {
-  const rawType = reservation.reservation_type_name || (reservation as any).reservation_type || "";
-
-  if (typeof rawType === "string") {
-    return rawType.toLowerCase().trim();
-  }
-  if (typeof rawType === "object" && rawType !== null) {
-    return String((rawType as any).type || (rawType as any).name || "").toLowerCase().trim();
-  }
-  return String(rawType || "").toLowerCase().trim();
-}
-
-function isBoardingReservation(reservation: Reservation): boolean {
-  const typeName = reservationTypeName(reservation);
-  return typeName.includes("board") || typeName.includes("overnight") || typeName.includes("lodge");
-}
-
-function getReservationDate(value: string): string {
-  // Gingr returns ISO timestamps in production. Keeping the first 10 characters
-  // preserves the facility-local reservation date rather than shifting it in UTC.
-  if (/^\d{4}-\d{2}-\d{2}/.test(value)) return value.slice(0, 10);
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
-    throw new Error("Gingr returned an invalid reservation date");
-  }
-  return parsed.toISOString().slice(0, 10);
-}
-
-function addDays(date: string, amount: number): string {
-  const result = new Date(`${date}T12:00:00Z`);
-  result.setUTCDate(result.getUTCDate() + amount);
-  return result.toISOString().slice(0, 10);
-}
-
-/**
- * Returns a live, public-safe boarding calendar for up to 31 days.
- *
- * This deliberately does not use getAvailability's legacy fallback numbers.
- * If Gingr is temporarily unavailable, the caller receives an error and can
- * clearly tell customers that live availability cannot be displayed.
- */
-export async function getBoardingCalendarAvailability(
- startDate: string,
- days: number
-): Promise<BoardingCalendarData> {
-  if (!Number.isInteger(days) || days < 1 || days > 62) {
-    throw new Error("Boarding calendar requests must include between 1 and 62 days");
-  }
-
-  const calendarDates = Array.from({ length: days }, (_, index) => addDays(startDate, index));
-
-  // Gingr's legacy reservations endpoint permits a maximum 30-day range.
-  // Two visible calendar months are split into safe request windows.
-  const requestWindows: Array<{ start: string; end: string }> = [];
-  for (let index = 0; index < calendarDates.length; index += 30) {
-    const windowDates = calendarDates.slice(index, index + 30);
-    requestWindows.push({ start: windowDates[0], end: windowDates[windowDates.length - 1] });
-  }
-
-  const reservationBatches = await Promise.all(
-    requestWindows.map(window => getReservations(window.start, window.end, false))
-  );
-
-  // A multi-night reservation can occur in adjoining 30-day request windows.
-  // Deduplicate it before calculating each night's inventory.
-  const reservations = Array.from(
-    new Map(
-      reservationBatches
-        .flat()
-        .map(reservation => [String(reservation.id || (reservation as any).reservation_id), reservation])
-    ).values()
-  );
-
-  const activeBoardingReservations = reservations.filter(
-    reservation => !((reservation as any).cancelled_date) && isBoardingReservation(reservation)
-  );
-
-  const daysData = calendarDates.map(date => {
-    const booked = activeBoardingReservations.filter(reservation => {
-      const checkInDate = getReservationDate(reservation.start_date);
-      const checkOutDate = getReservationDate(reservation.end_date);
-      // Boarding inventory is counted by overnight stay. Checkout day is not
-      // included because the suite becomes available after the scheduled pickup.
-      return checkInDate <= date && date < checkOutDate;
-    }).length;
-    const status: BoardingAvailabilityStatus =
-      booked >= CAPACITY.boarding
-        ? "unavailable"
-        : booked / CAPACITY.boarding > 0.5
-          ? "limited"
-          : "available";
-
-    return { date, status, booked, capacity: CAPACITY.boarding };
-  });
-
-  return {
-    days: daysData,
-    lastUpdated: new Date().toISOString(),
-  };
 }
 
 /**
