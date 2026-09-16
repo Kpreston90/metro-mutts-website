@@ -46,3 +46,16 @@ export function captureAttribution(
   }
   return result;
 }
+
+// A generic Google referrer, newsletter UTM, or campaign name does not prove a paid visit.
+export function isGoogleAdEntry(fields: Record<string, string | undefined>) {
+  if (fields.gclid || fields.gbraid || fields.wbraid) return true;
+  return (
+    /^(google|google_ads)$/i.test(fields.utm_source ?? "") &&
+    /^(cpc|ppc|paid_search|local_services|lsa)$/i.test(fields.utm_medium ?? "")
+  );
+}
+export const GINGR_SIGNUP_URL =
+  "https://metromutts.portal.gingrapp.com/public/new_customer";
+export const GINGR_LOGIN_URL =
+  "https://metromutts.portal.gingrapp.com/public/login/Ii9zZWN1cmUvaG9tZSI=";

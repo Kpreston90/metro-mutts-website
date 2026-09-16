@@ -1,3 +1,4 @@
+import StartSignup from "./pages/StartSignup";
 import AdminAttribution from "./pages/AdminAttribution";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -58,6 +59,7 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/tour"} component={Tour} />
       <Route path={"/vet-referred"} component={VetReferred} />
+      <Route path={"/start"} component={StartSignup} />
       <Route path={"/get-started"} component={GetStarted} />
       <Route path={"/booking"} component={Booking} />
       <Route path={"/privacy"} component={PrivacyPolicy} />

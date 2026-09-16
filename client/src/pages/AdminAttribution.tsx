@@ -12,7 +12,14 @@ export default function AdminAttribution() {
   const outcomes = trpc.attribution.outcomes.useQuery(undefined, {
     enabled: allowed,
   });
+  const registrations = trpc.attribution.registrations.useQuery(undefined, {
+    enabled: allowed,
+  });
+  const [registrationInquiryId, setRegistrationInquiryId] = useState("");
   const utils = trpc.useUtils();
+  const verifyRegistration = trpc.attribution.verifyRegistration.useMutation({
+    onSuccess: () => utils.attribution.registrations.invalidate(),
+  });
   const verify = trpc.attribution.verifyPaidVisit.useMutation({
     onSuccess: () => utils.attribution.outcomes.invalidate(),
   });
@@ -34,7 +41,15 @@ export default function AdminAttribution() {
         completed, paid visit in Gingr before recording an outcome. Closed
         invoices alone do not prove payment.
       </p>
-      {(inquiries.error || outcomes.error) && (
+      <p>
+        Recent records:{" "}
+        {inquiries.data?.filter(item => item.kind === "signup_handoff")
+          .length ?? 0}{" "}
+        email handoffs · {registrations.data?.length ?? 0} verified
+        registrations · {outcomes.data?.length ?? 0} paid visits. These are
+        recent-record counts, not campaign conversion rates.
+      </p>
+      {(inquiries.error || outcomes.error || registrations.error) && (
         <p role="alert">
           Unable to load records. Check the database and migration.
         </p>
@@ -56,13 +71,17 @@ export default function AdminAttribution() {
               <tr key={item.id} className="border-b align-top">
                 <td className="p-2">{item.createdAt.toLocaleDateString()}</td>
                 <td className="p-2">
-                  {item.name}
+                  {item.name || "New customer email"}
                   <br />
                   {item.email}
                   <br />
                   {item.phone}
                 </td>
                 <td className="p-2">
+                  {item.kind === "signup_handoff"
+                    ? "Email handoff"
+                    : "Contact inquiry"}
+                  <br />
                   {item.service}
                   <br />
                   {item.message}
@@ -82,6 +101,19 @@ export default function AdminAttribution() {
                   <small>{item.id}</small>
                 </td>
                 <td className="p-2">
+                  <p>
+                    {registrations.data?.some(
+                      registration => registration.inquiryId === item.id
+                    )
+                      ? "Registration verified"
+                      : "Registration unverified"}
+                  </p>
+                  <button
+                    className="underline block mb-2"
+                    onClick={() => setRegistrationInquiryId(item.id)}
+                  >
+                    Verify new account
+                  </button>
                   <button
                     className="underline"
                     onClick={() => setInquiryId(item.id)}
@@ -94,6 +126,77 @@ export default function AdminAttribution() {
           </tbody>
         </table>
       </div>
+      {registrationInquiryId && (
+        <form
+          key={registrationInquiryId}
+          className="space-y-3 border rounded p-4"
+          onSubmit={async event => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            try {
+              await verifyRegistration.mutateAsync({
+                inquiryId: registrationInquiryId,
+                ownerId: String(data.get("ownerId")),
+                ownerEmail: String(data.get("ownerEmail")),
+                registeredAt: new Date(String(data.get("registeredAt"))),
+                verified: true,
+              });
+              setRegistrationInquiryId("");
+            } catch {
+              /* visible mutation error below */
+            }
+          }}
+        >
+          <h2 className="font-bold">
+            Verify a completed new Gingr registration
+          </h2>
+          <p>Inquiry: {registrationInquiryId}</p>
+          <label className="block">
+            Gingr owner ID{" "}
+            <input
+              name="ownerId"
+              required
+              maxLength={100}
+              className="border ml-2"
+            />
+          </label>
+          <label className="block">
+            Email on the Gingr account{" "}
+            <input
+              name="ownerEmail"
+              type="email"
+              required
+              maxLength={320}
+              className="border ml-2"
+            />
+          </label>
+          <label className="block">
+            Account creation time (your local time){" "}
+            <input
+              name="registeredAt"
+              type="datetime-local"
+              step="1"
+              required
+              className="border ml-2"
+            />
+          </label>
+          <label className="block">
+            <input type="checkbox" required /> I verified this is a completed
+            new account created after the inquiry and the email matches.
+          </label>
+          {verifyRegistration.error && (
+            <p role="alert">{verifyRegistration.error.message}</p>
+          )}
+          <button
+            disabled={verifyRegistration.isPending}
+            className="rounded bg-[#48D597] p-3"
+          >
+            {verifyRegistration.isPending
+              ? "Saving…"
+              : "Save verified registration"}
+          </button>
+        </form>
+      )}
       {inquiryId && (
         <form
           key={inquiryId}
@@ -168,7 +271,14 @@ export default function AdminAttribution() {
           </button>
         </form>
       )}
-      <h2 className="text-xl font-bold">Verified outcomes</h2>
+      <h2 className="text-xl font-bold">Verified registrations</h2>
+      {registrations.data?.map(item => (
+        <p key={item.ownerId}>
+          Owner {item.ownerId} · {item.registeredAt.toLocaleString()} · Inquiry{" "}
+          {item.inquiryId} · Not uploaded
+        </p>
+      ))}
+      <h2 className="text-xl font-bold">Verified paid visits</h2>
       {outcomes.data?.map(item => (
         <p key={item.invoiceId}>
           Invoice {item.invoiceId} · Owner {item.ownerId} · $

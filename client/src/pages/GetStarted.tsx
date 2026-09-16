@@ -1,3 +1,5 @@
+import StartSignup from "./StartSignup";
+import { isAdEntry } from "@/lib/attribution";
 /*
  * Metro Mutts — "Get Started" New Customer Onboarding Page
  * A dedicated landing page that walks new customers through:
@@ -147,6 +149,7 @@ const vaccinations = [
 ];
 
 export default function GetStarted() {
+  if (isAdEntry()) return <StartSignup />;
   return (
     <div className="min-h-screen flex flex-col">
       <PageSEO

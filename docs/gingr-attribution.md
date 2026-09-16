@@ -23,7 +23,11 @@ This exact path is **not tracked end to end by this foundation**. We must verify
 
 Prefer a Gingr-supported analytics/tag integration using the same GA4 web data stream across the website and portal, preserving the cross-domain linker and firing a signup-completed event only after successful registration. This requires confirming portal customization and event support with Gingr/account settings. A redirect to the registration form is not a signup event. Google requires matching tag IDs on both domains: https://support.google.com/analytics/answer/10071811
 
-If that is unavailable, an identified handoff (email captured before Gingr registration) could link the click to the owner through the API, but it adds friction and is not made mandatory by this PR. The existing inquiry form is optional; direct registrations bypass it. Creating a new owner would measure signup, while a completed paid visit measures a different business outcome. Both should be separate events.
+This PR adds a temporary email-first handoff at `/start`. Recognizable Google paid entries use it when selecting new-customer signup from the booking modal, booking page, or `/get-started`. Organic visitors retain the existing flow; returning customers retain direct login. The email is saved before forwarding to Gingr, with a stable retry ID. It is never passed in the portal URL. Attribution remains optional and unchecked by default. The customer is asked to use the same email in Gingr; no unsupported email prefill or automatic matching is assumed.
+
+Staff can separately verify a new Gingr registration at `/admin/attribution` using the exact email, owner ID, and actual account creation time. The API rejects mismatched emails, accounts predating the inquiry, and reassignment of an already recorded owner. Handoffs, registrations, and paid visits remain separate. Nothing is uploaded to ad platforms. Apply migration `0004_signup_handoff.sql` through the normal deployment process after the preceding migrations.
+
+After deployment and a successful real test, configure the LSA website entry with `/start?utm_source=google&utm_medium=local_services&utm_campaign=lsa` if the account supports that destination. Verify the actual clicked URL retains those parameters. Do not point ads at this route before deployment. Untagged traffic is not labeled as LSA.
 
 ## Live portal hook verification — September 16, 2026
 
@@ -64,3 +68,9 @@ References:
 - https://support.gingrapp.com/hc/en-us/articles/25722122517517-Gingr-API-Functions-Reference
 - https://support.google.com/google-ads/answer/15713840
 - https://developers.facebook.com/docs/marketing-api/conversions-api/deduplicate-pixel-and-server-events/
+
+## Gingr automated acknowledgment and documented events
+
+The automated support acknowledgment for ticket 4082052 links to Gingr's Portal 2.0 GTM guide. The guide explicitly says Customer App JS and CSS fields are nonfunctional in Portal 2.0, specifies Customer app footer for tag installation, and documents `owner_created` (new account), `reservation_created` (reservation request), and `lead_created` (lead form). This establishes a documented direct-registration mechanism, but does not explain our failed footer probe or prove it works on this account. A registration request is not a settled visit. Do not export raw `ownerData` into analytics; allowlist nonpersonal event fields and verify consent and cross-domain attribution before activation.
+
+References: https://support.gingrapp.com/hc/en-us/articles/25846389005325 and https://support.gingrapp.com/hc/en-us/articles/25846095500557.
