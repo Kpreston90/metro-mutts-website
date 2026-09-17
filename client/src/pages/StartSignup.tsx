@@ -2,6 +2,7 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { inquiryAttribution } from "@/lib/attribution";
 import { prepareMetaLead, reportMetaLead } from "@/lib/metaLead";
+import { reportGoogleEmailLead } from "@/lib/googleEmailLead";
 import { isDaycareSignupEntry } from "@/lib/signupEntry";
 import { GINGR_SIGNUP_URL, GINGR_LOGIN_URL } from "@shared/attribution";
 import PageSEO from "@/components/PageSEO";
@@ -73,7 +74,10 @@ export default function StartSignup() {
                 attribution: inquiryAttribution(consent),
               });
               setSaved(true);
-              await reportMetaLead(id, consent);
+              await Promise.all([
+                reportMetaLead(id, consent),
+                reportGoogleEmailLead(id, consent),
+              ]);
               continueToGingr();
             } catch {
               setError(
@@ -117,7 +121,8 @@ export default function StartSignup() {
             <span>
               Optional: allow Metro Mutts to connect this inquiry and resulting
               bookings to the ad that brought me here to measure advertising
-              results, including sharing an inquiry conversion event with Meta.
+              results, including sharing an inquiry conversion event with Google
+              and Meta. This event does not include your email.
             </span>
           </label>
           {error && (
