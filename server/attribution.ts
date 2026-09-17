@@ -31,7 +31,7 @@ export const signupHandoffSchema = inquirySchema.pick({
   email: true,
   botField: true,
   attribution: true,
-});
+}).extend({ service: inquirySchema.shape.service.default("") });
 export const registrationSchema = z.object({
   inquiryId: z.string().uuid(),
   ownerId: z.string().trim().min(1).max(100),
@@ -104,7 +104,7 @@ export const attributionRouter = router({
             name: "",
             email: input.email,
             phone: "",
-            service: "",
+            service: input.service,
             message:
               "Email captured before Gingr registration. Registration not yet verified.",
             attribution: input.attribution

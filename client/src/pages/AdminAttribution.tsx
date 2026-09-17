@@ -36,7 +36,9 @@ export default function AdminAttribution() {
     <main className="max-w-5xl mx-auto p-6 space-y-6 text-[#345460]">
       <h1 className="text-3xl font-bold">Inquiries and verified bookings</h1>
       <p>
-        Recent 100 inquiries and outcomes. Ad-platform uploads are disabled.
+        Recent 100 inquiries and outcomes. Opted-in website inquiries can send a
+        Meta Lead event. Verified Gingr registrations and payments are not
+        automatically uploaded to ad platforms.
         Confirm owner identity using the inquiry email or phone and verify a
         completed, paid visit in Gingr before recording an outcome. Closed
         invoices alone do not prove payment.

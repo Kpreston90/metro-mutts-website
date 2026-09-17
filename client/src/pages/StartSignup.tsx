@@ -2,10 +2,14 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { inquiryAttribution } from "@/lib/attribution";
 import { prepareMetaLead, reportMetaLead } from "@/lib/metaLead";
+import { isDaycareSignupEntry } from "@/lib/signupEntry";
 import { GINGR_SIGNUP_URL, GINGR_LOGIN_URL } from "@shared/attribution";
 import PageSEO from "@/components/PageSEO";
 
 export default function StartSignup() {
+  const [daycareEntry] = useState(() =>
+    isDaycareSignupEntry(window.location.search)
+  );
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [id] = useState(() => crypto.randomUUID());
@@ -28,13 +32,20 @@ export default function StartSignup() {
           New customers · Step 1 of 2
         </p>
         <h1 className="mt-3 text-4xl sm:text-5xl font-extrabold leading-tight">
-          Let’s plan your pup’s first visit.
+          {daycareEntry ? "Your dog has plans." : "Let’s plan your pup’s first visit."}
         </h1>
         <p className="mt-5 text-lg leading-relaxed">
-          Your first day of daycare is free and includes a temperament
-          assessment. Boarding requires approval first. Grooming can be booked
-          directly.
+          {daycareEntry
+            ? "Less couch. More company. Start your dog’s daycare journey at Metro Mutts in Tulsa."
+            : "Your first day of daycare is free and includes a temperament assessment. Boarding requires approval first. Grooming can be booked directly."}
         </p>
+        {daycareEntry && (
+          <p className="mt-4 leading-relaxed text-[#345460]/80">
+            New to our pack? We start with a temperament assessment to see
+            whether group daycare is a good fit for your dog. Your first day
+            of daycare is free and includes the assessment.
+          </p>
+        )}
         <p className="mt-4 text-[#345460]/70">
           Start with your email, then finish your account in our booking portal.
           Use the same email in both places so we can connect your signup to
@@ -58,6 +69,7 @@ export default function StartSignup() {
                 id,
                 email,
                 botField,
+                service: daycareEntry ? "daycare" : "",
                 attribution: inquiryAttribution(consent),
               });
               setSaved(true);
