@@ -3,9 +3,13 @@
 const TAG_ID = "AW-16543896139";
 const DESTINATION = `${TAG_ID}/CsTnCJP6mPscEMuk39A9`;
 type GoogleWindow = Window & {
-  dataLayer?: unknown[];
-  gtag?: (...args: unknown[]) => void;
+  googleInquiryDataLayer?: unknown[];
 };
+function inquiryTag(..._args: unknown[]) {
+  const tracking = window as GoogleWindow;
+  tracking.googleInquiryDataLayer ??= [];
+  tracking.googleInquiryDataLayer.push(arguments);
+}
 let ready: Promise<void> | undefined;
 const sent = new Set<string>();
 
@@ -15,23 +19,23 @@ export function prepareGoogleEmailLead(consent: boolean): Promise<void> {
   ready = new Promise(resolve => {
     try {
       const tracking = window as GoogleWindow;
-      tracking.dataLayer ??= [];
-      tracking.gtag ??= function () { tracking.dataLayer!.push(arguments); };
+      tracking.googleInquiryDataLayer ??= [];
       // Measurement consent is not permission for enhanced conversions or remarketing.
-      tracking.gtag("consent", "update", {
+      inquiryTag("consent", "default", {
         ad_storage: "granted", ad_user_data: "denied", ad_personalization: "denied",
       });
-      tracking.gtag("js", new Date());
-      tracking.gtag("config", TAG_ID, {
+      inquiryTag("js", new Date());
+      inquiryTag("config", TAG_ID, {
         send_page_view: false, allow_enhanced_conversions: false,
         allow_ad_personalization_signals: false,
       });
-      if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+      if (document.querySelector('script[data-google-inquiry-tag]')) {
         resolve();
       } else {
         const script = document.createElement("script");
         script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${TAG_ID}`;
+        script.dataset.googleInquiryTag = "true";
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${TAG_ID}&l=googleInquiryDataLayer`;
         script.onload = () => resolve();
         script.onerror = () => resolve();
         document.head.appendChild(script);
@@ -50,13 +54,11 @@ export async function reportGoogleEmailLead(id: string, consent: boolean): Promi
   sent.add(id);
   try {
     await prepareGoogleEmailLead(true);
-    const tracking = window as GoogleWindow;
-    if (!tracking.gtag) return;
     await new Promise<void>(resolve => {
       const done = () => resolve();
       const timeout = window.setTimeout(done, 1500);
       try {
-        tracking.gtag!("event", "conversion", {
+        inquiryTag("event", "conversion", {
           send_to: DESTINATION,
           transaction_id: `website-inquiry-${id}`,
           value: 0, currency: "USD",
