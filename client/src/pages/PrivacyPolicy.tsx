@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-sm text-[#345460]/50 mb-10">
-            Last updated: September 16, 2026
+            Last updated: September 17, 2026
           </p>
 
           <div className="prose prose-slate max-w-none space-y-8 text-[#32302F]/80 leading-relaxed">
@@ -90,7 +90,7 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-xl font-bold text-[#345460] mt-8 mb-3">Optional inquiry attribution</h2>
               <p className="text-[#345460]/70 leading-relaxed mb-4">When you start a new-customer signup on an advertising entry page, we save your email to connect your inquiry to a resulting Gingr account and visit. This does not subscribe you to a mailing list. When you opt in on our inquiry or signup form, we store campaign information and advertising click identifiers with your inquiry to connect it to resulting bookings and measure advertising results. This choice is optional and does not affect your ability to contact or book with us. We retain contact details to respond to your inquiry. Payment cards and booking account credentials remain in Gingr; they are not part of this attribution record. Contact us to request deletion of your inquiry and attribution data.</p>
-              <p className="text-[#345460]/70 leading-relaxed mb-4">If you choose optional advertising measurement on the signup form, a successfully saved inquiry can send a Lead event to Meta using the Meta Pixel. The event does not include your email or other form fields. Meta may receive browser and connection information, page information, and advertising cookie identifiers through its tracking technology. A saved inquiry is not a completed Gingr registration or booking. Verified Gingr registrations and payments are not automatically uploaded to advertising platforms by this feature.</p>
+              <p className="text-[#345460]/70 leading-relaxed mb-4">If you choose optional advertising measurement on the signup form, a successfully saved inquiry can send an inquiry conversion event to Google Ads and a Lead event to Meta. These events do not include your email or other form fields. Google and Meta may receive browser and connection information, page information, and advertising cookie or click identifiers through their tracking technologies. Google enhanced conversions and personalized advertising are not enabled by this inquiry event. A saved inquiry is not a completed Gingr registration or booking. Verified Gingr registrations and payments are not automatically uploaded to advertising platforms by this feature.</p>
               <h2 className="text-xl font-bold text-[#345460] mt-8 mb-3">5. Cookies and Tracking Technologies</h2>
               <p>
                 Our website uses cookies and similar tracking technologies to enhance your browsing experience, analyze site traffic, and understand where our visitors come from. You can control cookie preferences through your browser settings. Disabling cookies may affect certain features of our website.
